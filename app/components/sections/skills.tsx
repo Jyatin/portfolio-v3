@@ -18,8 +18,6 @@ const skillGroups = [
         skills: [
             ["Node.js", "nodedotjs"],
             ["Express.js", "express"],
-            ["Laravel", "laravel"],
-            ["PHP", "php"],
             ["REST APIs", "fastapi"],
         ],
     },
@@ -67,7 +65,7 @@ export default function Skills() {
             <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-14 xl:px-18 2xl:max-w-none 2xl:pl-24 2xl:pr-24">
                 <div className="mb-12 flex items-center gap-4 sm:mb-14 md:mb-16">
                     <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45 sm:text-xs">
-                        Skills
+                        05 / Skills
                     </span>
                     <span className="h-px flex-1 bg-border" />
                 </div>
@@ -89,7 +87,7 @@ export default function Skills() {
 
                 <div className="mt-14 border-t border-border pt-8 sm:mt-16">
                     <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/30 sm:text-xs">
-                        C++ · Java · Python · Git · GitHub · Docker · AI · RAG · DSA
+                        Java · C++ · Python · Git · GitHub · Docker · AI · RAG · DSA
                     </p>
                 </div>
             </div>
