@@ -2,112 +2,65 @@
 
 import { useGSAP } from "@/app/hooks/useGSAP";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Mail, Github, Linkedin, Twitter, ArrowUp } from "lucide-react";
+import { Mail, Github, Linkedin, ArrowUp } from "lucide-react";
 
-if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-}
+if (typeof window !== "undefined") gsap.registerPlugin(gsap.ScrollTrigger);
 
 const socialLinks = [
-    { name: "Email", icon: Mail, url: "mailto:romancaseres929@gmail.com" },
-    { name: "GitHub", icon: Github, url: "#" },
-    { name: "LinkedIn", icon: Linkedin, url: "#" },
-    { name: "Twitter", icon: Twitter, url: "#" },
+    { name: "Email", icon: Mail, url: "mailto:singhjyatin@gmail.com" },
+    { name: "GitHub", icon: Github, url: "https://github.com/Jyatin" },
+    { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/jyatin-singh-88984831b/" },
 ];
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
-
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    // Use usage of useGSAP consistent with local hook definition:
-    // It returns the scope ref which must be attached to the container
+    const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
     const containerRef = useGSAP(() => {
-        // Footer content reveal animation
         gsap.from(".footer-content", {
-            scrollTrigger: {
-                trigger: ".footer-content", // Trigger relative to content or container
-                start: "top 95%",
-            },
-            y: 30,
+            scrollTrigger: { trigger: ".footer-content", start: "top 95%" },
+            y: 25,
             opacity: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: "power2.out"
+            duration: 0.7,
+            stagger: 0.08,
+            ease: "power2.out",
         });
     }, []);
 
     return (
-        <footer ref={containerRef} className="relative bg-background w-full overflow-hidden border-t border-border pt-20 pb-10">
-            {/* Background Atmosphere */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-linear-to-r from-transparent via-foreground/20 to-transparent" />
-            <div className="absolute bottom-0 right-0 w-[320px] h-[320px] bg-foreground/5 blur-[90px] rounded-full pointer-events-none" />
-
-            <div className="max-w-[1920px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 relative z-10">
-                <div className="flex flex-col gap-16 mb-16">
-                    {/* Top Section: Navigation & Scroll To Top */}
-                    <div className="footer-content flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
+        <footer ref={containerRef} className="relative w-full overflow-hidden border-t border-border bg-background pt-16 pb-8 sm:pt-20">
+            <div className="mx-auto max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24">
+                <div className="footer-content flex flex-col gap-12">
+                    <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
                         <div>
-                            <span className="text-xs uppercase tracking-[0.3em] text-foreground/45 font-medium mb-6 block">Navigation</span>
-                            <nav className="flex flex-col gap-3">
-                                {["About", "Work", "Testimonials", "Contact"].map((item) => (
-                                    <a 
-                                        key={item} 
-                                        href={`#${item.toLowerCase()}`}
-                                        className="text-lg md:text-xl uppercase font-bold text-foreground/60 hover:text-foreground transition-colors tracking-wide w-fit"
-                                    >
-                                        {item}
-                                    </a>
+                            <span className="mb-5 block font-mono text-xs uppercase tracking-[0.3em] text-foreground/40">Navigation</span>
+                            <nav className="flex flex-col gap-2">
+                                {["About", "Work", "Achievements", "Contact"].map((item) => (
+                                    <a key={item} href={`#${item.toLowerCase()}`} className="w-fit text-lg font-bold uppercase tracking-wide text-foreground/55 transition-colors hover:text-foreground">{item}</a>
                                 ))}
                             </nav>
                         </div>
-
-                        <button 
-                            type="button"
-                            onClick={scrollToTop}
-                            className="group flex flex-col items-center gap-2 text-foreground/45 hover:text-foreground transition-colors"
-                        >
-                            <div className="p-3 rounded-full border border-border group-hover:border-foreground/40 group-hover:bg-muted transition-all duration-300">
-                                <ArrowUp className="w-5 h-5" />
-                            </div>
-                            <span className="text-[10px] uppercase tracking-widest">Back to Top</span>
+                        <button type="button" onClick={scrollToTop} className="group flex w-fit flex-col items-center gap-2 text-foreground/40 hover:text-foreground">
+                            <span className="rounded-full border border-border p-3 transition-colors group-hover:bg-muted"><ArrowUp className="h-5 w-5" /></span>
+                            <span className="font-mono text-[9px] uppercase tracking-widest">Back to top</span>
                         </button>
                     </div>
 
-                    {/* Middle Section: Large Name Branding */}
-                    <div className="footer-content border-y border-border py-12">
-                        <h1 className="text-[clamp(3rem,10vw,12rem)] font-black uppercase text-foreground/5 leading-none text-center select-none pointer-events-none">
-                            Roman Caseres
-                        </h1>
+                    <div className="footer-content border-y border-border py-10">
+                        <h1 className="text-center text-[clamp(3rem,11vw,12rem)] font-black uppercase leading-none tracking-tighter text-foreground/5">Jyatin Kumar Singh</h1>
                     </div>
-                </div>
 
-                {/* Bottom Section: Copyright & Socials */}
-                <div className="footer-content flex flex-col-reverse md:flex-row justify-between items-center gap-6 md:gap-0">
-                    <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-center md:text-left">
-                        <p className="text-foreground/45 text-xs uppercase tracking-wider">
-                            © {currentYear} Roman Caseres
-                        </p>
-                        <span className="hidden md:block text-foreground/15">|</span>
-                        <p className="text-foreground/45 text-xs uppercase tracking-wider">
-                            Dev By Roman
-                        </p>
-                    </div>
-                    
-                    <div className="flex gap-4">
-                        {socialLinks.map((link) => (
-                            <a 
-                                key={link.name}
-                                href={link.url}
-                                className="group p-2 rounded-full border border-border bg-muted/40 hover:bg-muted hover:border-foreground/25 transition-all duration-300"
-                                aria-label={link.name}
-                            >
-                                <link.icon className="w-4 h-4 text-foreground/55 group-hover:text-foreground transition-colors" />
-                            </a>
-                        ))}
+                    <div className="footer-content flex flex-col-reverse items-center justify-between gap-5 sm:flex-row">
+                        <div className="text-center sm:text-left">
+                            <p className="font-mono text-[9px] uppercase tracking-wider text-foreground/40">© {currentYear} Jyatin Kumar Singh</p>
+                            <p className="mt-1 font-mono text-[9px] uppercase tracking-wider text-foreground/25">Full-Stack Developer • DSA • AI/RAG</p>
+                        </div>
+                        <div className="flex gap-3">
+                            {socialLinks.map((link) => (
+                                <a key={link.name} href={link.url} target={link.name === "Email" ? undefined : "_blank"} rel={link.name === "Email" ? undefined : "noreferrer"} className="rounded-full border border-border bg-muted/20 p-2 transition-colors hover:bg-muted" aria-label={link.name}>
+                                    <link.icon className="h-4 w-4 text-foreground/50" />
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
