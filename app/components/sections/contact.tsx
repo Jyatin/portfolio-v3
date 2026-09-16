@@ -4,9 +4,11 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@/app/hooks/useGSAP";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Mail, Github, Linkedin, ArrowUpRight, Copy, Check, Code2 } from "lucide-react";
+import { Github, Linkedin, ArrowUpRight, Copy, Check, Code2, Download } from "lucide-react";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+
+const LINKEDIN_URL = "https://www.linkedin.com/in/jyatinsingh/";
 
 export default function Contact() {
     const [copied, setCopied] = useState(false);
@@ -15,7 +17,7 @@ export default function Contact() {
 
     const socialLinks = [
         { name: "GitHub", icon: Github, url: "https://github.com/Jyatin" },
-        { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/jyatin-singh-88984831b/" },
+        { name: "LinkedIn", icon: Linkedin, url: LINKEDIN_URL },
     ];
 
     const copyEmail = async (e: React.MouseEvent) => {
@@ -42,7 +44,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-24">
                     <div className="space-y-10">
                         <div className="space-y-2 overflow-hidden">
-                            <span className="contact-header-text block font-mono text-xs uppercase tracking-[0.3em] text-foreground/45">06 / Contact</span>
+                            <span className="contact-header-text block font-mono text-xs uppercase tracking-[0.3em] text-foreground/45">08 / Contact</span>
                             <h2 className="contact-header-text text-[clamp(3.5rem,9vw,8rem)] font-black uppercase leading-[0.85] tracking-tighter">Let's Build</h2>
                             <h2 className="contact-header-text text-[clamp(3.5rem,9vw,8rem)] font-black uppercase leading-[0.85] tracking-tighter text-foreground/25">Something.</h2>
                         </div>
@@ -50,12 +52,20 @@ export default function Contact() {
                             <p className="contact-content text-lg leading-relaxed text-foreground/65 sm:text-xl">
                                 I'm open to internships, software roles, open-source collaboration, and interesting projects where I can build, learn, and contribute.
                             </p>
-                            <div className="contact-content flex gap-3">
+                            <div className="contact-content flex flex-wrap gap-3">
                                 {socialLinks.map((link) => (
-                                    <a key={link.name} href={link.url} target="_blank" rel="noreferrer" className="group flex h-12 w-12 items-center justify-center rounded-full border border-border bg-muted/20 transition-all duration-300 hover:bg-foreground">
+                                    <a key={link.name} href={link.url} target="_blank" rel="noreferrer" className="group flex h-12 w-12 items-center justify-center rounded-full border border-border bg-muted/20 transition-all duration-300 hover:bg-foreground" aria-label={link.name}>
                                         <link.icon className="h-5 w-5 text-foreground/60 transition-colors group-hover:text-background" />
                                     </a>
                                 ))}
+                                <a
+                                    href="/resume.pdf"
+                                    download
+                                    className="inline-flex h-12 items-center gap-2 border border-border bg-foreground px-5 font-mono text-[10px] uppercase tracking-[0.2em] text-background transition-opacity hover:opacity-80"
+                                >
+                                    <Download className="h-4 w-4" aria-hidden />
+                                    Download Resume
+                                </a>
                             </div>
                         </div>
                     </div>
