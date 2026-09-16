@@ -3,42 +3,40 @@
 import { useGSAP } from "@/app/hooks/useGSAP";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Code, Trophy, Zap } from "lucide-react";
+import { Code2, GitPullRequest, Trophy, Zap } from "lucide-react";
 import { useRef } from "react";
 
-if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-}
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const achievements = [
     {
-        icon: Trophy,
-        title: "Best Research Paper Award",
-        description: "Won 'Best Research Paper' at Synergy 2025 Conference for Water Quality Monitoring System",
-        year: "2025",
-        category: "Recognition"
-    },
-    {
-        icon: Code,
-        title: "Production Deliveries",
-        description: "Delivered multiple production projects within 6 months, contributing to real-world systems and dashboards",
-        year: "2025",
-        category: "Milestone"
-    },
-    {
-        icon: Code,
-        title: "Production Code Contributions",
-        description: "Actively contributing to enterprise-grade solutions using Laravel, Next.js, and modern full-stack architectures",
-        year: "2025",
-        category: "Technical"
+        icon: Code2,
+        title: "200+ LeetCode Problems",
+        description: "Consistent DSA practice focused on problem solving, with Java as a primary language for interview preparation.",
+        year: "2026",
+        category: "Problem Solving",
     },
     {
         icon: Zap,
-        title: "IoT & ML Innovation",
-        description: "Developed advanced Water Quality Monitoring System with 95% data accuracy using IoT and Machine Learning",
-        year: "2024",
-        category: "Innovation"
-    }
+        title: "100-Day Streak",
+        description: "Maintained a 100-day LeetCode practice streak while building consistency in algorithms and data structures.",
+        year: "2026",
+        category: "Consistency",
+    },
+    {
+        icon: GitPullRequest,
+        title: "5 Merged Open-Source PRs",
+        description: "Contributed fixes and improvements to open-source projects while learning from real production codebases.",
+        year: "2026",
+        category: "Open Source",
+    },
+    {
+        icon: Trophy,
+        title: "120+ GitHub Contributions",
+        description: "Built and maintained projects across full-stack development, AI/RAG exploration, and developer tooling.",
+        year: "2026",
+        category: "Building",
+    },
 ];
 
 export default function Achievements() {
@@ -46,103 +44,53 @@ export default function Achievements() {
 
     useGSAP(() => {
         const isDesktop = window.innerWidth >= 1024;
-
-        // Header entrance
         if (isDesktop) {
             gsap.from(".achievements-header", {
-                y: 50,
+                y: 40,
                 opacity: 0,
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 80%",
-                    end: "top 50%",
-                    scrub: 1,
-                }
+                scrollTrigger: { trigger: sectionRef.current, start: "top 80%", end: "top 55%", scrub: 1 },
             });
-        }
-
-        // Desktop: subtle reveal per card
-        if (isDesktop) {
-            // Animate each card on scroll
             achievements.forEach((_, i) => {
                 gsap.from(`.achievement-card-${i}`, {
-                    scrollTrigger: {
-                        trigger: `.achievement-card-${i}`,
-                        start: "top 85%",
-                        end: "top 50%",
-                        scrub: 1,
-                    },
-                    x: 100,
+                    scrollTrigger: { trigger: `.achievement-card-${i}`, start: "top 85%", end: "top 55%", scrub: 1 },
+                    x: 60,
                     opacity: 0,
-                    scale: 0.9,
-                    duration: 1,
-                    ease: "power2.out"
+                    ease: "power2.out",
                 });
             });
-        }
-
-        // Mobile: Simple fade animations
-        if (!isDesktop) {
+        } else {
             gsap.from(".achievement-card", {
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 80%",
-                },
+                scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
                 opacity: 0,
-                y: 30,
-                duration: 0.6,
-                stagger: 0.15,
-                ease: "power2.out"
+                y: 24,
+                duration: 0.55,
+                stagger: 0.1,
             });
         }
     }, []);
 
     return (
-        <section ref={sectionRef} className="achievements-section relative bg-background overflow-hidden py-16 sm:py-20 lg:py-28">
-            <div className="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-20 xl:px-32">
-                {/* Header */}
-                <div className="achievements-header mb-10 md:mb-14 lg:mb-16">
-                    <span className="text-[10px] uppercase tracking-[0.3em] font-mono text-foreground/45 mb-3 block">Achievements</span>
-                    <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-foreground uppercase leading-[0.9] tracking-tighter italic mb-4">
-                        Recognition & Milestones
-                    </h2>
-                    <p className="text-foreground/55 text-sm md:text-lg italic leading-relaxed max-w-2xl">
-                        A focused set of highlights that represent impact, delivery, and innovation.
+        <section ref={sectionRef} id="achievements" className="achievements-section relative overflow-hidden bg-background py-16 sm:py-20 lg:py-28">
+            <div className="mx-auto max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24">
+                <div className="achievements-header mb-10 md:mb-14">
+                    <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">04 / Progress</span>
+                    <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter sm:text-5xl lg:text-7xl">Proof of Work</h2>
+                    <p className="mt-5 max-w-2xl text-sm leading-relaxed text-foreground/50 sm:text-base">
+                        A snapshot of the habits and work that shape my development journey.
                     </p>
                 </div>
 
-                {/* Achievements Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
                     {achievements.map((achievement, index) => {
                         const Icon = achievement.icon;
                         return (
-                            <article 
-                                key={index} 
-                                className={`achievement-card achievement-card-${index} group relative p-5 md:p-6 lg:p-7 rounded-sm border border-border bg-muted/30 hover:bg-muted hover:border-foreground/25 transition-colors duration-300`}
-                            >
-                                {/* Year and Category */}
-                                <div className="flex items-center justify-between gap-4 text-foreground/50 font-mono text-[10px] uppercase tracking-widest mb-5">
-                                    <span>{achievement.year}</span>
-                                    <div className="flex-1 h-px bg-border" />
-                                    <span className="text-foreground/55">{achievement.category}</span>
+                            <article key={achievement.title} className={`achievement-card achievement-card-${index} group border border-border bg-muted/20 p-5 transition-colors duration-300 hover:bg-muted/50 md:p-6`}>
+                                <div className="mb-6 flex items-center gap-3 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/40">
+                                    <span>{achievement.year}</span><div className="h-px flex-1 bg-border" /><span>{achievement.category}</span>
                                 </div>
-
-                                {/* Icon */}
-                                <div className="mb-5">
-                                    <div className="w-12 h-12 rounded-sm bg-muted flex items-center justify-center border border-border group-hover:border-foreground/25 transition-colors">
-                                        <Icon className="w-6 h-6 text-foreground" />
-                                    </div>
-                                </div>
-
-                                {/* Title */}
-                                <h3 className="text-lg md:text-xl lg:text-2xl font-black text-foreground uppercase tracking-tight leading-tight mb-3 group-hover:text-foreground/90 transition-colors">
-                                    {achievement.title}
-                                </h3>
-
-                                {/* Description */}
-                                <p className="text-foreground/65 text-sm md:text-base leading-relaxed italic">
-                                    {achievement.description}
-                                </p>
+                                <Icon className="mb-6 h-7 w-7 text-foreground/60" />
+                                <h3 className="mb-3 text-xl font-black uppercase leading-tight tracking-tight">{achievement.title}</h3>
+                                <p className="text-sm leading-relaxed text-foreground/55">{achievement.description}</p>
                             </article>
                         );
                     })}
