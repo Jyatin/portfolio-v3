@@ -7,7 +7,9 @@ import ScrollSection from "./components/scroll-section";
 const Marquee = dynamic(() => import("./components/sections/marquee"));
 const Stats = dynamic(() => import("./components/sections/stats"));
 const Projects = dynamic(() => import("./components/sections/projects"));
+const Experience = dynamic(() => import("./components/sections/experience"));
 const Skills = dynamic(() => import("./components/sections/skills"));
+const Certifications = dynamic(() => import("./components/sections/certifications"));
 const Achievements = dynamic(() => import("./components/sections/achievements"));
 const Contact = dynamic(() => import("./components/sections/contact"));
 const Footer = dynamic(() => import("./components/footer"));
@@ -36,7 +38,15 @@ export default function Home() {
             </ScrollSection>
 
             <ScrollSection>
+                <Experience />
+            </ScrollSection>
+
+            <ScrollSection>
                 <Skills />
+            </ScrollSection>
+
+            <ScrollSection>
+                <Certifications />
             </ScrollSection>
 
             <ScrollSection>
