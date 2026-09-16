@@ -1,174 +1,115 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { Briefcase, MapPin } from "lucide-react";
+import { useRef } from "react";
+import { Briefcase, MapPin, ArrowUpRight } from "lucide-react";
+import { useGSAP } from "@/app/hooks/useGSAP";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const experiences = [
-    {
-        title: "Junior Developer",
-        company: "SOCIA ph",
-        location: "Philippines",
-        period: "2025 - Present",
-        description: "Contributing to the development of enterprise-grade solutions using modern full-stack architectures. Collaborating with cross-functional teams to deliver high-quality code, optimized database schemas, and scalable microservices.",
-        achievements: [
-            "Actively contributing to production-level codebases as a Junior Developer",
-            "Working on scalable solutions within the SOCIA ecosystem using Laravel and Next.js",
-            "Collaborating with senior engineers to implement containerized workflows with Docker"
-        ],
-        tech: ["React", "TypeScript", "Laravel", "Node", "Next", "Postgres", "Docker", "MySQL"]
-    },
-    {
-        title: "Lead Developer (Innovation Award Winner)",
-        company: "Synergy 2025 Conference",
-        location: "University Tech Showcase",
-        period: "2024 - 2025",
-        description: "Developed an advanced Water Quality Monitoring System using IoT technology. The project features real-time analysis, mobile app integration, and environmental monitoring with 95% data accuracy.",
-        achievements: [
-            "Won 'Best Research Paper' at Synergy 2025 Conference",
-            "Developed a cross-platform Flutter app for real-time visualization",
-            "Implemented REST APIs and alert systems using Firebase",
-            "Developed ML algorithms for water quality prediction"
-        ],
-        tech: ["Flutter", "ESP32", "Firebase", "IoT", "Machine Learning", "REST API"]
-    }
-];
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+
+const experience = {
+    title: "Software Development Engineer Intern",
+    company: "KaHo Technologies",
+    location: "Bengaluru, India · Remote",
+    period: "Sep 2026 – Present",
+    description:
+        "Building and shipping customer-facing product features for the Parent App using Next.js, React, JavaScript, and TypeScript.",
+    highlights: [
+        "Built and shipped parent verification forms and real-time toast notification systems, contributing to 5+ production features and bug fixes.",
+        "Cut form submission failure rate by 50% (20% to 10%) by redesigning client-side validation logic and implementing structured error handling across key user flows.",
+        "Boosted image rendering performance by 60%+, achieving consistent sub-500ms load times and eliminating recurring stalling issues through optimized lazy-loading and caching strategies.",
+    ],
+    tech: ["Next.js", "React", "JavaScript", "TypeScript"],
+};
 
 export default function Experience() {
     const sectionRef = useRef<HTMLElement>(null);
 
-    useEffect(() => {
-        if (!sectionRef.current) return;
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        const ctx = gsap.context(() => {
-            const root = sectionRef.current;
-            if (!root) return;
-
-            const leftPanel = root.querySelector<HTMLElement>(".experience-panel-left");
-            const rightPanel = root.querySelector<HTMLElement>(".experience-panel-right");
-
-            const animItems = gsap.utils.toArray<HTMLElement>(".experience-anim", root);
-            const techBadges = gsap.utils.toArray<HTMLElement>(".experience-tech-anim", root);
-
-            const panels: HTMLElement[] = [leftPanel, rightPanel].filter((el): el is HTMLElement => !!el);
-            const allItems: HTMLElement[] = [...animItems, ...techBadges];
-
-            gsap.set(panels, { autoAlpha: 0, y: 40, willChange: "transform,opacity" });
-            gsap.set(allItems, { autoAlpha: 0, y: 26, willChange: "transform,opacity" });
-
-            const tlPanelsIn = gsap.timeline({ paused: true }).to(panels, {
-                autoAlpha: 1,
-                y: 0,
-                duration: 0.55,
-                ease: "power2.out",
-                stagger: 0.1,
-            });
-
-            ScrollTrigger.create({
-                trigger: root,
+    useGSAP(() => {
+        const items = gsap.utils.toArray<HTMLElement>(".experience-anim", sectionRef.current);
+        gsap.from(items, {
+            y: 35,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.08,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: sectionRef.current,
                 start: "top 78%",
-                end: "bottom 22%",
-                onEnter: () => tlPanelsIn.play(0),
-                onEnterBack: () => tlPanelsIn.play(0),
-                onRefresh: (self) => {
-                    if (self.progress > 0) tlPanelsIn.progress(1);
-                    else tlPanelsIn.pause(0).progress(0);
-                },
-            });
-
-            const scrubReveal = (el: HTMLElement, yFrom: number) => {
-                gsap.fromTo(
-                    el,
-                    { autoAlpha: 0, y: yFrom },
-                    {
-                        autoAlpha: 1,
-                        y: 0,
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: el,
-                            start: "top 88%",
-                            end: "top 70%",
-                            scrub: 0.85,
-                            invalidateOnRefresh: true,
-                        },
-                    },
-                );
-            };
-
-            animItems.forEach((el) => scrubReveal(el, 22));
-            techBadges.forEach((el) => scrubReveal(el, 18));
-        }, sectionRef);
-
-        return () => ctx.revert();
+            },
+        });
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative bg-background py-16 sm:py-20 lg:py-28 overflow-hidden">
-            <div className="w-full px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 2xl:px-44 max-w-[1920px] mx-auto">
-                <div className="flex flex-col lg:flex-row lg:justify-between gap-10 md:gap-14 lg:gap-16 items-start">
-                    {/* Left — Title */}
-                    <div className="experience-panel-left lg:w-5/12 space-y-6">
-                        <div className="flex items-center gap-3">
-                            <span className="experience-anim text-[10px] sm:text-xs uppercase tracking-[0.35em] text-foreground/45 font-mono">
-                                Experience
-                            </span>
-                            <div className="h-px flex-1 bg-border" />
-                        </div>
-
-                        <h2 className="experience-anim text-[clamp(2rem,5vw,5rem)] font-black uppercase leading-[0.95] text-foreground tracking-tight">
-                            Work History
-                        </h2>
-
-                        <p className="experience-anim text-base sm:text-lg text-foreground/65 leading-relaxed max-w-lg">
-                            Roles and innovation work across enterprise and academic projects.
-                        </p>
-                    </div>
-
-                    {/* Right — List */}
-                    <div className="experience-panel-right lg:w-7/12 lg:self-center">
-                        <div className="grid gap-10 md:gap-12">
-                            {experiences.map((exp) => (
-                                <article key={`${exp.company}-${exp.period}-${exp.title}`} className="experience-anim border border-border bg-muted/30 p-6 md:p-8 lg:p-10">
-                                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-foreground/60 text-xs md:text-sm font-medium mb-4">
-                                        <span className="flex items-center gap-2 text-foreground/85">
-                                            <Briefcase className="w-4 h-4 opacity-50 text-foreground" />
-                                            {exp.company}
-                                        </span>
-                                        <span className="flex items-center gap-2 text-foreground/55">
-                                            <MapPin className="w-4 h-4 opacity-40" />
-                                            {exp.location}
-                                        </span>
-                                        <span className="text-foreground/45 font-mono uppercase tracking-widest text-[10px] md:text-xs">
-                                            {exp.period}
-                                        </span>
-                                    </div>
-
-                                    <h3 className="text-2xl md:text-4xl lg:text-5xl font-black text-foreground tracking-tight leading-none mb-4">
-                                        {exp.title}
-                                    </h3>
-
-                                    <p className="text-foreground/65 text-sm md:text-base leading-relaxed max-w-3xl mb-6">
-                                        {exp.description}
-                                    </p>
-
-                                    <div className="flex flex-wrap gap-2 md:gap-3">
-                                        {exp.tech.map((tech) => (
-                                            <span
-                                                key={tech}
-                                                className="experience-tech-anim text-[10px] md:text-xs px-3 py-1.5 md:px-4 md:py-2 bg-muted text-foreground/60 border border-border font-mono uppercase tracking-widest"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </article>
-                            ))}
-                        </div>
-                    </div>
+        <section
+            ref={sectionRef}
+            id="experience"
+            className="relative overflow-hidden bg-background py-16 text-foreground sm:py-20 lg:py-28"
+        >
+            <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-14 xl:px-18 2xl:pl-24 2xl:pr-24">
+                <div className="mb-10 flex items-center gap-4 sm:mb-14 md:mb-16">
+                    <span className="experience-anim font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45 sm:text-xs">
+                        04 / Experience
+                    </span>
+                    <span className="h-px flex-1 bg-border" />
                 </div>
+
+                <article className="experience-anim border border-border bg-muted/20 p-6 sm:p-8 md:p-10 lg:p-12">
+                    <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
+                        <div className="max-w-2xl">
+                            <div className="mb-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45 sm:text-xs">
+                                <span className="flex items-center gap-2 text-foreground/70">
+                                    <Briefcase className="h-4 w-4" aria-hidden />
+                                    {experience.company}
+                                </span>
+                                <span className="flex items-center gap-2">
+                                    <MapPin className="h-4 w-4" aria-hidden />
+                                    {experience.location}
+                                </span>
+                            </div>
+
+                            <h2 className="text-[clamp(2rem,5vw,4.75rem)] font-black uppercase leading-[0.92] tracking-tighter">
+                                {experience.title}
+                            </h2>
+
+                            <p className="mt-5 text-sm leading-relaxed text-foreground/55 sm:text-base">
+                                {experience.description}
+                            </p>
+                        </div>
+
+                        <div className="shrink-0 lg:text-right">
+                            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/45 sm:text-xs">
+                                {experience.period}
+                            </p>
+                            <ArrowUpRight className="mt-6 hidden h-7 w-7 text-foreground/30 lg:ml-auto lg:block" aria-hidden />
+                        </div>
+                    </div>
+
+                    <div className="mt-10 grid gap-4 border-t border-border pt-8 md:grid-cols-3 md:gap-6">
+                        {experience.highlights.map((highlight, index) => (
+                            <div key={highlight} className="experience-anim border-l border-border pl-4 sm:pl-5">
+                                <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/30">
+                                    {String(index + 1).padStart(2, "0")}
+                                </span>
+                                <p className="mt-3 text-sm leading-relaxed text-foreground/60 sm:text-[15px]">
+                                    {highlight}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-8 flex flex-wrap gap-2 border-t border-border pt-7">
+                        {experience.tech.map((tech) => (
+                            <span
+                                key={tech}
+                                className="experience-anim border border-border bg-background px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/50 sm:text-[10px]"
+                            >
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+                </article>
             </div>
         </section>
     );
