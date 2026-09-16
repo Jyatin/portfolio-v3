@@ -73,7 +73,7 @@ export default function Achievements() {
         <section ref={sectionRef} id="achievements" className="achievements-section relative overflow-hidden bg-background py-16 sm:py-20 lg:py-28">
             <div className="mx-auto max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24">
                 <div className="achievements-header mb-10 md:mb-14">
-                    <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">04 / Progress</span>
+                    <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">07 / Progress</span>
                     <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter sm:text-5xl lg:text-7xl">Proof of Work</h2>
                     <p className="mt-5 max-w-2xl text-sm leading-relaxed text-foreground/50 sm:text-base">
                         A snapshot of the habits and work that shape my development journey.
