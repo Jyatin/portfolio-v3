@@ -6,33 +6,32 @@ import {
     HeroBackdrop,
     HeroEnterBlock,
     HeroEnterSplitRow,
-    HeroExploreLink,
     HeroMotionRoot,
     HeroTechChips,
 } from "./hero-interactive";
+
+const PROFILE_PHOTO = "https://raw.githubusercontent.com/Jyatin/portfolio-v3/master/IMG_20260916_061704.jpg";
 
 export default function Hero() {
     return (
         <LazyMotion features={domAnimation} strict>
             <section
+                id="home"
                 data-shoot-target="1"
-                data-shoot-granularity="char"
-                className="relative isolate w-full overflow-hidden bg-background contain-layout pb-12 min-h-[calc(100svh-var(--app-header-h,88px))] sm:pb-16 lg:pb-8 xl:flex xl:min-h-[calc(100svh-var(--app-header-h,88px))] xl:flex-col xl:justify-center"
-                style={{ marginTop: "var(--app-header-h, 88px)" }}
+                className="relative isolate min-h-[calc(100svh-var(--app-header-h,72px))] w-full overflow-hidden bg-black text-white"
+                style={{ marginTop: "var(--app-header-h, 72px)" }}
             >
                 <HeroBackdrop />
-                <div className="relative z-10 mx-auto h-full min-h-0 w-full max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24">
-                    <HeroMotionRoot className="flex min-h-[calc(100svh-var(--app-header-h,88px)-48px)] flex-col justify-center gap-10 py-12 sm:gap-14 sm:py-16 lg:gap-16">
+
+                <div className="relative z-10 mx-auto w-full max-w-[1400px] px-7 pb-24 pt-8 sm:px-10 md:px-12 lg:px-16">
+                    <HeroMotionRoot className="flex flex-col">
                         <HeroEnterSplitRow
+                            className="mb-10 grid grid-cols-[1fr_auto] items-start gap-4"
                             left={
-                                <div className="font-mono uppercase tracking-[0.28em] text-[10px] text-foreground/60 sm:text-xs">
-                                    <div>01 / PROFILE</div>
-                                    <div className="mt-3 text-foreground/40 tracking-[0.22em]">
-                                        B.Tech CSE (AIML)
-                                        <br />
-                                        Lovely Professional University
-                                        <br />
-                                        Class of 2028
+                                <div className="font-mono text-[10px] uppercase leading-relaxed tracking-[0.3em] text-white/55 sm:text-xs">
+                                    <div>01 /</div>
+                                    <div className="mt-5 max-w-[230px] whitespace-pre-line text-white/55">
+                                        FROM INDIA{`\n`}WITH{`\n`}LOVE
                                     </div>
                                 </div>
                             }
@@ -40,77 +39,62 @@ export default function Hero() {
                         />
 
                         <HeroEnterBlock drift="left">
-                            <div className="max-w-6xl">
-                                <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45 sm:text-xs">
-                                    Jyatin Kumar Singh
-                                </p>
-                                <h1
-                                    data-shoot-target="1"
-                                    data-shoot-granularity="char"
-                                    className="max-w-6xl text-foreground font-black uppercase leading-[0.82] tracking-[-0.055em] text-[clamp(3.8rem,10vw,10rem)]"
-                                >
-                                    Full-Stack
-                                    <br />
-                                    Developer
-                                </h1>
-                            </div>
+                            <h1
+                                data-shoot-target="1"
+                                data-shoot-granularity="char"
+                                className="max-w-[1050px] text-[clamp(4.3rem,13vw,12rem)] font-black uppercase leading-[0.78] tracking-[-0.065em] text-white"
+                            >
+                                Full-Stack
+                                <br />
+                                Developer
+                            </h1>
                         </HeroEnterBlock>
 
-                        <HeroEnterBlock drift="left">
+                        <HeroEnterBlock className="mt-9" drift="left">
                             <HeroTechChips />
                         </HeroEnterBlock>
 
-                        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
-                            <HeroEnterBlock className="lg:col-span-7" drift="left">
-                                <div className="relative min-h-[220px] overflow-hidden border border-border bg-muted/20 sm:min-h-[280px] lg:min-h-[340px]">
-                                    <img
-                                        src="https://raw.githubusercontent.com/Jyatin/portfolio-v3/master/IMG_20260916_061704.jpg"
-                                        alt="Jyatin Kumar Singh in the mountains"
-                                        className="absolute inset-0 h-full w-full object-cover"
-                                    />
-                                    <div className="relative flex h-full flex-col justify-between p-6 sm:p-8">
-                                        <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/55">CURRENT FOCUS</div>
-                                        <div>
-                                            <div className="text-[clamp(2rem,5vw,4.5rem)] font-black uppercase leading-[0.9] tracking-tight text-foreground">
-                                                AI / RAG
-                                            </div>
-                                            <div className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-foreground/60 sm:text-sm">
-                                                Intelligent applications • Open source • DSA
-                                            </div>
-                                        </div>
-                                        <div className="flex items-end justify-between font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/55 sm:text-[10px]">
-                                            <span>BUILD / BREAK / DEBUG</span>
-                                            <span>2026</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </HeroEnterBlock>
+                        <HeroEnterBlock className="mt-8" drift="left">
+                            <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.32em] text-white/55 sm:text-xs">
+                                DR &amp; ME
+                            </div>
+                            <div className="relative aspect-[1.78/1] w-full overflow-hidden border border-white/35 bg-neutral-900">
+                                <img
+                                    src={PROFILE_PHOTO}
+                                    alt="Jyatin Kumar Singh"
+                                    className="h-full w-full object-cover object-center"
+                                    loading="eager"
+                                    fetchPriority="high"
+                                />
+                                <div className="pointer-events-none absolute inset-4 border border-white/20" />
+                                <div className="pointer-events-none absolute left-5 top-5 h-5 w-5 border-l border-t border-white/45" />
+                                <div className="pointer-events-none absolute right-5 top-5 h-5 w-5 border-r border-t border-white/45" />
+                                <div className="pointer-events-none absolute bottom-5 left-5 h-5 w-5 border-b border-l border-white/45" />
+                                <div className="pointer-events-none absolute bottom-5 right-5 h-5 w-5 border-b border-r border-white/45" />
+                            </div>
+                        </HeroEnterBlock>
 
-                            <HeroEnterBlock className="flex flex-col justify-between lg:col-span-5" drift="right">
-                                <div className="max-w-md lg:ml-auto lg:text-right">
-                                    <p className="text-[11px] font-mono uppercase leading-relaxed tracking-[0.22em] text-foreground/65 sm:text-sm">
-                                        I build practical full-stack products, solve problems with data structures and algorithms, and explore AI systems that turn ideas into working software.
-                                    </p>
-                                    <p className="mt-5 text-[10px] font-mono uppercase leading-relaxed tracking-[0.2em] text-foreground/40 sm:text-xs">
-                                        Based in India
-                                        <br />
-                                        Open to internships &amp; software roles
-                                    </p>
-                                </div>
+                        <HeroEnterBlock className="mt-8" drift="right">
+                            <div className="mx-auto max-w-[760px] text-center font-mono uppercase">
+                                <p className="text-[12px] leading-[1.9] tracking-[0.28em] text-white/65 sm:text-sm md:text-base">
+                                    Building practical full-stack applications
+                                    <br />
+                                    for real users.
+                                </p>
+                                <p className="mt-5 text-[10px] leading-[1.9] tracking-[0.28em] text-white/45 sm:text-xs md:text-sm">
+                                    Open for internships / software roles
+                                    <br />
+                                    Based in India
+                                </p>
+                            </div>
+                        </HeroEnterBlock>
 
-                                <div className="mt-10 flex justify-start lg:justify-end">
-                                    <HeroExploreLink />
-                                </div>
-                            </HeroEnterBlock>
-                        </div>
-
-                        <HeroEnterBlock drift="right">
-                            <div className="flex flex-col gap-2 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
-                                <div className="font-mono text-[9px] uppercase tracking-[0.28em] text-foreground/40 sm:text-[10px]">
-                                    Full-Stack • DSA • AI/RAG • Open Source
-                                </div>
-                                <div className="font-mono text-[9px] uppercase tracking-[0.28em] text-foreground/35 sm:text-[10px]">
-                                    Design &amp; code by Jyatin
+                        <HeroEnterBlock className="mt-12" drift="right">
+                            <div className="flex justify-end">
+                                <div className="max-w-[720px] text-right text-[clamp(4rem,12vw,10rem)] font-black uppercase leading-[0.78] tracking-[-0.07em] text-white">
+                                    JYATIN
+                                    <br />
+                                    SINGH
                                 </div>
                             </div>
                         </HeroEnterBlock>
