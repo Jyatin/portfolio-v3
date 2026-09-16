@@ -20,14 +20,16 @@ export default function ScrollSection({ children }: ScrollSectionProps) {
     useGSAP(() => {
         if (!containerRef.current || !contentRef.current) return;
 
-        // One-shot reveal (no scrub): two fewer ScrollTriggers per section vs enter+exit scrub.
+        // Keep content visible at all times. The previous opacity: 0 start state
+        // could leave the entire page invisible when ScrollTrigger failed to
+        // initialize or calculate its trigger position during hydration.
+        // The reveal animation now only adds a subtle vertical entrance.
         gsap.fromTo(
             contentRef.current,
-            { opacity: 0, y: 28 },
+            { y: 20 },
             {
-                opacity: 1,
                 y: 0,
-                duration: 0.75,
+                duration: 0.6,
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: containerRef.current,
