@@ -32,7 +32,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "#",
         featured: true,
         year: "2026",
-        image: "/images/projects/askpdf.svg",
+        image: "/images/projects/attendance-monitoring.webp",
     },
     {
         slug: "kiranawala",
@@ -49,7 +49,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "#",
         featured: true,
         year: "2025",
-        image: "/images/projects/kiranawala.svg",
+        image: "/images/projects/outfithaven.webp",
     },
     {
         slug: "fixmyway",
@@ -66,7 +66,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "#",
         featured: true,
         year: "2025",
-        image: "/images/projects/fixmyway.svg",
+        image: "/images/projects/burger-ka-samen.webp",
     },
     {
         slug: "mystring",
@@ -82,7 +82,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "#",
         featured: true,
         year: "2025",
-        image: "/images/projects/mystring.svg",
+        image: "/images/projects/omnichannel-analytics.webp",
     },
     {
         slug: "cropcycle",
