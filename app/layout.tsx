@@ -5,7 +5,6 @@ import "./globals.css";
 import AppNavbar from "./components/navbar/app-navbar";
 import SmoothScroll from "./components/smooth-scroll";
 import PageTransition from "./components/page-transition";
-import CollaborativeCursors from "./components/collaborative-cursors";
 import ProjectTiltRuntime from "./components/project-tilt-runtime";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -31,7 +30,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <body className={`${geistSans.variable} ${geistMono.variable} font-body antialiased`}>
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
                     <AppNavbar />
-                    <CollaborativeCursors />
                     <ProjectTiltRuntime />
                     <SmoothScroll>
                         <PageTransition>{children}</PageTransition>
