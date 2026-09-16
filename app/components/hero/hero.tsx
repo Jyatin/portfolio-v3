@@ -63,18 +63,24 @@ export default function Hero() {
                         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
                             <HeroEnterBlock className="lg:col-span-7" drift="left">
                                 <div className="relative min-h-[220px] overflow-hidden border border-border bg-muted/20 p-6 sm:min-h-[280px] sm:p-8 lg:min-h-[340px]">
+                                    <img
+                                        src="/jyatin-photo-v2.svg"
+                                        alt="Jyatin Kumar Singh in the mountains"
+                                        className="absolute inset-0 h-full w-full object-cover opacity-90"
+                                    />
+                                    <div className="absolute inset-0 bg-background/55" />
                                     <div className="absolute inset-0 bg-[linear-gradient(rgba(127,127,127,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(127,127,127,.12)_1px,transparent_1px)] bg-[size:42px_42px]" />
                                     <div className="relative flex h-full flex-col justify-between">
-                                        <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/40">CURRENT FOCUS</div>
+                                        <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/55">CURRENT FOCUS</div>
                                         <div>
                                             <div className="text-[clamp(2rem,5vw,4.5rem)] font-black uppercase leading-[0.9] tracking-tight text-foreground">
                                                 AI / RAG
                                             </div>
-                                            <div className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-foreground/45 sm:text-sm">
+                                            <div className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-foreground/60 sm:text-sm">
                                                 Intelligent applications • Open source • DSA
                                             </div>
                                         </div>
-                                        <div className="flex items-end justify-between font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/35">
+                                        <div className="flex items-end justify-between font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/55 sm:text-[10px]">
                                             <span>BUILD / BREAK / DEBUG</span>
                                             <span>2026</span>
                                         </div>
