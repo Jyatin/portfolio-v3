@@ -2,15 +2,16 @@
 
 import { useGSAP } from "@/app/hooks/useGSAP";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, Github, Linkedin, ArrowUp } from "lucide-react";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
+const LINKEDIN_URL = "https://www.linkedin.com/in/jyatinsingh/";
+
 const socialLinks = [
     { name: "Email", icon: Mail, url: "mailto:singhjyatin@gmail.com" },
     { name: "GitHub", icon: Github, url: "https://github.com/Jyatin" },
-    { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/jyatin-singh-88984831b/" },
+    { name: "LinkedIn", icon: Linkedin, url: LINKEDIN_URL },
 ];
 
 export default function Footer() {
@@ -35,8 +36,10 @@ export default function Footer() {
                         <div>
                             <span className="mb-5 block font-mono text-xs uppercase tracking-[0.3em] text-foreground/40">Navigation</span>
                             <nav className="flex flex-col gap-2">
-                                {["About", "Work", "Achievements", "Contact"].map((item) => (
-                                    <a key={item} href={`#${item.toLowerCase()}`} className="w-fit text-lg font-bold uppercase tracking-wide text-foreground/55 transition-colors hover:text-foreground">{item}</a>
+                                {["About", "Work", "Experience", "Skills", "Certifications", "Achievements", "Contact"].map((item) => (
+                                    <a key={item} href={`#${item.toLowerCase()}`} className="w-fit text-lg font-bold uppercase tracking-wide text-foreground/55 transition-colors hover:text-foreground">
+                                        {item}
+                                    </a>
                                 ))}
                             </nav>
                         </div>
