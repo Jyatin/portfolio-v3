@@ -65,6 +65,11 @@ export default function Hero() {
                                     className="h-full w-full object-cover object-center"
                                     loading="eager"
                                     fetchPriority="high"
+                                    referrerPolicy="no-referrer"
+                                    onError={(event) => {
+                                        event.currentTarget.onerror = null;
+                                        event.currentTarget.src = "/jyatin-photo-v2.svg";
+                                    }}
                                 />
                                 <div className="pointer-events-none absolute inset-4 border border-white/20" />
                                 <div className="pointer-events-none absolute left-5 top-5 h-5 w-5 border-l border-t border-white/45" />
