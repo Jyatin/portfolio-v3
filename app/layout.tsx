@@ -17,17 +17,14 @@ export const metadata: Metadata = {
     metadataBase: new URL(siteUrl),
     title: "Jyatin Kumar Singh | Full-Stack Developer",
     description: "Portfolio of Jyatin Kumar Singh — full-stack developer, DSA problem solver, AI/RAG explorer, and open-source contributor.",
-    icons: { icon: "/DevByRoman.png" },
     openGraph: {
         title: "Jyatin Kumar Singh | Full-Stack Developer",
         description: "Full-stack development, DSA, AI/RAG projects, and open-source work by Jyatin Kumar Singh.",
-        images: "/DevByRoman.png",
     },
     twitter: {
-        card: "summary_large_image",
+        card: "summary",
         title: "Jyatin Kumar Singh | Full-Stack Developer",
         description: "Full-stack development, DSA, AI/RAG projects, and open-source work by Jyatin Kumar Singh.",
-        images: ["/DevByRoman.png"],
     },
 };
 
