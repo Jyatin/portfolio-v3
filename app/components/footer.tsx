@@ -15,6 +15,16 @@ const socialLinks = [
     { name: "LinkedIn", icon: Linkedin, url: LINKEDIN_URL },
 ];
 
+const navigation = [
+    ["About", "about"],
+    ["Work", "projects"],
+    ["Experience", "experience"],
+    ["Skills", "skills"],
+    ["Certifications", "certifications"],
+    ["Achievements", "achievements"],
+    ["Contact", "contact"],
+] as const;
+
 export default function Footer() {
     const currentYear = new Date().getFullYear();
     const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -37,9 +47,9 @@ export default function Footer() {
                         <div>
                             <span className="mb-5 block font-mono text-xs uppercase tracking-[0.3em] text-foreground/40">Navigation</span>
                             <nav className="flex flex-col gap-2">
-                                {["About", "Work", "Experience", "Skills", "Certifications", "Achievements", "Contact"].map((item) => (
-                                    <a key={item} href={`#${item.toLowerCase()}`} className="w-fit text-lg font-bold uppercase tracking-wide text-foreground/55 transition-colors hover:text-foreground">
-                                        {item}
+                                {navigation.map(([label, href]) => (
+                                    <a key={label} href={`#${href}`} className="w-fit text-lg font-bold uppercase tracking-wide text-foreground/55 transition-colors hover:text-foreground">
+                                        {label}
                                     </a>
                                 ))}
                             </nav>
