@@ -9,7 +9,6 @@ import {
     HeroMotionRoot,
     HeroTechChips,
 } from "./hero-interactive";
-import ScrambleHeading from "./scramble-heading";
 
 const PROFILE_PHOTO = "https://raw.githubusercontent.com/Jyatin/portfolio-v3/master/IMG_20260916_061704.jpg";
 
@@ -18,7 +17,6 @@ export default function Hero() {
         <LazyMotion features={domAnimation} strict>
             <section
                 id="home"
-                data-shoot-target="1"
                 className="relative isolate min-h-[calc(100svh-var(--app-header-h,72px))] w-full overflow-hidden bg-black text-white"
                 style={{ marginTop: "var(--app-header-h, 72px)" }}
             >
@@ -40,12 +38,11 @@ export default function Hero() {
                         />
 
                         <HeroEnterBlock drift="left">
-                            <ScrambleHeading
-                                text={"Full-Stack\nDeveloper"}
-                                data-shoot-target="1"
-                                data-shoot-granularity="char"
-                                className="max-w-[1050px] whitespace-pre-line text-[clamp(4.3rem,13vw,12rem)] font-black uppercase leading-[0.78] tracking-[-0.065em] text-white"
-                            />
+                            <h1 className="max-w-[1050px] whitespace-pre-line text-[clamp(4.3rem,13vw,12rem)] font-black uppercase leading-[0.78] tracking-[-0.065em] text-white">
+                                Full-Stack
+                                <br />
+                                Developer
+                            </h1>
                         </HeroEnterBlock>
 
                         <HeroEnterBlock className="mt-9" drift="left">
@@ -95,7 +92,7 @@ export default function Hero() {
                         <HeroEnterBlock className="mt-12" drift="right">
                             <div className="flex justify-end">
                                 <div className="max-w-[720px] text-right text-[clamp(4rem,12vw,10rem)] font-black uppercase leading-[0.78] tracking-[-0.07em] text-white">
-                                    JYATIN
+                                    JYATIN KUMAR
                                     <br />
                                     SINGH
                                 </div>
