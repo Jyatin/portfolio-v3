@@ -9,32 +9,79 @@ import { cn } from "@/lib/utils";
 export const HERO_MOTION_ORIGIN: React.CSSProperties = { transformOrigin: "center" };
 export type HeroEnterDrift = "left" | "right" | "center";
 
+/**
+ * Keep the hero content visible even if Framer Motion does not get a chance to
+ * run its entrance animation (slow device, hydration interruption, disabled
+ * motion, or a runtime error elsewhere). Motion should enhance the page, not
+ * be responsible for making the page content visible.
+ */
 function driftItemVariants(reduceMotion: boolean, drift: HeroEnterDrift): Variants {
-    if (reduceMotion) return { hidden: { opacity: 1, x: 0, y: 0 }, visible: { opacity: 1, x: 0, y: 0 } };
     const xHidden = drift === "left" ? 28 : drift === "right" ? -28 : 0;
+
+    if (reduceMotion) {
+        return {
+            hidden: { opacity: 1, x: 0, y: 0 },
+            visible: { opacity: 1, x: 0, y: 0 },
+        };
+    }
+
     return {
-        hidden: { opacity: 0, x: xHidden, y: drift === "center" ? 10 : 0 },
-        visible: { opacity: 1, x: 0, y: 0, transition: { type: "tween", duration: 0.32, ease: [0.22, 1, 0.36, 1] } },
+        // IMPORTANT: never hide hero content while waiting for animation.
+        // The previous opacity: 0 caused the entire hero to appear blank when
+        // the animation did not initialize correctly on the deployed page.
+        hidden: { opacity: 1, x: xHidden, y: drift === "center" ? 10 : 0 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            transition: { type: "tween", duration: 0.32, ease: [0.22, 1, 0.36, 1] },
+        },
     };
 }
 
 export function HeroMotionRoot({ children, className }: { children: React.ReactNode; className?: string }): React.JSX.Element {
     const reduceMotion = useHydrationSafeReducedMotion();
-    const containerVariants = React.useMemo<Variants>(() => ({ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.025 } } }), [reduceMotion]);
-    return <m.div className={cn(className, "transform-gpu")} variants={containerVariants} initial="hidden" animate="visible">{children}</m.div>;
+    const containerVariants = React.useMemo<Variants>(() => ({
+        hidden: {},
+        visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.025 } },
+    }), [reduceMotion]);
+
+    return (
+        <m.div
+            className={cn(className, "transform-gpu")}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+        >
+            {children}
+        </m.div>
+    );
 }
 
 export function HeroEnterBlock({ children, className, drift = "center" }: { children: React.ReactNode; className?: string; drift?: HeroEnterDrift }): React.JSX.Element {
     const reduceMotion = useHydrationSafeReducedMotion();
     const variants = React.useMemo(() => driftItemVariants(!!reduceMotion, drift), [reduceMotion, drift]);
-    return <m.div className={cn(className, "transform-gpu")} variants={variants} style={HERO_MOTION_ORIGIN}>{children}</m.div>;
+
+    return (
+        <m.div
+            className={cn(className, "transform-gpu")}
+            variants={variants}
+            style={HERO_MOTION_ORIGIN}
+        >
+            {children}
+        </m.div>
+    );
 }
 
 export function HeroEnterSplitRow({ className, left, right }: { className?: string; left: React.ReactNode; right: React.ReactNode }): React.JSX.Element {
     const reduceMotion = useHydrationSafeReducedMotion();
-    const rowVariants = React.useMemo<Variants>(() => ({ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.018 } } }), [reduceMotion]);
+    const rowVariants = React.useMemo<Variants>(() => ({
+        hidden: {},
+        visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.018 } },
+    }), [reduceMotion]);
     const leftVariants = React.useMemo(() => driftItemVariants(!!reduceMotion, "left"), [reduceMotion]);
     const rightVariants = React.useMemo(() => driftItemVariants(!!reduceMotion, "right"), [reduceMotion]);
+
     return (
         <m.div className={cn("grid grid-cols-[1fr_auto] items-start gap-4", className)} variants={rowVariants}>
             <m.div variants={leftVariants} style={HERO_MOTION_ORIGIN} className="min-w-0 transform-gpu">{left}</m.div>
