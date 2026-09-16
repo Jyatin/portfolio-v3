@@ -62,15 +62,13 @@ export default function Hero() {
 
                         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
                             <HeroEnterBlock className="lg:col-span-7" drift="left">
-                                <div className="relative min-h-[220px] overflow-hidden border border-border bg-muted/20 p-6 sm:min-h-[280px] sm:p-8 lg:min-h-[340px]">
+                                <div className="relative min-h-[220px] overflow-hidden border border-border bg-muted/20 sm:min-h-[280px] lg:min-h-[340px]">
                                     <img
                                         src="/jyatin-photo.svg"
                                         alt="Jyatin Kumar Singh in the mountains"
                                         className="absolute inset-0 h-full w-full object-cover"
                                     />
-                                    <div className="absolute inset-0 bg-background/10" />
-                                    <div className="absolute inset-0 bg-[linear-gradient(rgba(127,127,127,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(127,127,127,.12)_1px,transparent_1px)] bg-[size:42px_42px]" />
-                                    <div className="relative flex h-full flex-col justify-between">
+                                    <div className="relative flex h-full flex-col justify-between p-6 sm:p-8">
                                         <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/55">CURRENT FOCUS</div>
                                         <div>
                                             <div className="text-[clamp(2rem,5vw,4.5rem)] font-black uppercase leading-[0.9] tracking-tight text-foreground">
