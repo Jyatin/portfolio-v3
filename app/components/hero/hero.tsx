@@ -9,6 +9,7 @@ import {
     HeroMotionRoot,
     HeroTechChips,
 } from "./hero-interactive";
+import ScrambleHeading from "./scramble-heading";
 
 const PROFILE_PHOTO = "https://raw.githubusercontent.com/Jyatin/portfolio-v3/master/IMG_20260916_061704.jpg";
 
@@ -39,15 +40,12 @@ export default function Hero() {
                         />
 
                         <HeroEnterBlock drift="left">
-                            <h1
+                            <ScrambleHeading
+                                text={"Full-Stack\nDeveloper"}
                                 data-shoot-target="1"
                                 data-shoot-granularity="char"
-                                className="max-w-[1050px] text-[clamp(4.3rem,13vw,12rem)] font-black uppercase leading-[0.78] tracking-[-0.065em] text-white"
-                            >
-                                Full-Stack
-                                <br />
-                                Developer
-                            </h1>
+                                className="max-w-[1050px] whitespace-pre-line text-[clamp(4.3rem,13vw,12rem)] font-black uppercase leading-[0.78] tracking-[-0.065em] text-white"
+                            />
                         </HeroEnterBlock>
 
                         <HeroEnterBlock className="mt-9" drift="left">
