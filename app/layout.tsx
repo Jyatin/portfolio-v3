@@ -11,10 +11,7 @@ import CollaborativeCursors from "./components/collaborative-cursors";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio-v3.vercel.app";
-
 export const metadata: Metadata = {
-    metadataBase: new URL(siteUrl),
     title: "Jyatin Kumar Singh | Full-Stack Developer",
     description: "Portfolio of Jyatin Kumar Singh — full-stack developer, DSA problem solver, AI/RAG explorer, and open-source contributor.",
     openGraph: {
