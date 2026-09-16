@@ -1,7 +1,6 @@
 import Hero from "./components/hero/hero";
 import dynamic from "next/dynamic";
 
-import FloatingSocials from "./components/floating-socials";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import ScrollSection from "./components/scroll-section";
 
@@ -17,7 +16,6 @@ export default function Home() {
     return (
         <main className="relative min-h-screen w-full overflow-x-hidden bg-background text-foreground">
             <ScrollProgress />
-            <FloatingSocials />
 
             <ScrollSection>
                 <Hero />
