@@ -30,7 +30,6 @@ function categoryLabel(project: Project): string {
     return `[${primary.toUpperCase()}] — [${secondary.toUpperCase()}]`;
 }
 
-/** Stacked layout tag line (reference-style multiple brackets). */
 function projectTagsLine(project: Project): string {
     const tags = project.tech.slice(0, 3).map((t) => `[${t.toUpperCase()}]`);
     if (tags.length === 0) {
@@ -109,7 +108,7 @@ const ProjectsDesktopGallery = memo(function ProjectsDesktopGallery({
                 aria-hidden
             />
             <span
-                className="pointer-events-none absolute bottom-4 right-4 z-30 h-3 w-3 border-r border-b border-foreground/25 opacity-60 transition-opacity duration-300 group-hover/shell:opacity-100 sm:bottom-5 sm:right-5"
+                className="pointer-events-none absolute bottom-4 right-4 z-30 h-3 w-3 border-r border-b border-foreground/25 opacity-60 transition-opacity duration-300 group-hover/shell:opacity-100 sm:right-5 sm:bottom-5"
                 aria-hidden
             />
 
@@ -178,7 +177,17 @@ const ProjectsDesktopGallery = memo(function ProjectsDesktopGallery({
                         </div>
                     </div>
 
-                    <div className="px-4 pb-3 sm:px-5 sm:pb-4">
+                    <div className="bg-linear-to-t from-black/80 via-black/45 to-transparent px-4 pb-3 pt-14 sm:px-5 sm:pb-4 sm:pt-16">
+                        <ul className="mb-4 space-y-1.5">
+                            {project.highlights.slice(0, 3).map((highlight) => (
+                                <li
+                                    key={highlight}
+                                    className="pl-3 font-mono text-[8px] leading-relaxed tracking-[0.08em] text-white/70 before:absolute before:-ml-3 before:mt-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-white/60 sm:text-[9px]"
+                                >
+                                    {highlight}
+                                </li>
+                            ))}
+                        </ul>
                         <div className="flex gap-1.5 sm:gap-2">
                             {featured.map((p, i) => (
                                 <div
@@ -189,11 +198,8 @@ const ProjectsDesktopGallery = memo(function ProjectsDesktopGallery({
                                     <div
                                         className="h-full origin-left rounded-full bg-white transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
                                         style={{
-                                            transform: `scaleX(${
-                                                i === activeIndex ? 1 : i < activeIndex ? 1 : 0.2
-                                            })`,
-                                            opacity:
-                                                i === activeIndex ? 1 : i < activeIndex ? 0.55 : 0.35,
+                                            transform: `scaleX(${i === activeIndex ? 1 : i < activeIndex ? 1 : 0.2})`,
+                                            opacity: i === activeIndex ? 1 : i < activeIndex ? 0.55 : 0.35,
                                         }}
                                     />
                                 </div>
@@ -334,8 +340,7 @@ export default function Projects() {
                     track,
                     { y: 0 },
                     {
-                        y: () =>
-                            -Math.max(0, track.scrollHeight - viewport.clientHeight),
+                        y: () => -Math.max(0, track.scrollHeight - viewport.clientHeight),
                         ease: "none",
                         scrollTrigger: {
                             trigger: section,
@@ -392,7 +397,6 @@ export default function Projects() {
         };
     }, []);
 
-    /** Outer shell height (desktop preview column). Inner clip is shorter due to padding so gaps show between slides. */
     const viewportShell =
         "h-[72dvh] min-h-[300px] lg:h-[min(95vh,1040px)] lg:min-h-[520px] xl:h-[min(97vh,1180px)]";
 
@@ -408,14 +412,8 @@ export default function Projects() {
                           key={transitionKey}
                           className="absolute inset-0 bg-[#0a0a0a]"
                           initial={{ y: "100%" }}
-                          animate={{
-                              y: ["100%", "0%", "0%"],
-                          }}
-                          transition={{
-                              duration: 1.25,
-                              times: [0, 0.24, 1],
-                              ease: "easeInOut",
-                          }}
+                          animate={{ y: ["100%", "0%", "0%"] }}
+                          transition={{ duration: 1.25, times: [0, 0.24, 1], ease: "easeInOut" }}
                       />
                   </div>,
                   document.body,
@@ -429,160 +427,59 @@ export default function Projects() {
                 ref={sectionRef}
                 id="projects"
                 data-shoot-scroll-interactive="1"
-                className="projects-section scroll-mt-24  bg-background text-foreground"
+                className="projects-section scroll-mt-24 bg-background text-foreground"
                 aria-label="Projects"
             >
                 <div className="mx-auto w-full max-w-[1920px] px-5 py-14 sm:px-8 md:px-12 lg:px-14 xl:px-18 2xl:max-w-none 2xl:pl-24 2xl:pr-0">
-                {/* ——— Below lg: single column, stacked projects (theme) ——— */}
-                <div className="lg:hidden">
-                    <h2 className="text-3xl font-black uppercase leading-[0.95] tracking-tighter text-foreground sm:text-4xl md:text-5xl">
-                        Featured Work
-                    </h2>
-                    <p className="mt-5 max-w-2xl text-sm leading-relaxed text-foreground/55 sm:text-base md:text-lg">
-                        We build websites where every scroll, every transition, and every interaction feels intentional.
-                        The details most teams skip are the details we care about most.
-                    </p>
-
-                    <div className="mt-12 flex flex-col gap-14 sm:mt-14 sm:gap-16 md:gap-20">
-                        {featured.map((project, index) => (
-                            <article key={project.slug} className="w-full">
-                                <button
-                                    type="button"
-                                    onClick={() => goToProject(project.slug)}
-                                    className="group w-full text-left outline-none ring-foreground/30 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                                >
-                                    <div className="relative aspect-16/10 w-full overflow-hidden rounded-sm border border-border bg-muted">
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            sizes="100vw"
-                                            className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
-                                            priority={index === 0}
-                                        />
-                                        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/15 via-transparent to-transparent" />
-                                    </div>
-                                    <h3 className="mt-4 font-black uppercase leading-tight tracking-tight text-foreground sm:mt-5 sm:text-xl md:text-2xl">
-                                        {project.title}
-                                    </h3>
-                                    <p className="mt-2 font-mono text-[10px] uppercase leading-relaxed tracking-[0.2em] text-foreground/45 sm:text-[11px]">
-                                        {projectTagsLine(project)}
-                                    </p>
-                                </button>
-                            </article>
-                        ))}
-                    </div>
-
-                    <div className="mt-12 border-t border-border pt-10 sm:mt-14">
-                        <Link
-                            href="/projects"
-                            onClick={(e) => {
-                                if (shootModeOn) e.preventDefault();
-                            }}
-                            aria-disabled={shootModeOn}
-                            tabIndex={shootModeOn ? -1 : undefined}
-                            className={`inline-flex items-center gap-3 bg-foreground px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-background transition-colors hover:bg-foreground/85${shootModeOn ? " pointer-events-none opacity-50" : ""}`}
-                        >
-                            View all
-                        </Link>
-                    </div>
-                </div>
-
-                {/* ——— lg+ : split column + pinned scrub gallery ——— */}
-                <div className="hidden gap-8 lg:flex lg:flex-row lg:items-start lg:gap-10 xl:gap-14">
-                    <div className="flex w-full shrink-0 flex-col lg:w-[min(100%,320px)] xl:w-[360px]">
-                        <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45">
-                            Selected Projects
+                    <div className="lg:hidden">
+                        <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45 sm:text-xs">
+                            03 / Projects
                         </span>
-                        <h2 className="text-3xl font-black uppercase leading-[0.95] tracking-tighter text-foreground sm:text-4xl lg:text-5xl">
-                            Featured
-                            <br />
-                            Work
+                        <h2 className="text-3xl font-black uppercase leading-[0.95] tracking-tighter text-foreground sm:text-4xl md:text-5xl">
+                            Featured Work
                         </h2>
-                        <p className="mt-5 max-w-sm text-sm leading-relaxed text-foreground/55 sm:text-base">
-                            Websites where scroll, motion, and interaction feel intentional. The details most teams skip
-                            are the details we care about most.
+                        <p className="mt-5 max-w-2xl text-sm leading-relaxed text-foreground/55 sm:text-base md:text-lg">
+                            Selected projects focused on practical products, reliable systems, and applied AI.
                         </p>
 
-                        <div className="mt-8 flex flex-col gap-3 sm:mt-10">
-                            {featured.map((project, index) => {
-                                const isActive = activeIndex === index;
-                                return (
+                        <div className="mt-12 flex flex-col gap-14 sm:mt-14 sm:gap-16 md:gap-20">
+                            {featured.map((project, index) => (
+                                <article key={project.slug} className="w-full">
                                     <button
-                                        key={project.slug}
                                         type="button"
-                                        disabled={shootModeOn}
-                                        onClick={() => scrollToProject(index)}
-                                        className="group flex items-center gap-3 rounded-sm text-left outline-none ring-foreground/30 focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-60"
+                                        onClick={() => goToProject(project.slug)}
+                                        className="group w-full text-left outline-none ring-foreground/30 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                                     >
-                                        <motion.div
-                                            animate={{ scale: isActive ? 1 : 0.78 }}
-                                            transition={{
-                                                type: "spring",
-                                                stiffness: 340,
-                                                damping: 28,
-                                                mass: 0.72,
-                                            }}
-                                            className="relative h-14 w-24 shrink-0 origin-left overflow-hidden rounded-sm border border-border bg-transparent sm:h-16 sm:w-28"
-                                            aria-hidden
-                                        >
-                                            <img
+                                        <div className="relative aspect-16/10 w-full overflow-hidden rounded-sm border border-border bg-muted">
+                                            <Image
                                                 src={project.image}
-                                                alt=""
-                                                width={160}
-                                                height={90}
-                                                loading="eager"
-                                                decoding="async"
-                                                draggable={false}
-                                                className="pointer-events-none absolute inset-0 z-10 h-full w-full object-cover"
+                                                alt={project.title}
+                                                fill
+                                                sizes="100vw"
+                                                className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                                                priority={index === 0}
                                             />
-                                            {isActive ? (
-                                                <motion.span
-                                                    layoutId="projects-left-active-frame"
-                                                    className="pointer-events-none absolute inset-0 z-30 rounded-sm border-2 border-primary/45"
-                                                    transition={{
-                                                        type: "spring",
-                                                        stiffness: 420,
-                                                        damping: 34,
-                                                        mass: 0.7,
-                                                    }}
-                                                    aria-hidden
-                                                />
-                                            ) : null}
-                                            {!isActive ? (
-                                                <span
-                                                    className="pointer-events-none absolute inset-0 z-20 bg-muted5"
-                                                    aria-hidden
-                                                />
-                                            ) : null}
-                                        </motion.div>
-                                        <span
-                                            className="relative h-2 w-2 shrink-0"
-                                            aria-hidden
-                                        >
-                                            {isActive ? (
-                                                <>
-                                                    <motion.span
-                                                        layoutId="projects-left-active-dot"
-                                                        className="absolute inset-0 rounded-[2px] bg-primary"
-                                                        transition={{
-                                                            type: "spring",
-                                                            stiffness: 460,
-                                                            damping: 32,
-                                                            mass: 0.6,
-                                                        }}
-                                                    />
-                                                </>
-                                            ) : (
-                                                <span className="absolute inset-0 rounded-[2px] bg-muted-foreground/40 transition-colors group-hover:bg-muted-foreground/60" />
-                                            )}
-                                        </span>
+                                            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/15 via-transparent to-transparent" />
+                                        </div>
+                                        <h3 className="mt-4 font-black uppercase leading-tight tracking-tight text-foreground sm:mt-5 sm:text-xl md:text-2xl">
+                                            {project.title}
+                                        </h3>
+                                        <p className="mt-2 font-mono text-[10px] uppercase leading-relaxed tracking-[0.2em] text-foreground/45 sm:text-[11px]">
+                                            {projectTagsLine(project)}
+                                        </p>
+                                        <ul className="mt-4 space-y-2 border-t border-border pt-4">
+                                            {project.highlights.slice(0, 3).map((highlight) => (
+                                                <li key={highlight} className="pl-4 text-sm leading-relaxed text-foreground/60 before:absolute before:-ml-4 before:mt-[0.6em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-foreground/35">
+                                                    {highlight}
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </button>
-                                );
-                            })}
+                                </article>
+                            ))}
                         </div>
 
-                        <div className="mt-10 sm:mt-12">
+                        <div className="mt-12 border-t border-border pt-10 sm:mt-14">
                             <Link
                                 href="/projects"
                                 onClick={(e) => {
@@ -597,20 +494,104 @@ export default function Projects() {
                         </div>
                     </div>
 
-                    <div className="min-h-0 flex-1 lg:flex-[1.45] lg:pl-2">
-                        <ProjectsDesktopGallery
-                            viewportRef={viewportRef}
-                            trackRef={trackRef}
-                            featured={featured}
-                            activeIndex={activeIndex}
-                            viewportShell={viewportShell}
-                            goToProject={goToProject}
-                            interactionsDisabled={shootModeOn}
-                        />
+                    <div className="hidden gap-8 lg:flex lg:flex-row lg:items-start lg:gap-10 xl:gap-14">
+                        <div className="flex w-full shrink-0 flex-col lg:w-[min(100%,320px)] xl:w-[360px]">
+                            <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45">
+                                03 / Projects
+                            </span>
+                            <h2 className="text-3xl font-black uppercase leading-[0.95] tracking-tighter text-foreground sm:text-4xl lg:text-5xl">
+                                Featured
+                                <br />
+                                Work
+                            </h2>
+                            <p className="mt-5 max-w-sm text-sm leading-relaxed text-foreground/55 sm:text-base">
+                                Selected projects focused on practical products, reliable systems, and applied AI.
+                            </p>
+
+                            <div className="mt-8 flex flex-col gap-3 sm:mt-10">
+                                {featured.map((project, index) => {
+                                    const isActive = activeIndex === index;
+                                    return (
+                                        <button
+                                            key={project.slug}
+                                            type="button"
+                                            disabled={shootModeOn}
+                                            onClick={() => scrollToProject(index)}
+                                            className="group flex items-center gap-3 rounded-sm text-left outline-none ring-foreground/30 focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-60"
+                                        >
+                                            <motion.div
+                                                animate={{ scale: isActive ? 1 : 0.78 }}
+                                                transition={{ type: "spring", stiffness: 340, damping: 28, mass: 0.72 }}
+                                                className="relative h-14 w-24 shrink-0 origin-left overflow-hidden rounded-sm border border-border bg-transparent sm:h-16 sm:w-28"
+                                                aria-hidden
+                                            >
+                                                <img
+                                                    src={project.image}
+                                                    alt=""
+                                                    width={160}
+                                                    height={90}
+                                                    loading="eager"
+                                                    decoding="async"
+                                                    draggable={false}
+                                                    className="pointer-events-none absolute inset-0 z-10 h-full w-full object-cover"
+                                                />
+                                                {isActive ? (
+                                                    <motion.span
+                                                        layoutId="projects-left-active-frame"
+                                                        className="pointer-events-none absolute inset-0 z-30 rounded-sm border-2 border-primary/45"
+                                                        transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.7 }}
+                                                        aria-hidden
+                                                    />
+                                                ) : null}
+                                                {!isActive ? (
+                                                    <span className="pointer-events-none absolute inset-0 z-20 bg-muted5" aria-hidden />
+                                                ) : null}
+                                            </motion.div>
+                                            <span className="relative h-2 w-2 shrink-0" aria-hidden>
+                                                {isActive ? (
+                                                    <motion.span
+                                                        layoutId="projects-left-active-dot"
+                                                        className="absolute inset-0 rounded-[2px] bg-primary"
+                                                        transition={{ type: "spring", stiffness: 460, damping: 32, mass: 0.6 }}
+                                                    />
+                                                ) : (
+                                                    <span className="absolute inset-0 rounded-[2px] bg-muted-foreground/40 transition-colors group-hover:bg-muted-foreground/60" />
+                                                )}
+                                            </span>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+
+                            <div className="mt-10 sm:mt-12">
+                                <Link
+                                    href="/projects"
+                                    onClick={(e) => {
+                                        if (shootModeOn) e.preventDefault();
+                                    }}
+                                    aria-disabled={shootModeOn}
+                                    tabIndex={shootModeOn ? -1 : undefined}
+                                    className={`inline-flex items-center gap-3 bg-foreground px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-background transition-colors hover:bg-foreground/85${shootModeOn ? " pointer-events-none opacity-50" : ""}`}
+                                >
+                                    View all
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className="min-h-0 flex-1 lg:flex-[1.45] lg:pl-2">
+                            <ProjectsDesktopGallery
+                                viewportRef={viewportRef}
+                                trackRef={trackRef}
+                                featured={featured}
+                                activeIndex={activeIndex}
+                                viewportShell={viewportShell}
+                                goToProject={goToProject}
+                                interactionsDisabled={shootModeOn}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         </>
     );
 }
