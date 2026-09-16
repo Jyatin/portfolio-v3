@@ -64,7 +64,7 @@ export default function Hero() {
                             <HeroEnterBlock className="lg:col-span-7" drift="left">
                                 <div className="relative min-h-[220px] overflow-hidden border border-border bg-muted/20 sm:min-h-[280px] lg:min-h-[340px]">
                                     <img
-                                        src="/jyatin-photo.svg"
+                                        src="/IMG_20260916_061704.jpg"
                                         alt="Jyatin Kumar Singh in the mountains"
                                         className="absolute inset-0 h-full w-full object-cover"
                                     />
