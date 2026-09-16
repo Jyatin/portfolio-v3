@@ -3,7 +3,6 @@
 import * as React from "react";
 import Link from "next/link";
 import { m, type Variants } from "framer-motion";
-import { ArrowDownRight } from "lucide-react";
 import { useHydrationSafeReducedMotion } from "@/app/hooks/use-hydration-safe-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -15,21 +14,13 @@ function driftItemVariants(reduceMotion: boolean, drift: HeroEnterDrift): Varian
     const xHidden = drift === "left" ? 28 : drift === "right" ? -28 : 0;
     return {
         hidden: { opacity: 0, x: xHidden, y: drift === "center" ? 10 : 0 },
-        visible: {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            transition: { type: "tween", duration: 0.28, ease: [0.22, 1, 0.36, 1] },
-        },
+        visible: { opacity: 1, x: 0, y: 0, transition: { type: "tween", duration: 0.32, ease: [0.22, 1, 0.36, 1] } },
     };
 }
 
 export function HeroMotionRoot({ children, className }: { children: React.ReactNode; className?: string }): React.JSX.Element {
     const reduceMotion = useHydrationSafeReducedMotion();
-    const containerVariants = React.useMemo<Variants>(() => ({
-        hidden: {},
-        visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.018, delayChildren: 0 } },
-    }), [reduceMotion]);
+    const containerVariants = React.useMemo<Variants>(() => ({ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.025 } } }), [reduceMotion]);
     return <m.div className={cn(className, "transform-gpu")} variants={containerVariants} initial="hidden" animate="visible">{children}</m.div>;
 }
 
@@ -45,7 +36,7 @@ export function HeroEnterSplitRow({ className, left, right }: { className?: stri
     const leftVariants = React.useMemo(() => driftItemVariants(!!reduceMotion, "left"), [reduceMotion]);
     const rightVariants = React.useMemo(() => driftItemVariants(!!reduceMotion, "right"), [reduceMotion]);
     return (
-        <m.div className={cn("grid transform-gpu grid-cols-[1fr_auto] items-start gap-4", className)} variants={rowVariants}>
+        <m.div className={cn("grid grid-cols-[1fr_auto] items-start gap-4", className)} variants={rowVariants}>
             <m.div variants={leftVariants} style={HERO_MOTION_ORIGIN} className="min-w-0 transform-gpu">{left}</m.div>
             <m.div variants={rightVariants} style={HERO_MOTION_ORIGIN} className="shrink-0 transform-gpu">{right}</m.div>
         </m.div>
@@ -53,35 +44,35 @@ export function HeroEnterSplitRow({ className, left, right }: { className?: stri
 }
 
 export function HeroBackdrop(): React.JSX.Element {
-    const reduceMotion = useHydrationSafeReducedMotion();
     return (
-        <div className={cn("hero-backdrop-root pointer-events-none absolute inset-0 z-0 overflow-hidden", !reduceMotion && "hero-backdrop-reveal")} aria-hidden style={HERO_MOTION_ORIGIN}>
-            <div className="hero-backdrop-grid absolute inset-0 opacity-[0.04] dark:opacity-[0.12]" />
-            {!reduceMotion ? <>
-                <div className="hero-backdrop-orb-a absolute -left-[18%] top-[12%] h-[min(42vw,420px)] w-[min(42vw,420px)] rounded-full bg-foreground/4.5 blur-2xl" aria-hidden />
-                <div className="hero-backdrop-orb-b absolute -right-[12%] bottom-[18%] h-[min(36vw,360px)] w-[min(36vw,360px)] rounded-full bg-foreground/5.5 blur-2xl" aria-hidden />
-            </> : null}
-        </div>
+        <div
+            className="pointer-events-none absolute inset-0 z-0"
+            aria-hidden
+            style={{
+                backgroundImage: "linear-gradient(to right, rgba(255,255,255,0.075) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.075) 1px, transparent 1px)",
+                backgroundSize: "85px 85px",
+                maskImage: "linear-gradient(to bottom, black 0%, black 82%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 82%, transparent 100%)",
+            }}
+        />
     );
 }
 
 const STACK_LINKS = [
-    { label: "React", href: "#skills" },
-    { label: "Node.js", href: "#skills" },
-    { label: "MongoDB", href: "#skills" },
+    { label: "Next.js", href: "#skills" },
     { label: "TypeScript", href: "#skills" },
+    { label: "UI Systems", href: "#skills" },
 ] as const;
 
 export function HeroTechChips(): React.JSX.Element {
     return (
-        <div className="flex flex-wrap gap-2" data-shoot-ui="1">
+        <div className="flex flex-wrap gap-3" data-shoot-ui="1">
             {STACK_LINKS.map((item) => (
                 <Link key={item.label} href={item.href} className={cn(
-                    "inline-flex items-center rounded-full border border-border bg-muted/50",
-                    "px-3 py-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-foreground/65",
-                    "transition-[border-color,background-color,transform,box-shadow] duration-200",
-                    "hover:border-foreground/35 hover:bg-muted hover:text-foreground/85",
-                    "active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                    "inline-flex items-center rounded-full border border-slate-600/80 bg-slate-900/75",
+                    "px-5 py-3 text-[10px] font-mono uppercase tracking-[0.24em] text-white/65 sm:px-6 sm:text-xs",
+                    "transition-all duration-200 hover:border-slate-400 hover:bg-slate-800 hover:text-white",
+                    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 )}>{item.label}</Link>
             ))}
         </div>
@@ -91,28 +82,12 @@ export function HeroTechChips(): React.JSX.Element {
 export function HeroAvailability(): React.JSX.Element {
     const reduceMotion = useHydrationSafeReducedMotion();
     return (
-        <div data-shoot-ui="1" className="inline-flex max-w-52 items-center gap-2 rounded-full border border-border bg-muted/60 px-2.5 py-1">
-            <span className="relative flex h-2 w-2 shrink-0">
+        <div data-shoot-ui="1" className="inline-flex items-center gap-2 rounded-full border border-slate-600/80 bg-slate-900/80 px-4 py-2">
+            <span className="relative flex h-2.5 w-2.5 shrink-0">
                 {!reduceMotion ? <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500/35" /> : null}
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600/90" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
             </span>
-            <span className="text-[9px] font-mono uppercase leading-tight tracking-[0.18em] text-foreground/58">Open to internships</span>
-        </div>
-    );
-}
-
-export function HeroExploreLink({ className }: { className?: string }): React.JSX.Element {
-    const reduceMotion = useHydrationSafeReducedMotion();
-    return (
-        <div className={className} data-shoot-ui="1">
-            <Link href="#projects" className={cn(
-                "group inline-flex items-center gap-2 rounded-full border border-border bg-transparent",
-                "px-3 py-2 text-[10px] font-mono uppercase tracking-[0.24em] text-foreground/70",
-                "transition-[border-color,background-color,color,transform] duration-200 hover:border-foreground/40 hover:bg-muted hover:text-foreground"
-            )}>
-                <span>Selected work</span>
-                {!reduceMotion ? <span className="hero-explore-arrow-nudge inline-flex" aria-hidden><ArrowDownRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" /></span> : <ArrowDownRight className="h-3.5 w-3.5" aria-hidden />}
-            </Link>
+            <span className="text-[9px] font-mono uppercase tracking-[0.22em] text-white/60 sm:text-[10px]">Open for work</span>
         </div>
     );
 }
