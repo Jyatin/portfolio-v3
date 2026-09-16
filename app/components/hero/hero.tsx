@@ -64,11 +64,11 @@ export default function Hero() {
                             <HeroEnterBlock className="lg:col-span-7" drift="left">
                                 <div className="relative min-h-[220px] overflow-hidden border border-border bg-muted/20 p-6 sm:min-h-[280px] sm:p-8 lg:min-h-[340px]">
                                     <img
-                                        src="/jyatin-photo-v2.svg"
+                                        src="/jyatin-photo.svg"
                                         alt="Jyatin Kumar Singh in the mountains"
-                                        className="absolute inset-0 h-full w-full object-cover opacity-90"
+                                        className="absolute inset-0 h-full w-full object-cover"
                                     />
-                                    <div className="absolute inset-0 bg-background/55" />
+                                    <div className="absolute inset-0 bg-background/10" />
                                     <div className="absolute inset-0 bg-[linear-gradient(rgba(127,127,127,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(127,127,127,.12)_1px,transparent_1px)] bg-[size:42px_42px]" />
                                     <div className="relative flex h-full flex-col justify-between">
                                         <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/55">CURRENT FOCUS</div>
