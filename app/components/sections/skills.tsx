@@ -1,88 +1,97 @@
 "use client";
 
-import React, { useRef, useLayoutEffect, useState } from "react";
-import { motion, useMotionValue, useTransform, useAnimationFrame } from "motion/react";
-import '@/components/ScrollVelocity.css';
+import React from "react";
 
-const techStackString = "JavaScript • TypeScript • React • Next.js • Node.js • Express.js • MongoDB • MySQL • HTML • CSS • Tailwind CSS • Java • C++ • DSA • Git • GitHub • Docker • AI • RAG • REST APIs • ";
+const skillGroups = [
+    {
+        title: "Frontend",
+        skills: [
+            ["JavaScript", "javascript"],
+            ["TypeScript", "typescript"],
+            ["React", "react"],
+            ["Next.js", "nextdotjs"],
+            ["Tailwind CSS", "tailwindcss"],
+        ],
+    },
+    {
+        title: "Backend",
+        skills: [
+            ["Node.js", "nodedotjs"],
+            ["Express.js", "express"],
+            ["Laravel", "laravel"],
+            ["PHP", "php"],
+            ["REST APIs", "fastapi"],
+        ],
+    },
+    {
+        title: "Database",
+        skills: [
+            ["MongoDB", "mongodb"],
+            ["MySQL", "mysql"],
+            ["PostgreSQL", "postgresql"],
+            ["Redis", "redis"],
+        ],
+    },
+];
 
-function useElementWidth<T extends HTMLElement>(ref: React.RefObject<T | null>): number {
-    const [width, setWidth] = useState(0);
-    useLayoutEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        const apply = () => setWidth(el.offsetWidth);
-        apply();
-        if (typeof ResizeObserver !== 'undefined') {
-            const ro = new ResizeObserver(apply);
-            ro.observe(el);
-            return () => ro.disconnect();
-        }
-        window.addEventListener('resize', apply, { passive: true });
-        return () => window.removeEventListener('resize', apply);
-    }, [ref]);
-    return width;
-}
+const iconUrl = (slug: string) => `https://cdn.simpleicons.org/${slug}`;
 
-function VelocityText({ children, baseVelocity = 50, isMobile = false, paused = false }: { children: React.ReactNode; baseVelocity?: number; isMobile?: boolean; paused?: boolean }) {
-    const baseX = useMotionValue(0);
-    const copyRef = useRef<HTMLSpanElement>(null);
-    const copyWidth = useElementWidth(copyRef);
-    const wrap = (min: number, max: number, v: number) => {
-        if (max === min) return 0;
-        const range = max - min;
-        return (((v - min) % range) + range) % range + min;
-    };
-    const x = useTransform(baseX, (v) => copyWidth === 0 ? '0px' : `${wrap(-copyWidth, 0, v)}px`);
-    useAnimationFrame((_, delta) => {
-        if (!paused && copyWidth !== 0) baseX.set(baseX.get() + baseVelocity * (delta / 1000));
-    });
-    const spans = [];
-    const numCopies = isMobile ? 4 : 6;
-    for (let i = 0; i < numCopies; i++) {
-        spans.push(
-            <span key={i} ref={i === 0 ? copyRef : null} className="shrink-0 whitespace-nowrap text-2xl font-black uppercase tracking-tighter text-foreground/20 italic transition-colors duration-300 hover:text-foreground/40 sm:text-3xl md:text-5xl lg:text-6xl">
-                {children}
-            </span>
-        );
-    }
+function SkillItem({ name, icon }: { name: string; icon: string }) {
     return (
-        <div className="parallax w-full overflow-hidden">
-            <motion.div className="scroller" style={{ x, display: 'flex', gap: 'clamp(1rem, 3vw, 3rem)', paddingLeft: 'clamp(0.75rem, 2vw, 1.5rem)', paddingRight: 'clamp(0.75rem, 2vw, 1.5rem)', willChange: 'transform', width: 'max-content' }}>
-                {spans}
-            </motion.div>
+        <div className="group flex items-center gap-3 rounded-sm py-2 pr-4 transition-transform duration-300 hover:-translate-y-0.5">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-border bg-foreground/[0.025] p-2.5">
+                <img
+                    src={iconUrl(icon)}
+                    alt=""
+                    width={28}
+                    height={28}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-7 w-7 object-contain opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+                />
+            </span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/55 transition-colors duration-300 group-hover:text-foreground sm:text-xs">
+                {name}
+            </span>
         </div>
     );
 }
 
 export default function Skills() {
-    const sectionRef = useRef<HTMLElement>(null);
-    const [isMobile, setIsMobile] = useState(false);
-    const [marqueeActive, setMarqueeActive] = useState(true);
-
-    React.useEffect(() => {
-        const mq = window.matchMedia('(max-width: 767px)');
-        const sync = () => setIsMobile(mq.matches);
-        sync();
-        mq.addEventListener('change', sync);
-        return () => mq.removeEventListener('change', sync);
-    }, []);
-
-    React.useEffect(() => {
-        const el = sectionRef.current;
-        if (!el || typeof IntersectionObserver === 'undefined') return;
-        const io = new IntersectionObserver(([entry]) => setMarqueeActive(entry.isIntersecting), { rootMargin: '100px 0px', threshold: 0 });
-        io.observe(el);
-        return () => io.disconnect();
-    }, []);
-
     return (
-        <section ref={sectionRef} className="skills-section relative overflow-hidden bg-background py-10 sm:py-14 md:py-18 lg:py-24">
-            <div className="absolute inset-y-0 left-0 z-20 w-12 bg-linear-to-r from-background via-background/80 to-transparent pointer-events-none sm:w-20 md:w-28" />
-            <div className="absolute inset-y-0 right-0 z-20 w-12 bg-linear-to-l from-background via-background/80 to-transparent pointer-events-none sm:w-20 md:w-28" />
-            <div className="relative z-10 space-y-5 overflow-hidden sm:space-y-7 md:space-y-9">
-                <VelocityText baseVelocity={isMobile ? 55 : 75} isMobile={isMobile} paused={!marqueeActive}>{techStackString}</VelocityText>
-                <VelocityText baseVelocity={isMobile ? -55 : -75} isMobile={isMobile} paused={!marqueeActive}>{techStackString}</VelocityText>
+        <section
+            id="skills"
+            aria-label="Technical skills"
+            className="relative overflow-hidden bg-background py-16 text-foreground sm:py-20 md:py-24 lg:py-28"
+        >
+            <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-14 xl:px-18 2xl:max-w-none 2xl:pl-24 2xl:pr-24">
+                <div className="mb-12 flex items-center gap-4 sm:mb-14 md:mb-16">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45 sm:text-xs">
+                        Skills
+                    </span>
+                    <span className="h-px flex-1 bg-border" />
+                </div>
+
+                <div className="grid gap-12 md:grid-cols-3 md:gap-8 lg:gap-12">
+                    {skillGroups.map((group) => (
+                        <div key={group.title}>
+                            <h2 className="text-3xl font-black uppercase leading-none tracking-tighter text-foreground/80 sm:text-4xl lg:text-5xl">
+                                {group.title}
+                            </h2>
+                            <div className="mt-7 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-1">
+                                {group.skills.map(([name, icon]) => (
+                                    <SkillItem key={name} name={name} icon={icon} />
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="mt-14 border-t border-border pt-8 sm:mt-16">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/30 sm:text-xs">
+                        C++ · Java · Python · Git · GitHub · Docker · AI · RAG · DSA
+                    </p>
+                </div>
             </div>
         </section>
     );
