@@ -15,10 +15,9 @@ function randomGlyph(): string {
 
 function buildScrambledText(text: string, elapsed: number): string {
     let output = "";
-
-    // Spaces and line breaks remain stable so the heading never shifts while decoding.
     let characterIndex = 0;
 
+    // Spaces and line breaks remain stable so the heading never shifts while decoding.
     for (const character of text) {
         if (/\s/.test(character)) {
             output += character;
@@ -45,16 +44,19 @@ export default function ScrambleHeading({ text, className, ...props }: ScrambleH
         if (startedRef.current) return;
         startedRef.current = true;
 
-        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (reduceMotion) {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
             setDisplayText(text);
             return;
         }
 
         const startedAt = performance.now();
-        let frameId = 0;
+        let rafId: number | null = null;
+        let timeoutId: number | null = null;
+        let cancelled = false;
 
         const tick = (now: number) => {
+            if (cancelled) return;
+
             const elapsed = now - startedAt;
 
             if (elapsed >= DURATION_MS) {
@@ -63,15 +65,17 @@ export default function ScrambleHeading({ text, className, ...props }: ScrambleH
             }
 
             setDisplayText(buildScrambledText(text, elapsed));
-            frameId = window.setTimeout(() => {
-                requestAnimationFrame(tick);
+            timeoutId = window.setTimeout(() => {
+                rafId = requestAnimationFrame(tick);
             }, FRAME_MS);
         };
 
-        frameId = requestAnimationFrame(tick);
+        rafId = requestAnimationFrame(tick);
 
         return () => {
-            cancelAnimationFrame(frameId);
+            cancelled = true;
+            if (rafId !== null) cancelAnimationFrame(rafId);
+            if (timeoutId !== null) window.clearTimeout(timeoutId);
         };
     }, [text]);
 
