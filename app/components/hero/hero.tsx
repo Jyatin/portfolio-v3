@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { LazyMotion, domAnimation } from "framer-motion";
 import {
     HeroAvailability,
@@ -8,7 +7,6 @@ import {
     HeroEnterBlock,
     HeroEnterSplitRow,
     HeroExploreLink,
-    HeroInteractivePortrait,
     HeroMotionRoot,
     HeroTechChips,
 } from "./hero-interactive";
@@ -16,237 +14,105 @@ import {
 export default function Hero() {
     return (
         <LazyMotion features={domAnimation} strict>
-        <section
-            data-shoot-target="1"
-            data-shoot-granularity="char"
-            className="relative isolate w-full overflow-hidden bg-background contain-layout pb-8 min-h-[calc(100svh-var(--app-header-h,88px))] sm:min-h-[calc(72dvh-var(--app-header-h,88px))] sm:pb-10 md:min-h-0 md:pb-14 lg:pb-6 xl:flex xl:min-h-[calc(100svh-var(--app-header-h,88px))] xl:flex-col xl:justify-center xl:pb-8"
-            style={{
-                marginTop: "var(--app-header-h, 88px)",
-            }}
-        >
-            <HeroBackdrop />
-            <div className="relative z-10 mx-auto h-full min-h-0 w-full max-w-[1920px] px-4 sm:px-6 md:h-auto md:px-10 lg:px-14 xl:px-20">
-                {/* Mobile layout */}
-                <HeroMotionRoot className="md:hidden flex h-full flex-col justify-center gap-4 py-4 sm:py-6">
-                    <HeroEnterSplitRow
-                        left={
-                            <div className="font-mono uppercase tracking-[0.28em] text-[10px] text-foreground/70">
-                                <div>01/</div>
-                                <div className="mt-2 text-foreground/55 tracking-[0.26em]">
-                                    From Philippines with
-                                    <br />
-                                    Love
-                                </div>
-                            </div>
-                        }
-                        right={<HeroAvailability />}
-                    />
-
-                    <HeroEnterBlock drift="center">
-                        <h1
-                            data-shoot-target="1"
-                            data-shoot-granularity="char"
-                            className="text-foreground font-black uppercase leading-[0.9] tracking-[-0.05em] text-[clamp(2.6rem,11vw,4.6rem)]"
-                        >
-                            Software
-                            <br />
-                            Developer
-                        </h1>
-                    </HeroEnterBlock>
-
-                    <HeroEnterBlock drift="left">
-                        <HeroTechChips />
-                    </HeroEnterBlock>
-
-                    <HeroEnterBlock drift="center">
-                        <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-foreground/70 mb-2">
-                            Dr &amp; Me
-                        </div>
-                        <HeroInteractivePortrait frameClassName="w-full aspect-video">
-                            <Image
-                                src="/heropic.svg"
-                                alt="Portrait"
-                                width={1200}
-                                height={675}
-                                sizes="100vw"
-                                priority
-                                fetchPriority="high"
-                                className="h-full w-full object-cover"
-                            />
-                        </HeroInteractivePortrait>
-                    </HeroEnterBlock>
-
-                    <HeroEnterBlock drift="right">
-                        <div className="text-right">
-                            <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-foreground/72">
-                                Building fast, clean web apps
-                                <br />
-                                for real users.
-                            </p>
-                            <div className="mt-2 text-[10px] font-mono uppercase tracking-[0.24em] text-foreground/55">
-                                Open for freelance / full-time
-                                <br />
-                                Based in Quezon City, PH
-                            </div>
-                        </div>
-                    </HeroEnterBlock>
-
-                    <HeroEnterBlock drift="right">
-                        <div
-                            data-shoot-target="1"
-                            data-shoot-granularity="char"
-                            className="text-right text-foreground font-black uppercase leading-[0.88] tracking-[-0.06em] text-[clamp(3.1rem,13vw,5.2rem)]"
-                        >
-                            Roman
-                            <br />
-                            Caseres
-                        </div>
-                    </HeroEnterBlock>
-
-                    <HeroEnterBlock>
-                        <div className="text-right text-[10px] font-mono uppercase tracking-[0.26em] text-foreground/55">
-                            {new Date().getFullYear()} Portfolio
-                        </div>
-                    </HeroEnterBlock>
-
-                    <HeroEnterBlock>
-                        <div className="grid grid-cols-12 items-start gap-4">
-                            <div className="col-span-2 text-foreground/70 text-lg leading-none select-none">
-                                <span aria-hidden="true">-&gt;</span>
-                            </div>
-                            <div className="col-span-10">
-                                <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-foreground/70">
-                                    I based in
-                                    <br />
-                                    Quezon City,
-                                    <br />
-                                    Passionate in architect &amp; UI
-                                </div>
-                            </div>
-                        </div>
-                    </HeroEnterBlock>
-
-                    <HeroEnterBlock className="flex justify-end" drift="right">
-                        <HeroExploreLink />
-                    </HeroEnterBlock>
-
-                    <HeroEnterBlock drift="right">
-                        <div className="text-right text-[10px] font-mono uppercase tracking-[0.28em] text-foreground/55">
-                            Design &amp; code by Roman
-                        </div>
-                    </HeroEnterBlock>
-                </HeroMotionRoot>
-
-                {/* Desktop/tablet layout */}
-                <HeroMotionRoot className="hidden flex-col gap-6 py-6 md:flex md:justify-start md:gap-8 md:py-8 lg:gap-10 lg:py-10">
-                    {/* Top row */}
-                    <div className="grid grid-cols-12 items-start gap-x-6 gap-y-10">
-                        <HeroEnterBlock className="col-span-12 md:col-span-5 md:order-2">
-                            <div className="flex flex-col items-end gap-3 md:items-end">
-                                <HeroAvailability />
-                                <div className="font-mono uppercase tracking-[0.28em] text-[10px] text-foreground/70 md:text-right">
-                                    <div>01/</div>
-                                    <div className="mt-2 text-foreground/55 tracking-[0.26em]">
-                                        From Philippines with
+            <section
+                data-shoot-target="1"
+                data-shoot-granularity="char"
+                className="relative isolate w-full overflow-hidden bg-background contain-layout pb-12 min-h-[calc(100svh-var(--app-header-h,88px))] sm:pb-16 lg:pb-8 xl:flex xl:min-h-[calc(100svh-var(--app-header-h,88px))] xl:flex-col xl:justify-center"
+                style={{ marginTop: "var(--app-header-h, 88px)" }}
+            >
+                <HeroBackdrop />
+                <div className="relative z-10 mx-auto h-full min-h-0 w-full max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24">
+                    <HeroMotionRoot className="flex min-h-[calc(100svh-var(--app-header-h,88px)-48px)] flex-col justify-center gap-10 py-12 sm:gap-14 sm:py-16 lg:gap-16">
+                        <HeroEnterSplitRow
+                            left={
+                                <div className="font-mono uppercase tracking-[0.28em] text-[10px] text-foreground/60 sm:text-xs">
+                                    <div>01 / PROFILE</div>
+                                    <div className="mt-3 text-foreground/40 tracking-[0.22em]">
+                                        B.Tech CSE (AIML)
                                         <br />
-                                        Love
+                                        Lovely Professional University
+                                        <br />
+                                        Class of 2028
                                     </div>
                                 </div>
-                            </div>
-                        </HeroEnterBlock>
+                            }
+                            right={<HeroAvailability />}
+                        />
 
-                        <HeroEnterBlock className="col-span-12 md:col-span-7 md:order-1 md:text-left" drift="left">
-                            <h1
-                                data-shoot-target="1"
-                                data-shoot-granularity="char"
-                                className="text-foreground font-black uppercase leading-[0.88] tracking-[-0.04em] text-[clamp(2.8rem,6.6vw,6.6rem)]"
-                            >
-                                Software
-                                <br />
-                                Developer
-                            </h1>
-                            <div className="mt-4">
-                                <HeroTechChips />
-                            </div>
-                        </HeroEnterBlock>
-                    </div>
-
-                    {/* Bottom row */}
-                    <div className="grid grid-cols-12 items-start gap-x-6 gap-y-8">
-                        <HeroEnterBlock className="col-span-12 md:col-span-5 md:order-2" drift="right">
-                            <div className="mb-8 max-w-104 md:ml-auto md:text-right">
-                                <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-foreground/72">
-                                    Building fast, clean web apps
-                                    <br />
-                                    for real users.
+                        <HeroEnterBlock drift="left">
+                            <div className="max-w-6xl">
+                                <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45 sm:text-xs">
+                                    Jyatin Kumar Singh
                                 </p>
-                                <div className="mt-3 text-[10px] font-mono uppercase tracking-[0.24em] text-foreground/55">
-                                    Open for freelance / full-time
+                                <h1
+                                    data-shoot-target="1"
+                                    data-shoot-granularity="char"
+                                    className="max-w-6xl text-foreground font-black uppercase leading-[0.82] tracking-[-0.055em] text-[clamp(3.8rem,10vw,10rem)]"
+                                >
+                                    Full-Stack
                                     <br />
-                                    Based in Quezon City, PH
-                                </div>
-                            </div>
-
-                            <div
-                                data-shoot-target="1"
-                                data-shoot-granularity="char"
-                                className="text-foreground font-black uppercase leading-[0.88] tracking-[-0.05em] text-[clamp(3.4rem,6.7vw,6.4rem)] md:text-right"
-                            >
-                                Roman
-                                <br />
-                                Caseres
-                            </div>
-
-                            <div className="mt-8 text-[10px] font-mono uppercase tracking-[0.26em] text-foreground/55 md:text-right">
-                                {new Date().getFullYear()} Portfolio
-                            </div>
-
-                            <div className="mt-6 flex justify-end md:justify-end">
-                                <HeroExploreLink />
+                                    Developer
+                                </h1>
                             </div>
                         </HeroEnterBlock>
 
-                        <HeroEnterBlock className="col-span-12 md:col-span-7 md:order-1" drift="left">
-                            <div className="md:flex md:justify-start">
-                                <div className="w-full max-w-[720px]">
-                                    <HeroInteractivePortrait frameClassName="w-full aspect-16/6">
-                                        <Image
-                                            src="/heropic.svg"
-                                            alt="Portrait"
-                                            width={1600}
-                                            height={600}
-                                            sizes="(max-width: 768px) 100vw, 640px"
-                                            priority
-                                            fetchPriority="high"
-                                            className="h-full w-full object-cover"
-                                        />
-                                    </HeroInteractivePortrait>
+                        <HeroEnterBlock drift="left">
+                            <HeroTechChips />
+                        </HeroEnterBlock>
 
-                                    <div className="mt-6 grid grid-cols-12 items-start gap-4">
-                                        <div className="col-span-2 text-foreground/70 text-lg leading-none select-none">
-                                            <span aria-hidden="true">-&gt;</span>
-                                        </div>
-                                        <div className="col-span-10">
-                                            <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-foreground/70">
-                                                I based in
-                                                <br />
-                                                Quezon City,
-                                                <br />
-                                                Passionate in architect &amp; UI
+                        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
+                            <HeroEnterBlock className="lg:col-span-7" drift="left">
+                                <div className="relative min-h-[220px] overflow-hidden border border-border bg-muted/20 p-6 sm:min-h-[280px] sm:p-8 lg:min-h-[340px]">
+                                    <div className="absolute inset-0 bg-[linear-gradient(rgba(127,127,127,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(127,127,127,.12)_1px,transparent_1px)] bg-[size:42px_42px]" />
+                                    <div className="relative flex h-full flex-col justify-between">
+                                        <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/40">CURRENT FOCUS</div>
+                                        <div>
+                                            <div className="text-[clamp(2rem,5vw,4.5rem)] font-black uppercase leading-[0.9] tracking-tight text-foreground">
+                                                AI / RAG
+                                            </div>
+                                            <div className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-foreground/45 sm:text-sm">
+                                                Intelligent applications • Open source • DSA
                                             </div>
                                         </div>
+                                        <div className="flex items-end justify-between font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/35">
+                                            <span>BUILD / BREAK / DEBUG</span>
+                                            <span>2026</span>
+                                        </div>
                                     </div>
+                                </div>
+                            </HeroEnterBlock>
 
-                                    <div className="mt-10 text-left text-[10px] font-mono uppercase tracking-[0.28em] text-foreground/55">
-                                        Design &amp; code by Roman
-                                    </div>
+                            <HeroEnterBlock className="flex flex-col justify-between lg:col-span-5" drift="right">
+                                <div className="max-w-md lg:ml-auto lg:text-right">
+                                    <p className="text-[11px] font-mono uppercase leading-relaxed tracking-[0.22em] text-foreground/65 sm:text-sm">
+                                        I build practical full-stack products, solve problems with data structures and algorithms, and explore AI systems that turn ideas into working software.
+                                    </p>
+                                    <p className="mt-5 text-[10px] font-mono uppercase leading-relaxed tracking-[0.2em] text-foreground/40 sm:text-xs">
+                                        Based in India
+                                        <br />
+                                        Open to internships &amp; software roles
+                                    </p>
+                                </div>
+
+                                <div className="mt-10 flex justify-start lg:justify-end">
+                                    <HeroExploreLink />
+                                </div>
+                            </HeroEnterBlock>
+                        </div>
+
+                        <HeroEnterBlock drift="right">
+                            <div className="flex flex-col gap-2 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
+                                <div className="font-mono text-[9px] uppercase tracking-[0.28em] text-foreground/40 sm:text-[10px]">
+                                    Full-Stack • DSA • AI/RAG • Open Source
+                                </div>
+                                <div className="font-mono text-[9px] uppercase tracking-[0.28em] text-foreground/35 sm:text-[10px]">
+                                    Design &amp; code by Jyatin
                                 </div>
                             </div>
                         </HeroEnterBlock>
-                    </div>
-                </HeroMotionRoot>
-            </div>
-        </section>
+                    </HeroMotionRoot>
+                </div>
+            </section>
         </LazyMotion>
     );
 }
