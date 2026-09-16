@@ -1,11 +1,11 @@
 /** Long-form project descriptions used by project detail pages. */
 export const PROJECT_DESCRIPTIONS: Readonly<Record<string, string>> = {
     askpdf:
-        "AskPDF is an AI-powered document Q&A application built around retrieval-augmented generation. It combines PDF ingestion, embeddings, vector search, Gemini-powered responses, and streaming to make document conversations grounded and useful.",
+        "AskPDF is a RAG-powered document Q&A system with a 5-stage Node.js pipeline for PDFs up to 20 MB. It generates 768-dimensional embeddings for semantic vector search, uses Redis BRPOP workers for asynchronous processing, and applies a >0.7 similarity threshold before retrieved context reaches the LLM.",
     kiranawala:
-        "KiranaWala is a MERN-based local grocery platform focused on connecting customers with stores while providing authentication, product, inventory, and store management workflows.",
+        "KiranaWala is a MERN platform connecting customers with local stores within an 8 km radius. It provides RESTful authentication and order-management APIs, automated Jest/React Testing Library coverage, and end-to-end ordering validation across 80+ products and 3+ stores.",
     fixmyway:
-        "FixMyWay is a full-stack application built around a practical everyday problem, combining a responsive frontend with backend services and a maintainable application structure.",
+        "FixMyWay is an AI-powered civic issue reporting mobile app handling five issue categories with GPS tagging, image uploads, and duplicate detection. Gemini Vision AI validates images with a 2-model fallback, while a 5-factor priority score combines community confirmations with 30-day rainfall data.",
     mystring:
         "MyString is a custom C++ String implementation created to understand object-oriented programming, dynamic memory management, constructors, and operator overloading at a lower level.",
     cropcycle:
