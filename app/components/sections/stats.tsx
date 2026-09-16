@@ -63,7 +63,7 @@ export default function Stats() {
                         </p>
                     </div>
 
-                    <div id="skills" className="lg:col-span-7 lg:pt-10">
+                    <div className="lg:col-span-7 lg:pt-10">
                         <div className="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4">
                             {metrics.map(([value, label]) => (
                                 <div key={label} className="stats-reveal bg-background p-5 sm:p-6">
