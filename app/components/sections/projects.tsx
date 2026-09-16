@@ -135,7 +135,7 @@ const ProjectsDesktopGallery = memo(function ProjectsDesktopGallery({
                                             alt={p.title}
                                             fill
                                             sizes="(max-width: 1024px) 100vw, 65vw"
-                                            className="object-cover object-center"
+                                            className="object-contain object-center"
                                             priority={index === 0}
                                         />
                                     </div>
@@ -433,7 +433,7 @@ export default function Projects() {
                 <div className="mx-auto w-full max-w-[1920px] px-5 py-14 sm:px-8 md:px-12 lg:px-14 xl:px-18 2xl:max-w-none 2xl:pl-24 2xl:pr-0">
                     <div className="lg:hidden">
                         <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45 sm:text-xs">
-                            03 / Projects
+                            04 / Projects
                         </span>
                         <h2 className="text-3xl font-black uppercase leading-[0.95] tracking-tighter text-foreground sm:text-4xl md:text-5xl">
                             Featured Work
@@ -456,7 +456,7 @@ export default function Projects() {
                                                 alt={project.title}
                                                 fill
                                                 sizes="100vw"
-                                                className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                                                className="object-contain object-center transition-transform duration-500 group-hover:scale-[1.02]"
                                                 priority={index === 0}
                                             />
                                             <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/15 via-transparent to-transparent" />
@@ -497,7 +497,7 @@ export default function Projects() {
                     <div className="hidden gap-8 lg:flex lg:flex-row lg:items-start lg:gap-10 xl:gap-14">
                         <div className="flex w-full shrink-0 flex-col lg:w-[min(100%,320px)] xl:w-[360px]">
                             <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45">
-                                03 / Projects
+                                04 / Projects
                             </span>
                             <h2 className="text-3xl font-black uppercase leading-[0.95] tracking-tighter text-foreground sm:text-4xl lg:text-5xl">
                                 Featured

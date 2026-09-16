@@ -48,13 +48,13 @@ export default function Home() {
                 <Recognition />
             </ScrollSection>
 
-            {/* 06 — PROGRESS / PROOF OF WORK */}
+            {/* 06–07 — PROGRESS / PROOF OF WORK */}
             <ScrollSection>
                 <Achievements />
                 <Certifications />
             </ScrollSection>
 
-            {/* 07 — CONTACT */}
+            {/* 08 — CONTACT */}
             <ScrollSection>
                 <Contact />
             </ScrollSection>

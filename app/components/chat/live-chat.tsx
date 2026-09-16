@@ -33,6 +33,17 @@ export default function LiveChat() {
     useEffect(() => setGuestName(getGuestName()), []);
 
     useEffect(() => {
+        const handleOpen = () => setOpen(true);
+        const handleToggle = () => setOpen((prev) => !prev);
+        window.addEventListener("open-portfolio-chat", handleOpen);
+        window.addEventListener("toggle-portfolio-chat", handleToggle);
+        return () => {
+            window.removeEventListener("open-portfolio-chat", handleOpen);
+            window.removeEventListener("toggle-portfolio-chat", handleToggle);
+        };
+    }, []);
+
+    useEffect(() => {
         const supabase = getSupabaseBrowserClient();
         if (!supabase) return;
         const guest = getGuestName();

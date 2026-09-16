@@ -31,8 +31,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "https://ask-pdf-vert.vercel.app/",
         featured: true,
         year: "2026",
-        // Swap this path for the real screenshot when it is ready.
-        image: "/images/projects/askpdf.svg",
+        image: "/images/projects/askpdf_mockup.jpg",
     },
     {
         slug: "kiranawala",
@@ -48,8 +47,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "#",
         featured: true,
         year: "2026",
-        // Swap this path for the real screenshot when it is ready.
-        image: "/images/projects/kiranawala.svg",
+        image: "/images/projects/kiranawala_mockup.jpg",
     },
     {
         slug: "fixmyway",
@@ -65,8 +63,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "#",
         featured: true,
         year: "2026",
-        // Swap this path for the real screenshot when it is ready.
-        image: "/images/projects/fixmyway.svg",
+        image: "/images/projects/fixmyway_mockup.jpg",
     },
     {
         slug: "mystring",
@@ -82,8 +79,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "#",
         featured: true,
         year: "2025",
-        // Swap this path for the real screenshot when it is ready.
-        image: "/images/projects/mystring.svg",
+        image: "/images/projects/mystring_mockup.jpg",
     },
     {
         slug: "cropcycle",

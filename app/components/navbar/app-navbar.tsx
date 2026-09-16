@@ -64,11 +64,23 @@ export default function AppNavbar() {
                             <UsersRound className="h-5 w-5" />
                             <span className="font-mono text-xs">1</span>
                         </div>
-                        <a href="mailto:singhjyatin@gmail.com" aria-label="Email Jyatin" className="flex h-10 w-10 items-center justify-center rounded-xl border border-border text-foreground/65 transition-colors hover:border-foreground/40 hover:text-foreground">
-                            <MessageCircle className="h-5 w-5" />
-                        </a>
-                        <a href="https://github.com/Jyatin" target="_blank" rel="noreferrer" aria-label="GitHub" className="flex h-10 items-center justify-center rounded-xl border border-border px-3 text-foreground/65 transition-colors hover:border-foreground/40 hover:text-foreground">
-                            <Github className="h-5 w-5" />
+                        <button
+                            type="button"
+                            onClick={() => {
+                                if (typeof window !== "undefined") {
+                                    window.dispatchEvent(new CustomEvent("toggle-portfolio-chat"));
+                                }
+                            }}
+                            className="relative inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1 text-foreground/80 transition-colors hover:border-foreground/30 hover:bg-muted"
+                            aria-label="Open chat"
+                        >
+                            <MessageCircle className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
+                            <span className="hidden min-[420px]:inline text-[10px] font-semibold uppercase tracking-wide sm:text-xs">
+                                Messages
+                            </span>
+                        </button>
+                        <a href="https://github.com/Jyatin" target="_blank" rel="noreferrer" aria-label="GitHub" className="flex h-9 items-center justify-center rounded-lg border border-border px-2.5 text-foreground/75 transition-colors hover:border-foreground/30 hover:bg-muted">
+                            <Github className="h-4 w-4" />
                         </a>
                         <button
                             type="button"

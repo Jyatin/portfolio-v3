@@ -6,45 +6,56 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
-const techStacks = [
+type Skill = {
+    name: string;
+    icon: string;
+    invertInDark?: boolean;
+};
+
+type SkillCategory = {
+    label: string;
+    skills: readonly Skill[];
+};
+
+const skillCategories: readonly SkillCategory[] = [
     {
         label: "Frontend",
-        items: [
-            ["JavaScript", "javascript"],
-            ["TypeScript", "typescript"],
-            ["React", "react"],
-            ["Next.js", "nextdotjs"],
-            ["HTML", "html5"],
-            ["CSS", "css"],
-            ["Tailwind CSS", "tailwindcss"],
+        skills: [
+            { name: "JavaScript", icon: "/images/frontend/JavaScript.svg" },
+            { name: "TypeScript", icon: "/images/frontend/TypeScript.svg" },
+            { name: "React", icon: "/images/frontend/React.svg" },
+            { name: "Next.js", icon: "/images/frontend/Next.js.svg", invertInDark: true },
+            { name: "Tailwind CSS", icon: "/images/frontend/Tailwind CSS.svg" },
+            { name: "HTML5", icon: "https://cdn.simpleicons.org/html5" },
+            { name: "CSS3", icon: "https://cdn.simpleicons.org/css" },
         ],
     },
     {
         label: "Backend",
-        items: [
-            ["Node.js", "nodedotjs"],
-            ["Express.js", "express"],
-            ["REST APIs", "rest"],
+        skills: [
+            { name: "Node.js", icon: "/images/backend/Node.js.svg" },
+            { name: "Express.js", icon: "https://cdn.simpleicons.org/express", invertInDark: true },
+            { name: "REST APIs", icon: "https://cdn.simpleicons.org/postman" },
         ],
     },
     {
         label: "Database",
-        items: [
-            ["MongoDB", "mongodb"],
-            ["MySQL", "mysql"],
-            ["SQL", "postgresql"],
+        skills: [
+            { name: "MongoDB", icon: "/images/database/MongoDB.svg" },
+            { name: "MySQL", icon: "/images/database/MySQL.svg" },
+            { name: "PostgreSQL", icon: "/images/database/PostgresSQL.svg" },
         ],
     },
     {
         label: "Tools",
-        items: [
-            ["Git", "git"],
-            ["GitHub", "github"],
-            ["Docker", "docker"],
-            ["VS Code", "visualstudiocode"],
+        skills: [
+            { name: "Git", icon: "/images/tools/Git.svg" },
+            { name: "GitHub", icon: "https://cdn.simpleicons.org/github", invertInDark: true },
+            { name: "Docker", icon: "/images/tools/Docker.svg" },
+            { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
         ],
     },
-] as const;
+];
 
 const metrics = [
     ["200+", "LeetCode"],
@@ -52,26 +63,6 @@ const metrics = [
     ["150+", "GFG / Codeforces"],
     ["5", "Merged PRs"],
 ];
-
-function SkillItem({ name, icon }: { name: string; icon: string }) {
-    return (
-        <div className="group flex items-center gap-3 py-2">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-border bg-muted/10">
-                <img
-                    src={`https://cdn.simpleicons.org/${icon}`}
-                    alt=""
-                    width={24}
-                    height={24}
-                    loading="lazy"
-                    className="h-6 w-6 object-contain transition-transform duration-300 group-hover:scale-110"
-                />
-            </div>
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/55 transition-colors group-hover:text-foreground sm:text-[11px]">
-                {name}
-            </span>
-        </div>
-    );
-}
 
 export default function Stats() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -82,11 +73,11 @@ export default function Stats() {
 
         const ctx = gsap.context(() => {
             gsap.from(".stats-reveal", {
-                scrollTrigger: { trigger: root, start: "top 78%", once: true },
+                scrollTrigger: { trigger: root, start: "top 80%", once: true },
                 opacity: 0,
-                y: 28,
-                duration: 0.55,
-                stagger: 0.06,
+                y: 24,
+                duration: 0.5,
+                stagger: 0.05,
                 ease: "power2.out",
             });
         }, root);
@@ -101,65 +92,91 @@ export default function Stats() {
             className="relative min-w-0 overflow-hidden bg-background py-16 text-foreground sm:py-20 lg:py-28"
         >
             <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24">
-                <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-                    <div className="lg:col-span-5">
-                        <div className="stats-reveal mb-4 flex items-center gap-3">
-                            <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45 sm:text-xs">
+                <div className="flex min-w-0 flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16 xl:gap-20">
+                    {/* Left Panel: Section header, Display title, and Authentic Copy */}
+                    <div className="w-full min-w-0 max-w-full space-y-5 lg:w-[42%] xl:w-5/12">
+                        <div className="stats-reveal flex min-w-0 items-center gap-3">
+                            <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45 sm:text-xs">
                                 03 / About
                             </span>
-                            <div className="h-px flex-1 bg-border" />
+                            <div className="h-px min-w-0 flex-1 bg-border" />
                         </div>
 
-                        <h2 className="stats-reveal text-[clamp(2.7rem,7vw,6.5rem)] font-black uppercase leading-[0.88] tracking-tighter">
-                            Code.
-                            <br />
-                            Solve.
-                            <br />
-                            Build.
+                        <h2 className="stats-reveal text-[clamp(2.5rem,6vw,5.5rem)] font-black uppercase leading-[0.92] tracking-tighter text-foreground">
+                            About
                         </h2>
 
-                        <p className="stats-reveal mt-7 max-w-xl text-base leading-relaxed text-foreground/65 sm:text-lg">
+                        <p className="stats-reveal text-base leading-relaxed text-foreground/75 sm:text-lg">
                             I'm Jyatin Kumar Singh, a B.Tech Computer Science student at Lovely Professional University, graduating in 2028. I build full-stack applications, practise DSA, explore AI/RAG systems, and contribute to open source.
                         </p>
 
-                        <p className="stats-reveal mt-4 max-w-xl text-sm leading-relaxed text-foreground/45 sm:text-base">
+                        <p className="stats-reveal text-sm leading-relaxed text-foreground/55 sm:text-base">
                             My main stack is JavaScript/TypeScript, React, Node.js, Express.js and MongoDB, with C++ and Java for problem solving. I enjoy taking an idea from a rough concept to a working product.
                         </p>
-                    </div>
 
-                    <div className="lg:col-span-7 lg:pt-10">
-                        <div className="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4">
+                        <p className="stats-reveal text-sm leading-relaxed text-foreground/45 sm:text-base">
+                            Passionate about clean code, problem-solving, and collaboration, with a focus on delivering high-performance, user-centered applications.
+                        </p>
+
+                        {/* Metrics Grid */}
+                        <div className="stats-reveal grid grid-cols-2 gap-px border border-border bg-border pt-4 sm:grid-cols-4">
                             {metrics.map(([value, label]) => (
-                                <div key={label} className="stats-reveal bg-background p-5 sm:p-6">
-                                    <div className="text-3xl font-black tracking-tight sm:text-4xl">
+                                <div key={label} className="bg-background p-4 sm:p-5">
+                                    <div className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
                                         {value}
                                     </div>
-                                    <div className="mt-2 font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/45">
+                                    <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/45">
                                         {label}
                                     </div>
                                 </div>
                             ))}
                         </div>
+                    </div>
 
-                        <div className="mt-12 grid gap-10 sm:grid-cols-2">
-                            {techStacks.map((group) => (
-                                <div key={group.label} className="stats-reveal">
-                                    <h3 className="mb-5 text-xl font-black uppercase tracking-tight text-foreground/80 sm:text-2xl">
-                                        {group.label}
-                                    </h3>
+                    {/* Right Panel: Categorized Editorial Skills Grid */}
+                    <div className="w-full min-w-0 max-w-full lg:w-[58%] xl:w-7/12 lg:self-center">
+                        <div className="grid gap-8 sm:gap-10 md:gap-12">
+                            {skillCategories.map((cat) => (
+                                <div
+                                    key={cat.label}
+                                    className="stats-reveal grid min-w-0 grid-cols-1 items-start gap-4 min-[480px]:grid-cols-12 sm:items-center sm:gap-6"
+                                >
+                                    <div className="min-w-0 min-[480px]:col-span-12 sm:col-span-4">
+                                        <div className="text-xl font-black uppercase leading-[1.05] tracking-tight text-foreground/45 min-[400px]:text-2xl sm:text-3xl md:text-4xl lg:text-[2.2rem] xl:text-[2.6rem]">
+                                            {cat.label}
+                                        </div>
+                                    </div>
 
-                                    <div className="grid grid-cols-1 gap-1">
-                                        {group.items.map(([name, icon]) => (
-                                            <SkillItem key={name} name={name} icon={icon} />
-                                        ))}
+                                    <div className="min-w-0 min-[480px]:col-span-12 sm:col-span-8">
+                                        <div className="flex flex-wrap items-center gap-x-3 gap-y-3 sm:gap-x-4 sm:gap-y-3">
+                                            {cat.skills.map((skill) => (
+                                                <div
+                                                    key={skill.name}
+                                                    className="flex min-w-0 max-w-full items-center gap-2 pr-1 sm:pr-2"
+                                                    title={skill.name}
+                                                >
+                                                    <img
+                                                        src={skill.icon}
+                                                        alt={skill.name}
+                                                        loading="lazy"
+                                                        width={36}
+                                                        height={36}
+                                                        className={`h-6 w-6 sm:h-7 sm:w-7 object-contain shrink-0 ${skill.invertInDark ? "dark:invert" : ""}`}
+                                                    />
+                                                    <span className="font-mono text-[10px] uppercase leading-snug tracking-wide text-foreground/70 sm:text-xs whitespace-nowrap">
+                                                        {skill.name}
+                                                    </span>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
 
-                        <div className="stats-reveal mt-10 border-t border-border pt-7">
-                            <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-foreground/30 sm:text-[10px]">
-                                Java · C++ · Python · AI · RAG · DSA
+                        <div className="stats-reveal mt-12 border-t border-border pt-6">
+                            <p className="font-mono text-[9px] uppercase tracking-[0.26em] text-foreground/40 sm:text-[10px]">
+                                Java · C++ · Python · AI · RAG · DSA · Open Source
                             </p>
                         </div>
                     </div>
@@ -168,3 +185,4 @@ export default function Stats() {
         </section>
     );
 }
+
