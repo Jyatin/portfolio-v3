@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AppNavbar from "./components/navbar/app-navbar";
+import FloatingShootToggle from "./components/floating-shoot-toggle";
 import SmoothScroll from "./components/smooth-scroll";
 import PageTransition from "./components/page-transition";
 import ProjectTiltRuntime from "./components/project-tilt-runtime";

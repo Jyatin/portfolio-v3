@@ -100,7 +100,7 @@ function pickInnerShootTarget(raw: Element | null): HTMLElement | null {
     return null;
 }
 
-function pickSemanticTextTarget(raw: Element | null): HTMLElement | null {
+function pickSemanticTextTarget(raw: Element | null): HTMLElement|null {
     let el: Element | null = raw;
     while (el && el instanceof HTMLElement) {
         if (el.matches("[data-shoot-ui]")) return null;
@@ -191,7 +191,7 @@ function findTextOffsetAtPointWithRanges(root: HTMLElement, x: number, y: number
                     }
                 }
             } catch {
-                //
+                // ignore
             }
         }
         n = walker.nextNode();
@@ -205,9 +205,7 @@ function findTextOffsetAtPointWithRanges(root: HTMLElement, x: number, y: number
  * only moves that letter (imperative DOM; hero copy is static between navigations).
  */
 function wrapShootCharAtPoint(x: number, y: number, root: HTMLElement): HTMLElement | null {
-    const doc = document as Document & {
-        caretRangeFromPoint?: (nx: number, ny: number) => Range | null;
-    };
+    const doc = document as Document & { caretRangeFromPoint?: (nx: number, ny: number) => Range | null };
 
     let textNode: Text | null = null;
     let offset = 0;
@@ -247,16 +245,8 @@ function pickHitWord(x: number, y: number, raw: Element | null): HTMLElement | n
 
     if (target.tagName === "IMG") {
         const rect = target.getBoundingClientRect();
-        const inside =
-            x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+        const inside = x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
         return inside ? target : null;
-    }
-
-    if (raw instanceof HTMLElement && raw.tagName === "IMG") {
-        const rect = raw.getBoundingClientRect();
-        const inside =
-            x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
-        return inside ? raw : null;
     }
 
     const textAtPoint = getTextNodeAtPoint(x, y);
@@ -268,8 +258,6 @@ function pickHitWord(x: number, y: number, raw: Element | null): HTMLElement | n
                 return im;
             }
         }
-        // WebKit + shoot-mode `user-select: none` often makes caret APIs return no text node
-        // (iOS). Desktop paths still resolve a text node here, so this branch stays unused there.
         return target;
     }
 
@@ -287,7 +275,7 @@ function writeStateToStorage(isOn: boolean): void {
         window.localStorage.setItem(SHOOT_MODE_STORAGE_KEY, isOn ? "on" : "off");
         notifyShootModeSubscribers();
     } catch {
-        // ignore storage errors (private mode, etc.)
+        // ignore storage errors
     }
 }
 
@@ -318,414 +306,287 @@ export default function FloatingShootToggle(): React.JSX.Element {
         if (!isOn) setHoverShootControls(false);
     }, [isOn]);
 
+    // Warm up gun viewer import
     React.useEffect(() => {
-        // Warm up the JS chunk so first render appears faster.
         void import("./gun-viewer");
     }, []);
 
+    // Show gun cursor on large screens
     React.useEffect(() => {
-        const mediaQuery = window.matchMedia("(min-width: 1024px)");
-        const apply = (matches: boolean) => setShowGunCursor(matches);
-        apply(mediaQuery.matches);
-        const onChange = (event: MediaQueryListEvent) => apply(event.matches);
-        mediaQuery.addEventListener("change", onChange);
-        return () => mediaQuery.removeEventListener("change", onChange);
+        const mq = window.matchMedia("(min-width: 1024px)");
+        const apply = (m: boolean) => setShowGunCursor(m);
+        apply(mq.matches);
+        const handler = (e: MediaQueryListEvent) => apply(e.matches);
+        mq.addEventListener("change", handler);
+        return () => mq.removeEventListener("change", handler);
     }, []);
 
+    // Date/time display
     React.useEffect(() => {
-        const format = () => {
+        const fmt = () => {
             const now = new Date();
-            const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"] as const;
-            const day = days[now.getDay()] ?? "DAY";
-            const hours = now.getHours();
-            const minutes = now.getMinutes().toString().padStart(2, "0");
-            const ampm = hours >= 12 ? "P.M" : "A.M";
-            const displayHours = hours % 12 || 12;
-            setDateTimeText(`${day} ${displayHours}:${minutes} ${ampm}`);
+            const days = ["SUN","MON","TUE","WED","THU","FRI","SAT"] as const;
+            const day = days[now.getDay()];
+            const hrs = now.getHours();
+            const mins = now.getMinutes().toString().padStart(2,"0");
+            const ampm = hrs >= 12 ? "P.M" : "A.M";
+            const dh = hrs % 12 || 12;
+            setDateTimeText(`${day} ${dh}:${mins} ${ampm}`);
         };
-
-        format();
-        const id = window.setInterval(format, 1000);
-        return () => window.clearInterval(id);
+        fmt();
+        const id = setInterval(fmt, 1000);
+        return () => clearInterval(id);
     }, []);
 
     const toggle = React.useCallback(() => {
-        setIsOn((prev) => {
+        setIsOn(prev => {
             const next = !prev;
             writeStateToStorage(next);
-            if (next) {
-                void ensurePaintballAudioRunning();
-            }
+            if (next) void ensurePaintballAudioRunning();
             return next;
         });
     }, []);
 
-    // Fade all splats out when leaving shoot mode, then clear.
+    // Fade splats when mode turned off
     React.useEffect(() => {
         if (isOn) return;
-        setSplats((prev) => {
-            if (prev.length === 0) return prev;
-            return prev.map((s) => ({ ...s, exiting: true }));
-        });
-        const id = window.setTimeout(() => {
-            setSplats([]);
-        }, SPLAT_FADE_MS);
-        return () => window.clearTimeout(id);
+        setSplats(prev => prev.length ? prev.map(s => ({ ...s, exiting: true })) : prev);
+        const id = setTimeout(() => setSplats([]), SPLAT_FADE_MS);
+        return () => clearTimeout(id);
     }, [isOn]);
 
-    // Drop half-faded splats if shoot mode is turned back on mid-fade.
+    // Remove exiting splats if re‑enabled
     React.useEffect(() => {
         if (!isOn) return;
-        setSplats((prev) => prev.filter((s) => !s.exiting));
+        setSplats(prev => prev.filter(s => !s.exiting));
     }, [isOn]);
 
+    // Pointer tracking for gun aim
     React.useEffect(() => {
         if (!isOn) return;
-
         setCursorX(window.innerWidth / 2);
         setCursorY(window.innerHeight / 2);
-
-        const onPointerMove = (event: PointerEvent) => {
-            // Touch drags (e.g. scrolling) must not steer the gun; only mouse/trackpad
-            // tracks aim continuously, matching large-viewport behavior.
-            if (event.pointerType === "touch") return;
-            updateAimFromPoint(event.clientX, event.clientY);
+        const move = (e: PointerEvent) => {
+            if (e.pointerType === "touch") return;
+            updateAimFromPoint(e.clientX, e.clientY);
         };
-
-        window.addEventListener("pointermove", onPointerMove, { passive: true });
-        return () => {
-            window.removeEventListener("pointermove", onPointerMove);
-        };
+        window.addEventListener("pointermove", move, { passive: true });
+        return () => window.removeEventListener("pointermove", move);
     }, [isOn, updateAimFromPoint]);
 
+    // Main shooting logic (mouse / touch)
     React.useEffect(() => {
         if (!isOn) return;
-        let firingInterval: number | null = null;
-        let isHoldingPrimary = false;
+        let interval: number | null = null;
+        let holding = false;
         let touchStart: { x: number; y: number } | null = null;
-        let touchMoved = false;
-        const touchMoveThreshold = 12;
+        let moved = false;
+        const moveThreshold = 12;
 
-        const onSelectStart = (event: Event) => {
-            const target = event.target as Element | null;
-            if (target?.closest("[data-shoot-ui]")) return;
-            if (target?.closest(SHOOT_SCROLL_INTERACTIVE_SEL)) return;
-            event.preventDefault();
+        const prevent = (e: Event) => {
+            const t = e.target as Element | null;
+            if (t?.closest("[data-shoot-ui]") || t?.closest(SHOOT_SCROLL_INTERACTIVE_SEL)) return;
+            e.preventDefault();
         };
 
-        const fireShot = (x: number, y: number) => {
+        const fire = (x: number, y: number) => {
             const raw = document.elementFromPoint(x, y);
-            if (raw?.closest("[data-shoot-ui]")) {
-                return;
-            }
-            if (raw?.closest(SHOOT_SCROLL_INTERACTIVE_SEL)) {
-                return;
-            }
-
+            if (raw?.closest("[data-shoot-ui]") || raw?.closest(SHOOT_SCROLL_INTERACTIVE_SEL)) return;
             playPaintballShotSound();
-
             const id = nextPaintSplatId();
             const size = 26 + Math.random() * 20;
             const rotation = (Math.random() * 80) - 40;
             const palettes = [
-                { min: 340, max: 360 }, // magenta/red
-                { min: 8, max: 28 },    // orange
-                { min: 185, max: 210 }, // cyan/blue
-                { min: 265, max: 288 }, // violet
-                { min: 95, max: 122 },  // green
+                { min: 340, max: 360 },
+                { min: 8, max: 28 },
+                { min: 185, max: 210 },
+                { min: 265, max: 288 },
+                { min: 95, max: 122 },
             ] as const;
-            const picked = palettes[Math.floor(Math.random() * palettes.length)];
-            const hue = picked.min + Math.random() * (picked.max - picked.min);
-            const saturation = 74 + Math.random() * 18;
-            const lightness = 42 + Math.random() * 16;
-
-            setSplats((prev) => [
-                ...prev.slice(-45),
-                { id, x, y, size, rotation, hue, saturation, lightness },
-            ]);
-            window.setTimeout(() => {
-                setSplats((prev) =>
-                    prev.map((splat) => (splat.id === id ? { ...splat, exiting: true } : splat))
-                );
-                window.setTimeout(() => {
-                    setSplats((prev) => prev.filter((splat) => splat.id !== id));
-                }, SPLAT_FADE_MS);
+            const p = palettes[Math.floor(Math.random() * palettes.length)];
+            const hue = p.min + Math.random() * (p.max - p.min);
+            const sat = 74 + Math.random() * 18;
+            const lit = 42 + Math.random() * 16;
+            setSplats(prev => [...prev.slice(-45), { id, x, y, size, rotation, hue, saturation: sat, lightness: lit }]);
+            setTimeout(() => {
+                setSplats(prev => prev.map(s => s.id === id ? { ...s, exiting: true } : s));
+                setTimeout(() => setSplats(prev => prev.filter(s => s.id !== id)), SPLAT_FADE_MS);
             }, SPLAT_VISIBLE_MS);
 
-            const pageContent = document.querySelector("main") as HTMLElement | null;
-            if (pageContent) {
-                gsap.fromTo(
-                    pageContent,
-                    { x: 0, y: 0, rotate: 0 },
-                    {
-                        x: 9,
-                        y: -6,
-                        rotate: -0.15,
-                        duration: 0.045,
-                        repeat: 5,
-                        yoyo: true,
-                        ease: "power1.inOut",
-                        clearProps: "transform",
-                    }
-                );
+            // page shake
+            const main = document.querySelector("main") as HTMLElement | null;
+            if (main) {
+                gsap.fromTo(main, { x: 0, y: 0, rotate: 0 }, {
+                    x: 9, y: -6, rotate: -0.15, duration: 0.045, repeat: 5, yoyo: true, ease: "power1.inOut", clearProps: "transform"
+                });
             }
 
-            const target = pickHitWord(x, y, raw);
-            if (!target) return;
-
-            const animTarget = resolveShootAnimationTarget(target, x, y);
-
+            const targetEl = pickHitWord(x, y, raw);
+            if (!targetEl) return;
+            const animTarget = resolveShootAnimationTarget(targetEl, x, y);
             if (animTarget.dataset.shotDown === "1") {
-                gsap.to(animTarget, {
-                    y: "+=12",
-                    rotation: "+=6",
-                    duration: 0.16,
-                    ease: "power1.out",
-                });
+                gsap.to(animTarget, { y: "+=12", rotation: "+=6", duration: 0.16, ease: "power1.out" });
                 return;
             }
-
             animTarget.dataset.shotDown = "1";
             animTarget.style.willChange = "transform, opacity";
-            const impactTilt = gsap.utils.random(-7, 7, 1);
-            const fallTilt = gsap.utils.random(-24, 24, 1);
+            const impact = gsap.utils.random(-7, 7, 1);
+            const fall = gsap.utils.random(-24, 24, 1);
             const tl = gsap.timeline();
-            tl.to(animTarget, {
-                x: gsap.utils.random(-6, 6, 1),
-                y: gsap.utils.random(-10, -4, 1),
-                rotation: impactTilt,
-                scale: 1.08,
-                duration: 0.09,
-                ease: "power2.out",
-            })
-                .to(animTarget, {
-                    x: gsap.utils.random(-2, 2, 1),
-                    y: gsap.utils.random(-2, 2, 1),
-                    rotation: impactTilt * 0.45,
-                    scale: 0.96,
-                    duration: 0.08,
-                    ease: "power1.inOut",
-                })
-                .to(animTarget, {
-                    y: window.innerHeight * 0.55,
-                    rotation: fallTilt,
-                    opacity: 0.15,
-                    scale: 1,
-                    duration: 1.05,
-                    ease: "power2.in",
-                });
+            tl.to(animTarget, { x: gsap.utils.random(-6, 6, 1), y: gsap.utils.random(-10, -4, 1), rotation: impact, scale: 1.08, duration: 0.09, ease: "power2.out" })
+              .to(animTarget, { x: gsap.utils.random(-2, 2, 1), y: gsap.utils.random(-2, 2, 1), rotation: impact * 0.45, scale: 0.96, duration: 0.08, ease: "power1.inOut" })
+              .to(animTarget, { y: window.innerHeight * 0.55, rotation: fall, opacity: 0.15, scale: 1, duration: 1.05, ease: "power2.in" });
         };
 
-        const stopHoldFire = () => {
-            isHoldingPrimary = false;
-            if (firingInterval !== null) {
-                window.clearInterval(firingInterval);
-                firingInterval = null;
-            }
+        const stop = () => {
+            holding = false;
+            if (interval !== null) { clearInterval(interval); interval = null; }
         };
 
-        const onPointerDown = (event: PointerEvent) => {
-            if (!event.isPrimary) return;
-            if (event.pointerType === "mouse" && event.button !== 0) return;
-            if ((event.target as Element | null)?.closest("[data-shoot-ui]")) return;
-            if ((event.target as Element | null)?.closest(SHOOT_SCROLL_INTERACTIVE_SEL)) return;
-
-            // Keep touchscreen scrolling natural while allowing tap-to-shoot.
-            // Do not update aim on touch down (avoids gun jumping when starting a scroll).
-            if (event.pointerType === "touch") {
-                touchStart = { x: event.clientX, y: event.clientY };
-                touchMoved = false;
+        const down = (e: PointerEvent) => {
+            if (!e.isPrimary) return;
+            if (e.pointerType === "mouse" && e.button !== 0) return;
+            if ((e.target as Element | null)?.closest("[data-shoot-ui]") || (e.target as Element | null)?.closest(SHOOT_SCROLL_INTERACTIVE_SEL)) return;
+            if (e.pointerType === "touch") {
+                touchStart = { x: e.clientX, y: e.clientY };
+                moved = false;
                 return;
             }
-
-            event.preventDefault();
+            e.preventDefault();
             window.getSelection()?.removeAllRanges();
-            updateAimFromPoint(event.clientX, event.clientY);
-
-            fireShot(event.clientX, event.clientY);
-
-            isHoldingPrimary = true;
-            if (firingInterval !== null) window.clearInterval(firingInterval);
-            firingInterval = window.setInterval(() => {
-                if (!isHoldingPrimary) return;
-                fireShot(pointerRef.current.x, pointerRef.current.y);
-            }, 90);
+            updateAimFromPoint(e.clientX, e.clientY);
+            fire(e.clientX, e.clientY);
+            holding = true;
+            if (interval) clearInterval(interval);
+            interval = setInterval(() => { if (holding) fire(pointerRef.current.x, pointerRef.current.y); }, 90);
         };
 
-        const onPointerMove = (event: PointerEvent) => {
-            if (!event.isPrimary) return;
-            if (event.pointerType !== "touch") return;
-            if (!touchStart) return;
-            const movedDistance = Math.hypot(event.clientX - touchStart.x, event.clientY - touchStart.y);
-            if (movedDistance > touchMoveThreshold) {
-                touchMoved = true;
-            }
+        const moveTouch = (e: PointerEvent) => {
+            if (!e.isPrimary || e.pointerType !== "touch" || !touchStart) return;
+            const dist = Math.hypot(e.clientX - touchStart.x, e.clientY - touchStart.y);
+            if (dist > moveThreshold) moved = true;
         };
 
-        const onPointerUp = (event: PointerEvent) => {
-            if (!event.isPrimary) return;
-            if (event.pointerType === "mouse" && event.button !== 0) return;
-            if (event.pointerType === "touch") {
-                const upEl = document.elementFromPoint(event.clientX, event.clientY);
-                const inShootUi = upEl?.closest("[data-shoot-ui]");
-                const inScrollInteractive = upEl?.closest(SHOOT_SCROLL_INTERACTIVE_SEL);
-                if (!inShootUi && !inScrollInteractive && !touchMoved) {
-                    updateAimFromPoint(event.clientX, event.clientY);
-                    fireShot(event.clientX, event.clientY);
+        const up = (e: PointerEvent) => {
+            if (!e.isPrimary) return;
+            if (e.pointerType === "mouse" && e.button !== 0) return;
+            if (e.pointerType === "touch") {
+                const upEl = document.elementFromPoint(e.clientX, e.clientY);
+                const inUi = upEl?.closest("[data-shoot-ui]");
+                const inScroll = upEl?.closest(SHOOT_SCROLL_INTERACTIVE_SEL);
+                if (!inUi && !inScroll && !moved) {
+                    updateAimFromPoint(e.clientX, e.clientY);
+                    fire(e.clientX, e.clientY);
                 }
-                touchStart = null;
-                touchMoved = false;
+                touchStart = null; moved = false;
             }
-            stopHoldFire();
+            stop();
         };
 
-        const onPointerCancel = () => {
-            touchStart = null;
-            touchMoved = false;
-            stopHoldFire();
-        };
-
-        const onWindowBlur = () => {
-            stopHoldFire();
-        };
-
-        document.addEventListener("selectstart", onSelectStart);
-        document.addEventListener("dragstart", onSelectStart);
-        window.addEventListener("pointerdown", onPointerDown);
-        window.addEventListener("pointermove", onPointerMove, { passive: true });
-        window.addEventListener("pointerup", onPointerUp);
-        window.addEventListener("pointercancel", onPointerCancel);
-        window.addEventListener("blur", onWindowBlur);
+        document.addEventListener("selectstart", prevent);
+        document.addEventListener("dragstart", prevent);
+        window.addEventListener("pointerdown", down);
+        window.addEventListener("pointermove", moveTouch, { passive: true });
+        window.addEventListener("pointerup", up);
+        window.addEventListener("pointercancel", stop);
+        window.addEventListener("blur", stop);
         return () => {
-            stopHoldFire();
-            document.removeEventListener("selectstart", onSelectStart);
-            document.removeEventListener("dragstart", onSelectStart);
-            window.removeEventListener("pointerdown", onPointerDown);
-            window.removeEventListener("pointermove", onPointerMove);
-            window.removeEventListener("pointerup", onPointerUp);
-            window.removeEventListener("pointercancel", onPointerCancel);
-            window.removeEventListener("blur", onWindowBlur);
+            stop();
+            document.removeEventListener("selectstart", prevent);
+            document.removeEventListener("dragstart", prevent);
+            window.removeEventListener("pointerdown", down);
+            window.removeEventListener("pointermove", moveTouch);
+            window.removeEventListener("pointerup", up);
+            window.removeEventListener("pointercancel", stop);
+            window.removeEventListener("blur", stop);
         };
     }, [isOn, updateAimFromPoint]);
 
+    // Global CSS classes handling
     React.useEffect(() => {
-        const cursorClassName = "shoot-cursor-hidden";
-        const shootModeClassName = "shoot-mode-active";
-        const touchUiClassName = "shoot-mode-touch-ui";
-
+        const shootClass = "shoot-mode-active";
+        const cursorHide = "shoot-cursor-hidden";
+        const touchUI = "shoot-mode-touch-ui";
         if (isOn) {
-            document.documentElement.classList.add(shootModeClassName);
-            document.body.classList.add(shootModeClassName);
-            const isTouchCapable =
-                typeof navigator !== "undefined" && navigator.maxTouchPoints > 0;
-            if (isTouchCapable) {
-                document.documentElement.classList.add(touchUiClassName);
-                document.body.classList.add(touchUiClassName);
+            document.documentElement.classList.add(shootClass);
+            document.body.classList.add(shootClass);
+            if (navigator.maxTouchPoints > 0) {
+                document.documentElement.classList.add(touchUI);
+                document.body.classList.add(touchUI);
             }
         } else {
-            document.documentElement.classList.remove(shootModeClassName);
-            document.body.classList.remove(shootModeClassName);
-            document.documentElement.classList.remove(touchUiClassName);
-            document.body.classList.remove(touchUiClassName);
+            document.documentElement.classList.remove(shootClass);
+            document.body.classList.remove(shootClass);
+            document.documentElement.classList.remove(touchUI);
+            document.body.classList.remove(touchUI);
         }
-
-        const hideSystemCursor = isOn && showGunCursor && !hoverShootControls;
-        if (hideSystemCursor) {
-            document.documentElement.classList.add(cursorClassName);
-            document.body.classList.add(cursorClassName);
+        const hide = isOn && showGunCursor && !hoverShootControls;
+        if (hide) {
+            document.documentElement.classList.add(cursorHide);
+            document.body.classList.add(cursorHide);
         } else {
-            document.documentElement.classList.remove(cursorClassName);
-            document.body.classList.remove(cursorClassName);
+            document.documentElement.classList.remove(cursorHide);
+            document.body.classList.remove(cursorHide);
         }
-
         return () => {
-            document.documentElement.classList.remove(cursorClassName);
-            document.body.classList.remove(cursorClassName);
-            document.documentElement.classList.remove(shootModeClassName);
-            document.body.classList.remove(shootModeClassName);
-            document.documentElement.classList.remove(touchUiClassName);
-            document.body.classList.remove(touchUiClassName);
+            document.documentElement.classList.remove(cursorHide);
+            document.body.classList.remove(cursorHide);
+            document.documentElement.classList.remove(shootClass);
+            document.body.classList.remove(shootClass);
+            document.documentElement.classList.remove(touchUI);
+            document.body.classList.remove(touchUI);
         };
     }, [isOn, showGunCursor, hoverShootControls]);
 
     return (
         <>
-            {/* Paint splats: keep mounted while fading after shoot mode ends */}
-            {(isOn || splats.length > 0) && (
+            {(isOn || splats.length) && (
                 <div className="fixed inset-0 z-9998 pointer-events-none" aria-hidden="true">
-                    {splats.map((splat) => (
-                        <div
-                            key={splat.id}
-                            className="absolute transition-opacity ease-out"
-                            style={{
-                                left: splat.x,
-                                top: splat.y,
-                                width: splat.size,
-                                height: splat.size,
-                                transform: `translate(-50%, -50%) rotate(${splat.rotation}deg)`,
-                                opacity: splat.exiting ? 0 : 1,
-                                transitionDuration: `${SPLAT_FADE_MS}ms`,
-                            }}
-                        >
-                            <span
-                                className="absolute inset-0 opacity-95"
-                                style={{
-                                    clipPath:
-                                        "polygon(50% 0%, 59% 10%, 71% 4%, 77% 16%, 91% 12%, 89% 27%, 100% 38%, 88% 49%, 100% 62%, 84% 67%, 90% 82%, 74% 81%, 69% 97%, 55% 90%, 46% 100%, 35% 88%, 21% 96%, 15% 82%, 0% 77%, 6% 62%, 0% 48%, 11% 39%, 3% 24%, 18% 20%, 24% 5%, 38% 12%)",
-                                    background: `hsl(${splat.hue} ${splat.saturation}% ${splat.lightness}%)`,
-                                }}
-                            />
-                            <span
-                                className="absolute inset-0 opacity-70"
-                                style={{
-                                    clipPath:
-                                        "polygon(50% 8%, 62% 16%, 75% 14%, 84% 25%, 90% 38%, 83% 52%, 89% 65%, 77% 71%, 75% 85%, 62% 82%, 53% 92%, 42% 84%, 29% 88%, 22% 76%, 10% 70%, 14% 56%, 8% 44%, 18% 34%, 13% 22%, 27% 21%, 33% 10%, 44% 16%)",
-                                    background: `hsl(${splat.hue + 12} ${Math.min(splat.saturation + 8, 96)}% ${Math.min(splat.lightness + 10, 66)}%)`,
-                                }}
-                            />
-                            <span
-                                className="absolute rounded-full opacity-82"
-                                style={{
-                                    width: splat.size * 0.24,
-                                    height: splat.size * 0.24,
-                                    left: -splat.size * 0.18,
-                                    top: splat.size * 0.12,
-                                    background: `hsl(${splat.hue - 8} ${splat.saturation}% ${Math.max(splat.lightness - 10, 25)}%)`,
-                                }}
-                            />
-                            <span
-                                className="absolute rounded-full opacity-80"
-                                style={{
-                                    width: splat.size * 0.2,
-                                    height: splat.size * 0.2,
-                                    right: -splat.size * 0.15,
-                                    bottom: splat.size * 0.1,
-                                    background: `hsl(${splat.hue + 16} ${Math.min(splat.saturation + 6, 96)}% ${Math.max(splat.lightness - 4, 28)}%)`,
-                                }}
-                            />
-                            <span
-                                className="absolute rounded-full opacity-78"
-                                style={{
-                                    width: splat.size * 0.16,
-                                    height: splat.size * 0.16,
-                                    left: splat.size * 0.36,
-                                    bottom: -splat.size * 0.18,
-                                    background: `hsl(${splat.hue} ${splat.saturation}% ${Math.max(splat.lightness - 12, 24)}%)`,
-                                }}
-                            />
+                    {splats.map(s => (
+                        <div key={s.id} className="absolute transition-opacity ease-out" style={{
+                            left: s.x,
+                            top: s.y,
+                            width: s.size,
+                            height: s.size,
+                            transform: `translate(-50%, -50%) rotate(${s.rotation}deg)`,
+                            opacity: s.exiting ? 0 : 1,
+                            transitionDuration: `${SPLAT_FADE_MS}ms`,
+                        }}>
+                            <span className="absolute inset-0 opacity-95" style={{
+                                clipPath: "polygon(50% 0%, 59% 10%, 71% 4%, 77% 16%, 91% 12%, 89% 27%, 100% 38%, 88% 49%, 100% 62%, 84% 67%, 90% 82%, 74% 81%, 69% 97%, 55% 90%, 46% 100%, 35% 88%, 21% 96%, 15% 82%, 0% 77%, 6% 62%, 0% 48%, 11% 39%, 3% 24%, 18% 20%, 24% 5%, 38% 12%)",
+                                background: `hsl(${s.hue} ${s.saturation}% ${s.lightness}%)`
+                            }} />
+                            <span className="absolute inset-0 opacity-70" style={{
+                                clipPath: "polygon(50% 8%, 62% 16%, 75% 14%, 84% 25%, 90% 38%, 83% 52%, 89% 65%, 77% 71%, 75% 85%, 62% 82%, 53% 92%, 42% 84%, 29% 88%, 22% 76%, 10% 70%, 14% 56%, 8% 44%, 18% 34%, 13% 22%, 27% 21%, 33% 10%, 44% 16%)",
+                                background: `hsl(${s.hue + 12} ${Math.min(s.saturation + 8, 96)}% ${Math.min(s.lightness + 10, 66)}%)`
+                            }} />
+                            <span className="absolute rounded-full opacity-82" style={{
+                                width: s.size * 0.24,
+                                height: s.size * 0.24,
+                                left: -s.size * 0.18,
+                                top: s.size * 0.12,
+                                background: `hsl(${s.hue - 8} ${s.saturation}% ${Math.max(s.lightness - 10, 25)}%)`
+                            }} />
+                            <span className="absolute rounded-full opacity-80" style={{
+                                width: s.size * 0.2,
+                                height: s.size * 0.2,
+                                right: -s.size * 0.15,
+                                bottom: s.size * 0.1,
+                                background: `hsl(${s.hue + 16} ${Math.min(s.saturation + 6, 96)}% ${Math.max(s.lightness - 4, 28)}%)`
+                            }} />
+                            <span className="absolute rounded-full opacity-78" style={{
+                                width: s.size * 0.16,
+                                height: s.size * 0.16,
+                                left: s.size * 0.36,
+                                bottom: -s.size * 0.18,
+                                background: `hsl(${s.hue} ${s.saturation}% ${Math.max(s.lightness - 12, 24)}%)`
+                            }} />
                         </div>
                     ))}
                 </div>
             )}
-
-            {/* Custom gun cursor (hidden over the toggle so the system pointer reads clearly). */}
             {isOn && showGunCursor && !hoverShootControls && (
-                <div
-                    className="fixed z-9999 pointer-events-none"
-                    style={{ left: cursorX, top: cursorY, transform: "translate(-50%, -50%)" }}
-                    aria-hidden="true"
-                    data-shoot-ui="1"
-                >
+                <div className="fixed z-9999 pointer-events-none" style={{ left: cursorX, top: cursorY, transform: "translate(-50%, -100%)" }} aria-hidden="true" data-shoot-ui="1">
                     <div className="relative h-7 w-7">
                         <span className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-foreground/70" />
                         <span className="absolute top-1/2 left-0 h-px w-full -translate-y-1/2 bg-foreground/70" />
@@ -734,76 +595,34 @@ export default function FloatingShootToggle(): React.JSX.Element {
                     </div>
                 </div>
             )}
-
-            {/* Gun (above the bottom HUD) */}
             {isOn && (
                 <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-9999 pointer-events-none" data-shoot-ui="1">
                     <GunViewer aimX={aimX} aimY={aimY} />
                 </div>
             )}
-
-            {/* Bottom HUD */}
             <div className="fixed bottom-5 inset-x-0 z-9999 px-6 pointer-events-none" data-shoot-ui="1">
                 <div className="flex items-center justify-between">
-                    {/* Left: toggle */}
-                    <div
-                        className="pointer-events-auto cursor-pointer"
-                        data-shoot-controls="1"
-                        onMouseEnter={() => setHoverShootControls(true)}
-                        onMouseLeave={() => setHoverShootControls(false)}
-                    >
-                        <button
-                            type="button"
-                            onClick={toggle}
-                            className={[
-                                "group flex cursor-pointer items-center gap-3",
-                                "rounded-full  backdrop-blur-md",
-                                "px-4 py-2",
-                                "shadow-[0_18px_50px_-30px_rgba(0,0,0,0.35)]",
-                                "transition-[border-color,background-color] duration-200",
-                                isOn ? "border-border bg-card" : "",
-                            ].join(" ")}
-                            aria-pressed={isOn}
-                            aria-label="Toggle shoot mode"
-                        >
-                            <span
-                                aria-hidden="true"
-                                className={[
-                                    "relative inline-flex h-5 w-9 items-center rounded-full",
-                                    "border border-border bg-transparent",
-                                    "transition-[border-color,background-color] duration-200",
-                                    isOn ? "bg-muted border-foreground/35" : "",
-                                ].join(" ")}
-                            >
-                                <span
-                                    className={[
-                                        "absolute left-0.5 top-1/2 -translate-y-1/2",
-                                        "h-4 w-4 rounded-full bg-foreground",
-                                        "transition-transform duration-200 ease-out",
-                                        isOn ? "translate-x-4" : "translate-x-0",
-                                    ].join(" ")}
-                                />
+                    <div className="pointer-events-auto cursor-pointer" data-shoot-controls="1" onMouseEnter={() => setHoverShootControls(true)} onMouseLeave={() => setHoverShootControls(false)}>
+                        <button type="button" onClick={toggle} className={[
+                            "group flex items-center gap-3 rounded-full backdrop-blur-md px-4 py-2 shadow-[0_18px_50px_-30px_rgba(0,0,0,0.35)] transition-[border-color,background-color] duration-200",
+                            isOn ? "border-border bg-card" : ""
+                        ].join(" ")} aria-pressed={isOn} aria-label="Toggle shoot mode">
+                            <span aria-hidden="true" className={[
+                                "relative inline-flex h-5 w-9 items-center rounded-full border border-border bg-transparent transition-[border-color,background-color] duration-200",
+                                isOn ? "bg-muted border-foreground/35" : ""
+                            ].join(" ")}>
+                                <span className={[
+                                    "absolute left-0.5 top-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-foreground transition-transform duration-200 ease-out",
+                                    isOn ? "translate-x-4" : "translate-x-0"
+                                ].join(" ")} />
                             </span>
-
-                            <span className="text-[10px] font-mono uppercase tracking-[0.28em] text-foreground/80 select-none">
-                                Shoot
-                            </span>
+                            <span className="text-[10px] font-mono uppercase tracking-[0.28em] text-foreground/80 select-none">Shoot</span>
                         </button>
                     </div>
-
                     <div />
-
-                    {/* Right: date/time */}
-                    <div className="pointer-events-none">
-                        <div className="rounded-full  backdrop-blur-md px-4 py-2">
-                            <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-foreground/70 select-none">
-                                {dateTimeText}
-                            </div>
-                        </div>
-                    </div>
+                    <div className="pointer-events-none"><div className="rounded-full backdrop-blur-md px-4 py-2"><div className="text-[10px] font-mono uppercase tracking-[0.28em] text-foreground/70 select-none">{dateTimeText}</div></div></div>
                 </div>
             </div>
         </>
     );
 }
-
