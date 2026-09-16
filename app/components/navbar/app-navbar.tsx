@@ -41,10 +41,7 @@ export default function AppNavbar() {
 
     return (
         <>
-            <nav
-                className={`fixed top-0 z-50 w-full border-b border-slate-800/70 bg-black/85 px-7 py-4 backdrop-blur-md transition-transform duration-300 sm:px-10 ${navHidden && !menuOpen ? "-translate-y-full" : "translate-y-0"}`}
-                style={{ ["--app-header-h" as string]: "72px" }}
-            >
+            <nav className={`fixed top-0 z-50 w-full border-b border-slate-800/70 bg-black/85 px-7 py-4 backdrop-blur-md transition-transform duration-300 sm:px-10 ${navHidden && !menuOpen ? "-translate-y-full" : "translate-y-0"}`}>
                 <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3">
                     <Link href="/" className="text-base font-bold tracking-[-0.04em] text-white/70 sm:text-lg" aria-label="Jyatin Kumar Singh home">
                         Jyatin
