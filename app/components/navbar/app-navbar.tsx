@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Linkedin, Moon, Sun } from "lucide-react";
+import { Github, MessageCircle, Moon, Sun, UsersRound, X, Menu } from "lucide-react";
 import { useTheme } from "next-themes";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const navItems = [
@@ -15,10 +14,8 @@ const navItems = [
 
 export default function AppNavbar() {
     const { resolvedTheme, setTheme } = useTheme();
-    const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
     const [navHidden, setNavHidden] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
     const [themeReady, setThemeReady] = useState(false);
 
     useEffect(() => setThemeReady(true), []);
@@ -27,14 +24,12 @@ export default function AppNavbar() {
         let lastY = window.scrollY;
         const onScroll = () => {
             const currentY = window.scrollY;
-            setScrolled(currentY > 24);
             if (!menuOpen) {
                 if (currentY > lastY && currentY > 100) setNavHidden(true);
                 if (currentY < lastY) setNavHidden(false);
             }
             lastY = currentY;
         };
-        setScrolled(window.scrollY > 24);
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => window.removeEventListener("scroll", onScroll);
     }, [menuOpen]);
@@ -46,43 +41,52 @@ export default function AppNavbar() {
 
     return (
         <>
-            <nav className={`fixed top-0 z-50 w-full border-b border-border/0 px-5 py-4 transition-all duration-300 sm:px-8 lg:px-20 ${navHidden && !menuOpen ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"} ${scrolled ? "bg-background/80 backdrop-blur-xl" : "bg-transparent"}`}>
-                <div className="mx-auto flex max-w-[1920px] items-center justify-between gap-4">
-                    <Link href="/" className="font-black uppercase tracking-[-0.04em] text-foreground" aria-label="Jyatin Kumar Singh home">
-                        <span className="text-sm sm:text-base">Jyatin Kumar Singh</span>
+            <nav
+                className={`fixed top-0 z-50 w-full border-b border-slate-800/70 bg-black/85 px-7 py-4 backdrop-blur-md transition-transform duration-300 sm:px-10 ${navHidden && !menuOpen ? "-translate-y-full" : "translate-y-0"}`}
+                style={{ ["--app-header-h" as string]: "72px" }}
+            >
+                <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3">
+                    <Link href="/" className="text-base font-bold tracking-[-0.04em] text-white/70 sm:text-lg" aria-label="Jyatin Kumar Singh home">
+                        Jyatin
                     </Link>
 
-                    <div className="hidden items-center gap-5 md:flex">
+                    <div className="hidden items-center gap-2 md:flex">
                         {navItems.map((item) => (
-                            <Link key={item.href} href={item.href} className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50 transition-colors hover:text-foreground">
+                            <Link key={item.href} href={item.href} className="px-3 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white/45 transition-colors hover:text-white">
                                 {item.name}
                             </Link>
                         ))}
-                        <a href="https://github.com/Jyatin" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-foreground/50 transition-colors hover:text-foreground"><Github className="h-4 w-4" /></a>
-                        <a href="https://www.linkedin.com/in/jyatin-singh-88984831b/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-foreground/50 transition-colors hover:text-foreground"><Linkedin className="h-4 w-4" /></a>
                     </div>
 
                     <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/60 transition-colors hover:bg-muted hover:text-foreground" aria-label="Toggle theme">
-                            {themeReady && resolvedTheme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                        <div className="hidden items-center gap-2 text-white/55 sm:flex">
+                            <UsersRound className="h-5 w-5" />
+                            <span className="font-mono text-xs">1</span>
+                        </div>
+                        <a href="mailto:singhjyatin@gmail.com" aria-label="Email Jyatin" className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-700 text-white/65 transition-colors hover:border-slate-500 hover:text-white">
+                            <MessageCircle className="h-5 w-5" />
+                        </a>
+                        <a href="https://github.com/Jyatin" target="_blank" rel="noreferrer" aria-label="GitHub" className="flex h-10 items-center justify-center rounded-xl border border-slate-700 px-3 text-white/65 transition-colors hover:border-slate-500 hover:text-white">
+                            <Github className="h-5 w-5" />
+                        </a>
+                        <button type="button" onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-700 text-white/65 transition-colors hover:border-slate-500 hover:text-white" aria-label="Toggle theme">
+                            {themeReady && resolvedTheme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
                         </button>
-                        <button type="button" onClick={() => setMenuOpen((value) => !value)} className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden" aria-label="Toggle menu" aria-expanded={menuOpen}>
-                            <span className={`h-px w-5 bg-foreground transition-transform ${menuOpen ? "translate-y-2 rotate-45" : ""}`} />
-                            <span className={`h-px w-5 bg-foreground transition-opacity ${menuOpen ? "opacity-0" : "opacity-100"}`} />
-                            <span className={`h-px w-5 bg-foreground transition-transform ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
+                        <button type="button" onClick={() => setMenuOpen((value) => !value)} className="flex h-10 w-10 items-center justify-center text-white/85 md:hidden" aria-label="Toggle menu" aria-expanded={menuOpen}>
+                            {menuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
                         </button>
                     </div>
                 </div>
             </nav>
 
-            <div className={`fixed inset-0 z-40 bg-background/95 backdrop-blur-xl transition-opacity duration-300 md:hidden ${menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}>
+            <div className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-xl transition-opacity duration-300 md:hidden ${menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}>
                 <div className="flex h-full flex-col items-center justify-center gap-2">
                     {navItems.map((item, index) => (
-                        <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className={`py-3 text-3xl font-black uppercase tracking-tight text-foreground/45 transition-all duration-500 hover:text-foreground ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`} style={{ transitionDelay: `${index * 60}ms` }}>
+                        <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className={`py-3 text-3xl font-black uppercase tracking-tight text-white/45 transition-all duration-500 hover:text-white ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`} style={{ transitionDelay: `${index * 60}ms` }}>
                             {item.name}
                         </Link>
                     ))}
-                    <a href="mailto:singhjyatin@gmail.com" onClick={() => setMenuOpen(false)} className={`mt-5 font-mono text-xs uppercase tracking-[0.25em] text-foreground/50 transition-all duration-500 ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}>
+                    <a href="mailto:singhjyatin@gmail.com" onClick={() => setMenuOpen(false)} className={`mt-5 font-mono text-xs uppercase tracking-[0.25em] text-white/50 transition-all duration-500 ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}>
                         LET&apos;S CONNECT
                     </a>
                 </div>
