@@ -46,8 +46,8 @@ const achievements = [
     },
     {
         icon: Trophy,
-        title: "DevStorm 2026 Hackathon",
-        description: "Actively participated in DevStorm 2026, a 36-hour hackathon organized by SPIRIT under the Division of Youth Affairs and Student Welfare Wing, LPU.",
+        title: "DevStorm 2026 — 6th Place",
+        description: "Secured 6th place in DevStorm 2026, a 36-hour hackathon organized by SPIRIT under the Division of Youth Affairs and Student Welfare Wing, LPU.",
         year: "2026",
         category: "Hackathon · 28 Aug",
     },
