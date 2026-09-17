@@ -3,7 +3,7 @@
 import { useGSAP } from "@/app/hooks/useGSAP";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BookOpen, Code2, GitPullRequest, Trophy, Zap } from "lucide-react";
+import { BookOpen, Code2, GitPullRequest, Trophy, Zap, MessageCircle } from "lucide-react";
 import { useRef } from "react";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -51,6 +51,13 @@ const achievements = [
         year: "2026",
         category: "Hackathon · 28 Aug",
     },
+    {
+        icon: MessageCircle,
+        title: "Clash of Minds — Badge of Appreciation",
+        description: "Successfully participated in the competitive Group Discussion and Extempore Speaking event organized by CPE and Mittal School of Business at LPU.",
+        year: "2026",
+        category: "Communication · 20 Aug",
+    },
 ];
 
 export default function Achievements() {
@@ -90,7 +97,7 @@ export default function Achievements() {
                     <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">07 / Progress</span>
                     <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter sm:text-5xl lg:text-7xl">Proof of Work</h2>
                     <p className="mt-5 max-w-2xl text-sm leading-relaxed text-foreground/50 sm:text-base">
-                        A snapshot of the habits, research, hackathons, and work that shape my development journey.
+                        A snapshot of the habits, research, hackathons, communication, and work that shape my development journey.
                     </p>
                 </div>
 
