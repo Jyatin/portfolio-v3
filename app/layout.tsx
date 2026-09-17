@@ -6,6 +6,7 @@ import AppNavbar from "./components/navbar/app-navbar";
 import SmoothScroll from "./components/smooth-scroll";
 import PageTransition from "./components/page-transition";
 import ProjectTiltRuntime from "./components/project-tilt-runtime";
+import FloatingShootToggleHost from "./components/floating-shoot-toggle-host";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <body className={`${geistSans.variable} ${geistMono.variable} font-body antialiased`}>
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
                     <AppNavbar />
+                    <FloatingShootToggleHost />
                     <ProjectTiltRuntime />
                     <SmoothScroll>
                         <PageTransition>{children}</PageTransition>
