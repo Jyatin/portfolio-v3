@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { projects, type Project } from "@/app/data/projects";
+import ProjectMedia from "@/app/components/project-media";
 import { releaseDocumentScroll } from "@/app/utils/release-document-scroll";
 import {
     prefersHardNavigationToProjectDetail,
@@ -49,14 +49,11 @@ const ProjectGridCard = memo(function ProjectGridCard({
                 className="group w-full cursor-pointer text-left outline-none ring-foreground/30 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
                 <div className="relative isolate aspect-16/10 w-full overflow-hidden rounded-sm border border-border bg-muted">
-                    <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                        quality={75}
-                        className="object-cover object-center transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:scale-[1.02] motion-reduce:group-hover:scale-100"
+                    <ProjectMedia
+                        project={project}
                         priority={index === 0}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                        className="object-cover object-center transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:scale-[1.02] motion-reduce:group-hover:scale-100"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/15 via-transparent to-transparent" />
                 </div>
