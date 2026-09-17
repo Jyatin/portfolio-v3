@@ -31,7 +31,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "",
         featured: true,
         year: "2026",
-        image: "/images/projects/jaldrishti.svg",
+        image: "/images/projects/jaldrishti_laptop.svg",
     },
     {
         slug: "askpdf",
