@@ -13,7 +13,13 @@ const Recognition = dynamic(() => import("./components/sections/recognition"));
 const Achievements = dynamic(() => import("./components/sections/achievements"));
 const Contact = dynamic(() => import("./components/sections/contact"));
 const Footer = dynamic(() => import("./components/footer"));
-const LiveChat = dynamic(() => import("./components/chat/live-chat"));
+
+// Supabase/browser APIs are client-only. Prevent the chat bundle from being
+// evaluated during the server render so the floating chat cannot disappear
+// because of a browser-only API or environment mismatch during hydration.
+const LiveChat = dynamic(() => import("./components/chat/live-chat"), {
+    ssr: false,
+});
 
 export default function Home() {
     return (
