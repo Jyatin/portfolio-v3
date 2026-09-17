@@ -44,6 +44,13 @@ const achievements = [
         year: "2026",
         category: "Research & AI",
     },
+    {
+        icon: Trophy,
+        title: "DevStorm 2026 Hackathon",
+        description: "Actively participated in DevStorm 2026, a 36-hour hackathon organized by SPIRIT under the Division of Youth Affairs and Student Welfare Wing, LPU.",
+        year: "2026",
+        category: "Hackathon · 28 Aug",
+    },
 ];
 
 export default function Achievements() {
@@ -83,7 +90,7 @@ export default function Achievements() {
                     <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">07 / Progress</span>
                     <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter sm:text-5xl lg:text-7xl">Proof of Work</h2>
                     <p className="mt-5 max-w-2xl text-sm leading-relaxed text-foreground/50 sm:text-base">
-                        A snapshot of the habits, research, and work that shape my development journey.
+                        A snapshot of the habits, research, hackathons, and work that shape my development journey.
                     </p>
                 </div>
 
