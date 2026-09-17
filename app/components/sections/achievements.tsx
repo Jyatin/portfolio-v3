@@ -3,7 +3,7 @@
 import { useGSAP } from "@/app/hooks/useGSAP";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Code2, GitPullRequest, Trophy, Zap } from "lucide-react";
+import { BookOpen, Code2, GitPullRequest, Trophy, Zap } from "lucide-react";
 import { useRef } from "react";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
@@ -36,6 +36,13 @@ const achievements = [
         description: "Built and maintained projects across full-stack development, AI/RAG exploration, and developer tooling.",
         year: "2026",
         category: "Building",
+    },
+    {
+        icon: BookOpen,
+        title: "Authored & Submitted Research Paper",
+        description: "Authored and submitted a research paper on an IoT–AI digital twin for predictive water-stress and intervention planning in Bengaluru.",
+        year: "2026",
+        category: "Research & AI",
     },
 ];
 
@@ -76,7 +83,7 @@ export default function Achievements() {
                     <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">07 / Progress</span>
                     <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter sm:text-5xl lg:text-7xl">Proof of Work</h2>
                     <p className="mt-5 max-w-2xl text-sm leading-relaxed text-foreground/50 sm:text-base">
-                        A snapshot of the habits and work that shape my development journey.
+                        A snapshot of the habits, research, and work that shape my development journey.
                     </p>
                 </div>
 
