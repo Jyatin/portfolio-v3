@@ -111,7 +111,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "#",
         featured: false,
         year: "2025",
-        image: "/images/projects/askpdf.svg",
+        image: "/images/projects/cropcycle_mockup.jpg",
     },
     {
         slug: "portfolio-v3",
@@ -127,7 +127,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "#",
         featured: false,
         year: "2026",
-        image: "/images/projects/kiranawala.svg",
+        image: "/images/projects/portfolio_mockup.svg",
     },
 ];
 
