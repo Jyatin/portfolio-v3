@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import ScrollSection from "./components/scroll-section";
+import LiveChatHost from "./components/chat/live-chat-host";
 
 const Marquee = dynamic(() => import("./components/sections/marquee"));
 const Stats = dynamic(() => import("./components/sections/stats"));
@@ -13,13 +14,6 @@ const Recognition = dynamic(() => import("./components/sections/recognition"));
 const Achievements = dynamic(() => import("./components/sections/achievements"));
 const Contact = dynamic(() => import("./components/sections/contact"));
 const Footer = dynamic(() => import("./components/footer"));
-
-// Supabase/browser APIs are client-only. Prevent the chat bundle from being
-// evaluated during the server render so the floating chat cannot disappear
-// because of a browser-only API or environment mismatch during hydration.
-const LiveChat = dynamic(() => import("./components/chat/live-chat"), {
-    ssr: false,
-});
 
 export default function Home() {
     return (
@@ -66,7 +60,7 @@ export default function Home() {
             </ScrollSection>
 
             <Footer />
-            <LiveChat />
+            <LiveChatHost />
         </main>
     );
 }
