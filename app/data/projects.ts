@@ -127,7 +127,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "#",
         featured: false,
         year: "2026",
-        image: "/images/projects/portfolio_mockup.svg",
+        image: "/images/projects/portfolio_mockup.jpg",
     },
 ];
 
