@@ -18,6 +18,22 @@ type ProjectCore = Omit<Project, "description">;
 
 const projectCoreList: readonly ProjectCore[] = [
     {
+        slug: "jaldrishti",
+        title: "JalDrishti 2030 — IoT–AI Digital Twin",
+        role: "Research & Full-Stack Developer",
+        highlights: [
+            "Translated the JalDrishti 2030 research framework into a working software prototype for predictive urban water-stress and intervention planning in Bengaluru.",
+            "Built the research-facing workflow around water-stress indicators, scenario exploration, representative hydraulic-network visualisation, and intervention planning.",
+            "Kept a strict research boundary between measured evidence, synthetic demonstration data, simulated outputs, and future analytical methodology such as EPANET/WNTR and NSGA-II.",
+        ],
+        tech: ["Next.js", "TypeScript", "Digital Twin", "EPANET / WNTR", "NSGA-II"],
+        github: "https://github.com/Jyatin/jaldristi",
+        live: "",
+        featured: true,
+        year: "2026",
+        image: "/images/projects/jaldrishti.svg",
+    },
+    {
         slug: "askpdf",
         title: "AskPDF — RAG-Powered Document Q&A System",
         role: "Full-Stack Developer",

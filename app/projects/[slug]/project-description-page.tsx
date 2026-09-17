@@ -44,7 +44,6 @@ export default function ProjectDescriptionPage({
         <main className="w-full overflow-x-hidden bg-background text-foreground">
             <ProjectDetailScrollDebug slug={project.slug} />
             <ProjectPageEnter>
-                {/* —— Full-viewport hero (reference: full-bleed image, scroll for content) —— */}
                 <section
                     className="relative isolate min-h-dvh w-full"
                     aria-label={`${project.title} hero`}
@@ -114,26 +113,30 @@ export default function ProjectDescriptionPage({
                     </div>
                 </section>
 
-                {/* —— Case study body (reference: two columns, theme-aligned) —— */}
                 <section
                     className="border-t border-border bg-background"
                     aria-label="Project details"
                 >
                     <div className="mx-auto max-w-[1920px] px-5 py-14 sm:px-8 sm:py-16 md:px-12 md:py-20 lg:px-16 lg:py-24 xl:px-24">
                         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
-                            {/* Left column */}
                             <div className="lg:col-span-5 xl:col-span-4">
                                 <p className="text-2xl font-black uppercase leading-[0.95] tracking-tight text-foreground sm:text-3xl md:text-4xl wrap-break-word">
                                     {project.title}
                                 </p>
-                                <a
-                                    href={project.live}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="mt-5 inline-block border-b border-foreground/25 pb-0.5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:border-foreground/50 hover:text-foreground sm:text-xs"
-                                >
-                                    View live site
-                                </a>
+                                {project.live ? (
+                                    <a
+                                        href={project.live}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="mt-5 inline-block border-b border-foreground/25 pb-0.5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:border-foreground/50 hover:text-foreground sm:text-xs"
+                                    >
+                                        View live site
+                                    </a>
+                                ) : (
+                                    <span className="mt-5 inline-block font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground sm:text-xs">
+                                        Research prototype · source available
+                                    </span>
+                                )}
 
                                 <dl className="mt-10 sm:mt-12">
                                     <MetaRow label="Year" value={project.year} />
@@ -154,18 +157,19 @@ export default function ProjectDescriptionPage({
                                     >
                                         View source
                                     </a>
-                                    <a
-                                        href={project.live}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex w-full items-center justify-center rounded-full bg-foreground px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-background transition-colors hover:bg-foreground/85 sm:w-auto"
-                                    >
-                                        Live demo
-                                    </a>
+                                    {project.live ? (
+                                        <a
+                                            href={project.live}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex w-full items-center justify-center rounded-full bg-foreground px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-background transition-colors hover:bg-foreground/85 sm:w-auto"
+                                        >
+                                            Live demo
+                                        </a>
+                                    ) : null}
                                 </div>
                             </div>
 
-                            {/* Right column */}
                             <div className="min-w-0 lg:col-span-7 xl:col-span-8">
                                 <h2 className="text-[clamp(1.5rem,3.2vw,2.75rem)] font-black uppercase leading-[1.05] tracking-tight text-foreground text-balance">
                                     {lead}
@@ -177,7 +181,6 @@ export default function ProjectDescriptionPage({
                             </div>
                         </div>
 
-                        {/* Highlights — two-column block (reference layout) */}
                         <div className="mt-16 grid grid-cols-1 gap-6 border-t border-border pt-14 sm:mt-20 sm:gap-8 sm:pt-16 md:mt-24 md:pt-20 lg:grid-cols-12 lg:gap-12">
                             <div className="lg:col-span-5 xl:col-span-4">
                                 <h2 className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted-foreground sm:text-[11px]">

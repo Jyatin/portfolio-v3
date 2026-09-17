@@ -1,5 +1,7 @@
 /** Long-form project descriptions used by project detail pages. */
 export const PROJECT_DESCRIPTIONS: Readonly<Record<string, string>> = {
+    jaldrishti:
+        "JalDrishti 2030 is the software implementation of the research paper, “JalDrishti 2030: An IoT–AI Digital Twin for Predictive Water-Stress and Intervention Planning in Bengaluru.” It translates the proposed research framework into a research-facing prototype for water-stress analysis, forecasting, digital-twin simulation, scenario exploration, and intervention planning while keeping synthetic, simulated, and measured evidence explicitly separated.",
     askpdf:
         "AskPDF is a RAG-powered document Q&A system with a 5-stage Node.js pipeline for PDFs up to 20 MB. It generates 768-dimensional embeddings for semantic vector search, uses Redis BRPOP workers for asynchronous processing, and applies a >0.7 similarity threshold before retrieved context reaches the LLM.",
     kiranawala:

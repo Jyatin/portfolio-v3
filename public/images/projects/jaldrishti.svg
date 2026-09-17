@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">JalDrishti 2030</title>
+  <desc id="desc">Research prototype for an IoT-AI digital twin for predictive water-stress and intervention planning in Bengaluru.</desc>
+  <rect width="1600" height="900" fill="#080b0d"/>
+  <g opacity=".22" stroke="#7dd3fc" stroke-width="1">
+    <path d="M0 180H1600M0 360H1600M0 540H1600M0 720H1600"/>
+    <path d="M200 0V900M400 0V900M600 0V900M800 0V900M1000 0V900M1200 0V900M1400 0V900"/>
+  </g>
+  <g fill="none" stroke="#38bdf8" stroke-width="5" opacity=".75">
+    <path d="M170 670 C360 560 400 350 610 410 S900 650 1110 470 S1340 290 1480 350"/>
+    <path d="M170 720 C360 610 470 510 650 560 S930 730 1140 570 S1330 420 1480 455" stroke="#22c55e"/>
+  </g>
+  <g fill="#e2e8f0">
+    <circle cx="260" cy="620" r="10"/><circle cx="560" cy="430" r="10"/><circle cx="830" cy="590" r="10"/><circle cx="1110" cy="470" r="10"/><circle cx="1380" cy="330" r="10"/>
+  </g>
+  <g fill="#38bdf8" opacity=".12">
+    <circle cx="260" cy="620" r="80"/><circle cx="560" cy="430" r="105"/><circle cx="830" cy="590" r="90"/><circle cx="1110" cy="470" r="100"/><circle cx="1380" cy="330" r="85"/>
+  </g>
+  <text x="110" y="125" fill="#94a3b8" font-family="monospace" font-size="28" letter-spacing="8">RESEARCH PROTOTYPE · SMART CITY 2030</text>
+  <text x="110" y="225" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="900">JALDRISHTI 2030</text>
+  <text x="115" y="275" fill="#94a3b8" font-family="monospace" font-size="24" letter-spacing="3">IoT–AI DIGITAL TWIN / WATER-STRESS / BENGALURU</text>
+  <g transform="translate(110 760)">
+    <rect width="340" height="54" rx="27" fill="#0f172a" stroke="#334155"/>
+    <text x="28" y="35" fill="#cbd5e1" font-family="monospace" font-size="20" letter-spacing="2">PREDICT → SIMULATE → OPTIMISE</text>
+  </g>
+</svg>
