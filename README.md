@@ -1,48 +1,142 @@
-# Jyatin Kumar Singh — Developer Portfolio
+# Jyatin Kumar Singh — Portfolio v3
 
-A personal portfolio built with **Next.js, TypeScript, Tailwind CSS, Framer Motion, and GSAP**. The site presents my full-stack projects, DSA practice, AI/RAG exploration, and open-source work through an interaction-focused visual experience.
+<div align="center">
+
+### Full-Stack Developer · DSA · AI/RAG · Open Source
+
+Building practical products, exploring modern web architecture, and contributing to open source.
+
+**B.Tech Computer Science & Engineering · Lovely Professional University · 2028**
+
+[Portfolio](https://portfolio-v3-coral-five.vercel.app/) · [GitHub](https://github.com/Jyatin) · [LinkedIn](https://www.linkedin.com/in/jyatinsingh/) · [LeetCode](https://leetcode.com/u/Jyatin_singh/)
+
+</div>
+
+---
 
 ## About
 
-I'm **Jyatin Kumar Singh**, a B.Tech Computer Science student at **Lovely Professional University**, graduating in 2028. I focus on full-stack development, problem solving, AI/RAG applications, and open-source contribution.
+I'm **Jyatin Kumar Singh**, a Computer Science student focused on building full-stack applications with **JavaScript/TypeScript, React, Next.js, Node.js, and modern backend systems**.
 
-### Core stack
+Alongside development, I actively practice **DSA**, explore **AI/RAG systems**, work on research-oriented projects, and contribute to open-source projects.
 
-- **Frontend:** JavaScript, TypeScript, React, Next.js, HTML, CSS, Tailwind CSS
-- **Backend:** Node.js, Express.js, REST APIs
-- **Database:** MongoDB, MySQL, SQL
-- **Programming:** Java, C++, DSA
-- **Tools:** Git, GitHub, Docker, VS Code
-- **AI:** Gemini, RAG, embeddings, vector search
+My approach is simple: **learn by building, solve problems consistently, and ship useful software.**
 
-## Featured projects
+---
 
-- **AskPDF** — AI-powered PDF Q&A using RAG, Gemini, embeddings, vector search, and streaming.
-- **KiranaWala** — MERN-based local grocery platform with authentication, store, product, and inventory workflows.
-- **FixMyWay** — Full-stack application built around a practical everyday problem.
-- **MyString** — Custom C++ String implementation exploring OOP, memory management, and operator overloading.
-- **CropCycle** — Crop-cycle analysis platform using multi-temporal NDVI data.
+## Tech Stack
 
-## Problem solving & open source
+### Frontend
 
-- **200+ LeetCode problems**
+`JavaScript` `TypeScript` `React` `Next.js` `HTML` `CSS` `Tailwind CSS`
+
+### Backend & Data
+
+`Node.js` `Express.js` `REST APIs` `MongoDB` `MySQL` `SQL` `Redis`
+
+### AI & Intelligent Systems
+
+`RAG` `Gemini` `Embeddings` `Vector Search` `AI Applications`
+
+### Programming & Tools
+
+`C++` `Java` `Python` `Git` `GitHub` `Docker` `VS Code`
+
+---
+
+## Featured Projects
+
+### AskPDF — Conversational AI for Documents
+
+A document Q&A application built around **Retrieval-Augmented Generation (RAG)**. Users can interact with documents through natural-language questions using embeddings, vector search, Gemini, and streaming responses.
+
+- **Focus:** RAG · AI · Document Intelligence · Vector Search
+- [Live Demo](https://ask-pdf-vert.vercel.app/)
+- [Repository](https://github.com/Jyatin/AskPDF)
+
+### KiranaWala — Hyperlocal Smart Grocery Platform
+
+A **MERN-based hyperlocal grocery platform** designed around local-store discovery, products, inventory, authentication, and shopping workflows, with AI-driven demand prediction as part of the project direction.
+
+- **Focus:** MERN · Full Stack · APIs · AI-assisted demand prediction
+- [Repository](https://github.com/Jyatin/KiranaWala)
+
+### JalDrishti 2030 — Smart-City Research Project
+
+An **IoT–AI digital twin for predictive water-stress and intervention planning in Bengaluru**, developed as a research-oriented smart-city project.
+
+- **Focus:** IoT · AI · Digital Twins · Smart Cities · Predictive Analytics
+
+---
+
+## Problem Solving
+
+I regularly practice algorithmic problem solving and interview-oriented DSA.
+
+- **200+ LeetCode problems solved**
 - **100-day LeetCode streak**
-- **150+ GFG / Codeforces problems**
+- **150+ problems across GFG and Codeforces**
+- Following structured DSA practice with a focus on fundamentals, patterns, and interview problems
+
+[View my LeetCode profile →](https://leetcode.com/u/Jyatin_singh/)
+
+---
+
+## Open Source
+
+I actively explore and contribute to open-source software, with contributions across developer tools and JavaScript ecosystems.
+
 - **5 merged open-source PRs**
 - **120+ GitHub contributions**
+- Contributions include work across projects such as **OpenStory** and **OpenFeature JS SDK**
 
-## Links
+[View GitHub →](https://github.com/Jyatin)
 
-- GitHub: https://github.com/Jyatin
-- LinkedIn: https://www.linkedin.com/in/jyatin-singh-88984831b/
-- LeetCode: https://leetcode.com/u/Jyatin_singh/
-- Email: singhjyatin@gmail.com
+---
 
-## Run locally
+## What I'm Working On
+
+- Building production-oriented **full-stack applications**
+- Strengthening **DSA and problem-solving** skills
+- Exploring **AI/RAG architectures and intelligent applications**
+- Contributing to **open source**
+- Improving **UI/UX and frontend engineering**
+- Turning research ideas into practical software systems
+
+---
+
+## Portfolio
+
+This repository contains **Portfolio v3**, my personal developer portfolio focused on presenting my work, projects, technical interests, and journey as a developer.
+
+**Live:** [portfolio-v3-coral-five.vercel.app](https://portfolio-v3-coral-five.vercel.app/)
+
+---
+
+## Connect
+
+- **GitHub:** [github.com/Jyatin](https://github.com/Jyatin)
+- **LinkedIn:** [linkedin.com/in/jyatinsingh](https://www.linkedin.com/in/jyatinsingh/)
+- **LeetCode:** [leetcode.com/u/Jyatin_singh](https://leetcode.com/u/Jyatin_singh/)
+- **Email:** [singhjyatin@gmail.com](mailto:singhjyatin@gmail.com)
+
+---
+
+## Run Locally
 
 ```bash
+git clone https://github.com/Jyatin/portfolio-v3.git
+cd portfolio-v3
 npm install
 npm run dev
 ```
 
-Then open `http://localhost:3000`.
+Then open `http://localhost:3000` in your browser.
+
+---
+
+<div align="center">
+
+### Build. Learn. Ship. Repeat.
+
+</div>
