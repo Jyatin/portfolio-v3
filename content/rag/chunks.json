@@ -51,7 +51,6 @@
     "id": "project-jaldrishti",
     "type": "project",
     "title": "JalDrishti 2030 — IoT-AI Digital Twin",
-    "type": "project",
     "content": "JalDrishti 2030 is the software implementation of the research paper titled “JalDrishti 2030: An IoT–AI Digital Twin for Predictive Water-Stress and Intervention Planning in Bengaluru.” It is a research-facing prototype for water-stress analysis, forecasting, digital-twin simulation, scenario exploration and intervention planning. The implementation explicitly separates measured evidence, synthetic demonstration data, simulated outputs and proposed EPANET/WNTR and NSGA-II methodology. Technologies include Next.js, TypeScript, digital-twin concepts, EPANET/WNTR and NSGA-II."
   },
   {
