@@ -1,0 +1,111 @@
+[
+  {
+    "id": "about",
+    "type": "about",
+    "title": "About Jyatin Kumar Singh",
+    "content": "I'm Jyatin Kumar Singh, a B.Tech Computer Science student at Lovely Professional University, graduating in 2028. I build full-stack applications, practise data structures and algorithms, explore AI and RAG systems, and contribute to open source. My main stack is JavaScript and TypeScript, React, Next.js, Node.js, Express.js and MongoDB, with C++ and Java for problem solving. I enjoy taking an idea from a rough concept to a working product and focus on clean code, problem-solving, collaboration, and high-performance user-centered applications."
+  },
+  {
+    "id": "career-focus",
+    "type": "background",
+    "title": "Career focus",
+    "content": "My portfolio focuses on full-stack engineering, AI/RAG systems, practical product development, problem solving, and open-source contribution. I am particularly interested in opportunities where I can contribute to real production code, build user-facing systems, and continue developing strong software engineering fundamentals."
+  },
+  {
+    "id": "resume-summary",
+    "type": "resume",
+    "title": "Resume summary",
+    "content": "Jyatin Kumar Singh is a Computer Science undergraduate at Lovely Professional University, graduating in 2028. His portfolio demonstrates full-stack work with Next.js, React, Node.js, Express.js, MongoDB and TypeScript; AI/RAG work through AskPDF and VOXSHIELD; research work through JalDrishti 2030; mobile development through FixMyWay; and C++ systems fundamentals through MyString. His public portfolio also documents 200+ LeetCode problems, a 100-day LeetCode streak, 5 merged open-source pull requests, 120+ GitHub contributions, a submitted research paper, and hackathon/event participation."
+  },
+  {
+    "id": "experience-kaho",
+    "type": "experience",
+    "title": "KaHo Technologies — Software Development Engineer Intern",
+    "content": "Software Development Engineer Intern at KaHo Technologies, Bengaluru, India, remote, from September 2026 to present. Building and shipping customer-facing product features for the Parent App using Next.js, React, JavaScript and TypeScript. Built and shipped parent verification forms and real-time toast notification systems, contributing to 5+ production features and bug fixes. Reduced form submission failure rate from 20% to 10% through redesigned client-side validation and structured error handling. Improved image rendering performance by 60%+ with optimized lazy-loading and caching strategies, achieving consistent sub-500ms load times."
+  },
+  {
+    "id": "skills-frontend",
+    "type": "skills",
+    "title": "Frontend skills",
+    "content": "Frontend skills include JavaScript, TypeScript, React, Next.js, Tailwind CSS, HTML5 and CSS3. The portfolio is built with Next.js and TypeScript and uses Tailwind CSS, Framer Motion and GSAP for interaction and motion."
+  },
+  {
+    "id": "skills-backend",
+    "type": "skills",
+    "title": "Backend skills",
+    "content": "Backend skills include Node.js, Express.js and REST API development. Projects use Node.js and Express.js for API and application backends, including the AskPDF RAG pipeline and the KiranaWala platform."
+  },
+  {
+    "id": "skills-data-tools",
+    "type": "skills",
+    "title": "Database and tooling skills",
+    "content": "Database skills include MongoDB, MySQL and PostgreSQL. Tooling includes Git, GitHub, Docker and VS Code. Additional areas include Java, C++, Python, AI, RAG, DSA and open source."
+  },
+  {
+    "id": "project-voxshield",
+    "type": "project",
+    "title": "VOXSHIELD — Real-Time Voice Deepfake Detection",
+    "content": "VOXSHIELD is a voice deepfake detection and forensic analysis platform built around the E4 multi-scale raw-waveform CNN model. I built a real-time voice authenticity analysis workflow, integrated a FastAPI inference backend with a Next.js frontend, and designed waveform inspection, detection-result and forensic-analysis interfaces while preserving the core audio-processing pipeline. Technologies include Next.js, React, TypeScript, FastAPI and E4 CNN."
+  },
+  {
+    "id": "project-jaldrishti",
+    "type": "project",
+    "title": "JalDrishti 2030 — IoT-AI Digital Twin",
+    "type": "project",
+    "content": "JalDrishti 2030 is the software implementation of the research paper titled “JalDrishti 2030: An IoT–AI Digital Twin for Predictive Water-Stress and Intervention Planning in Bengaluru.” It is a research-facing prototype for water-stress analysis, forecasting, digital-twin simulation, scenario exploration and intervention planning. The implementation explicitly separates measured evidence, synthetic demonstration data, simulated outputs and proposed EPANET/WNTR and NSGA-II methodology. Technologies include Next.js, TypeScript, digital-twin concepts, EPANET/WNTR and NSGA-II."
+  },
+  {
+    "id": "project-askpdf",
+    "type": "project",
+    "title": "AskPDF — RAG-Powered Document Q&A System",
+    "content": "AskPDF is a RAG-powered document Q&A system with a five-stage Node.js pipeline for PDFs up to 20 MB. It generates 768-dimensional embeddings for semantic vector search, uses Redis BRPOP workers for asynchronous processing, tracks jobs and cleans up stale jobs, and applies a similarity threshold greater than 0.7 before retrieved context reaches the LLM to reduce unsupported answers. Technologies include Node.js, RAG, Redis, Gemini and vector search."
+  },
+  {
+    "id": "project-kiranawala",
+    "type": "project",
+    "title": "KiranaWala — Hyperlocal Smart Grocery Platform",
+    "content": "KiranaWala is a MERN-based hyperlocal smart grocery platform connecting customers with nearby local stores. I architected customer and store workflows, developed authentication, product, cart, checkout and order-management flows with a MongoDB-backed API, and explored AI-assisted demand prediction for local inventory planning. Technologies include MongoDB, Express.js, React, Node.js and AI/ML."
+  },
+  {
+    "id": "project-fixmyway",
+    "type": "project",
+    "title": "FixMyWay — AI-Powered Civic Issue Reporting",
+    "content": "FixMyWay is an AI-powered civic issue reporting mobile application built with React Native, Expo and Firebase. It supports GPS-tagged issue reporting, image uploads, duplicate detection, Gemini Vision validation, issue classification, severity estimation and priority analysis using community confirmations and rainfall context."
+  },
+  {
+    "id": "project-mystring",
+    "type": "project",
+    "title": "MyString — Custom C++ String",
+    "content": "MyString is a custom C++ String implementation created to understand string abstractions internally. It explores constructors, dynamic memory management, copying and operator overloading and strengthens object-oriented programming and low-level C++ fundamentals."
+  },
+  {
+    "id": "project-cropcycle",
+    "type": "project",
+    "title": "Crop Analysis — Multi-Temporal NDVI Crop Cycle",
+    "content": "Crop Analysis is a web platform for extracting and analysing crop-cycle parameters from multi-temporal NDVI data. It connects frontend workflows with backend processing and data services and presents crop-cycle information through an interface focused on interpretable agricultural results."
+  },
+  {
+    "id": "project-portfolio",
+    "type": "project",
+    "title": "Portfolio v3",
+    "content": "Portfolio v3 is Jyatin's personal developer portfolio, built with Next.js, TypeScript, Tailwind CSS, Framer Motion and GSAP. It presents projects, skills, problem-solving work and open-source contributions through an immersive editorial interface."
+  },
+  {
+    "id": "certifications",
+    "type": "certifications",
+    "title": "Certifications",
+    "content": "Certifications listed on the portfolio are Oracle Java SE 21 Developer Professional (1Z0-830); ReactJS from Infosys Springboard; Database Management Systems Part-1 from Infosys Springboard; C++ with OOP from Cipher Schools; and Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate."
+  },
+  {
+    "id": "proof-of-work",
+    "type": "achievements",
+    "title": "Proof of work",
+    "content": "The portfolio documents 200+ LeetCode problems, a 100-day LeetCode practice streak, 5 merged open-source pull requests, 120+ GitHub contributions, an authored and submitted research paper on an IoT-AI digital twin for predictive water-stress and intervention planning in Bengaluru, 6th place at DevStorm 2026, and a Badge of Appreciation for participation in Clash of Minds."
+  },
+  {
+    "id": "rag-portfolio-feature",
+    "type": "technical",
+    "title": "Portfolio RAG assistant architecture",
+    "content": "The portfolio assistant uses a small fixed corpus of semantically structured chunks. Each chunk represents a meaningful unit such as a project, experience entry, skill category, certification group or background section. The ingestion script embeds these chunks once. At query time the API embeds the question, computes cosine similarity against the local bundled vector index, keeps the top 5 candidates and only passes candidates above a 0.70 similarity threshold to the generation model. No visitor chat logs are persisted."
+  }
+]
