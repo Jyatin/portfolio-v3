@@ -51,29 +51,51 @@ The design follows a **dark editorial, developer-focused aesthetic** instead of 
 ## ✦ Architecture
 
 ```text
-User
- ↓
-Next.js App Router
- ↓
-Pages + Components
- ↓
-Tailwind + Motion + GSAP + Three.js
- ↓
-APIs / Supabase / RAG
- ↓
-Vercel
+┌──────────────┐
+│    Visitor   │
+└──────┬───────┘
+       ↓
+┌──────────────────────┐
+│ Next.js App Router   │
+└──────┬───────────────┘
+       ↓
+┌──────────────────────┐
+│ Pages + Components   │
+└──────┬───────────────┘
+       ↓
+┌──────────────────────┐
+│ Tailwind · Motion    │
+│ GSAP · Three.js      │
+└──────┬───────────────┘
+       ↓
+┌──────────────────────┐
+│ APIs · Supabase · AI │
+│ RAG / Embeddings     │
+└──────┬───────────────┘
+       ↓
+┌──────────────────────┐
+│       Vercel         │
+└──────────────────────┘
 ```
 
-### RAG Assistant
+### RAG Assistant Flow
 
 ```text
-Question → Embedding → Retrieval → Top-K Chunks
-                         ↓
-                  Similarity Threshold
-                         ↓
-                  Grounded Context
-                         ↓
-                  LLM → Streamed Answer
+User Question
+      ↓
+Query Embedding
+      ↓
+Vector Retrieval
+      ↓
+Top-K Relevant Chunks
+      ↓
+Similarity Threshold
+      ↓
+Grounded Context
+      ↓
+LLM Generation
+      ↓
+Streamed Answer
 ```
 
 The RAG corpus is organized into semantic units such as projects, experience, skills, and background rather than one large document.
