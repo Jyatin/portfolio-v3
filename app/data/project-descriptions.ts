@@ -14,6 +14,8 @@ export const PROJECT_DESCRIPTIONS: Readonly<Record<string, string>> = {
         "MyString is a custom C++ String implementation created to understand object-oriented programming, dynamic memory management, constructors, copying, and operator overloading at a lower level.",
     cropcycle:
         "Crop Analysis is a web platform for extracting and analysing crop-cycle parameters from multi-temporal NDVI data, connecting data processing with a practical interface for agricultural analysis and interpretation.",
+    "portfolio-v3":
+        "Jyatin's personal developer portfolio, built with Next.js, TypeScript, Tailwind CSS, Framer Motion, and GSAP. It presents projects, skills, problem-solving work, and open-source contributions through an immersive interface and includes Supabase-backed visitor messaging with a protected owner inbox.",
 };
 
 export function getProjectDescription(slug: string): string | undefined {
