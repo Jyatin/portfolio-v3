@@ -6,7 +6,7 @@ export type ChatHistoryMessage = {
 };
 
 export type LLMRequest = {
-    system: string;
+    context: string;
     history: ChatHistoryMessage[];
     userMessage: string;
 };
@@ -33,7 +33,7 @@ Keep answers concise but technically specific. Use bullets when comparing projec
 Visitor: What's the AskPDF RAG pipeline?
 Assistant: I built AskPDF as a five-stage Node.js RAG pipeline. It generates 768-dimensional embeddings, uses Redis BRPOP workers for asynchronous processing, performs semantic retrieval, and applies a >0.7 similarity threshold before retrieved context reaches the LLM.
 
-Visitor: What have you built with MERN?
+Visitor: What have I built with MERN?
 Assistant: I built KiranaWala with the MERN stack. It connects customers with nearby local stores and includes authentication, product, cart, checkout, and order-management workflows, with AI-assisted demand prediction explored for local inventory planning.
 
 Visitor: What's your favorite football club?
@@ -75,7 +75,7 @@ async function* streamAnthropic(request: LLMRequest): AsyncGenerator<string, voi
         body: JSON.stringify({
             model,
             max_tokens: 500,
-            system: buildPrompt(request.system),
+            system: buildPrompt(request.context),
             messages,
             stream: true,
         }),
@@ -130,5 +130,3 @@ export function getLLMProvider(): LLMProvider {
 
     throw new Error(`Unsupported LLM_PROVIDER: ${provider}`);
 }
-
-export { buildPrompt };
