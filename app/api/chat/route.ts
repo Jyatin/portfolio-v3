@@ -109,7 +109,7 @@ export async function POST(request: Request) {
         // Stage 4/5: generate and stream a first-person answer from the grounded context.
         const provider = getLLMProvider();
         const generator = provider.stream({
-            system: context,
+            context,
             history,
             userMessage: message,
         });
