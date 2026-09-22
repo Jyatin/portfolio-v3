@@ -129,6 +129,22 @@ const projectCoreList: readonly ProjectCore[] = [
         year: "2025",
         image: "/images/projects/cropcycle_mockup.jpg",
     },
+    {
+        slug: "portfolio-v3",
+        title: "Portfolio v3",
+        role: "Frontend Developer",
+        highlights: [
+            "Personal developer portfolio focused on immersive interaction and motion.",
+            "Built with a modern Next.js and TypeScript stack.",
+            "Customized the visual system and content around Jyatin's development profile.",
+        ],
+        tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "GSAP"],
+        github: "https://github.com/Jyatin/portfolio-v3",
+        live: "",
+        featured: false,
+        year: "2026",
+        image: "/images/projects/portfolio_mockup.jpg",
+    },
 ];
 
 function attachDescription(core: ProjectCore): Project {
