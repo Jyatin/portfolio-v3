@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Download, FileText, Github, MessageCircle, Moon, Sun, UsersRound, X, Menu } from "lucide-react";
+import { FileText, Github, MessageCircle, Moon, Sun, UsersRound, X, Menu } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -11,8 +11,6 @@ const navItems = [
     { name: "ACHIEVEMENTS", href: "/#achievements" },
     { name: "CONTACT", href: "/#contact" },
 ];
-
-const RESUME_URL = "/GenCV12412494jyatinsingh%20(2).pdf";
 
 export default function AppNavbar() {
     const { theme, resolvedTheme, setTheme } = useTheme();
