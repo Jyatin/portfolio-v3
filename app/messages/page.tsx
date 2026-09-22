@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { LockKeyhole, MessageCircle, RefreshCw } from "lucide-react";
 
 type ChatMessage = {
@@ -76,7 +76,7 @@ export default function MessagesPage() {
         return () => window.clearInterval(interval);
     }, [token, loadMessages]);
 
-    function unlock(event: React.FormEvent<HTMLFormElement>) {
+    function unlock(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const nextToken = input.trim();
         if (!nextToken) return;
