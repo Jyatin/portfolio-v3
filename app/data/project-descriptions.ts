@@ -7,15 +7,13 @@ export const PROJECT_DESCRIPTIONS: Readonly<Record<string, string>> = {
     askpdf:
         "AskPDF is a RAG-powered document Q&A system with a 5-stage Node.js pipeline for PDFs up to 20 MB. It generates 768-dimensional embeddings for semantic vector search, uses Redis BRPOP workers for asynchronous processing, and applies a >0.7 similarity threshold before retrieved context reaches the LLM.",
     kiranawala:
-        "KiranaWala is a MERN-based hyperlocal smart grocery platform connecting customers with nearby local stores. It provides RESTful authentication, product, cart, checkout, and order-management workflows and explores AI-assisted demand prediction for local inventory planning.",
+        "KiranaWala is a MERN-based hyperlocal smart grocery platform connecting customers with nearby local stores. It provides authentication, product, cart, checkout, and order-management workflows and explores AI-assisted demand prediction for local inventory planning.",
     fixmyway:
         "FixMyWay is an AI-powered civic issue reporting mobile app built with React Native, Expo, and Firebase. It supports GPS-tagged issue reporting, image uploads, duplicate detection, Gemini Vision validation, and priority analysis for civic infrastructure problems.",
     mystring:
         "MyString is a custom C++ String implementation created to understand object-oriented programming, dynamic memory management, constructors, copying, and operator overloading at a lower level.",
     cropcycle:
-        "CropCycle is a web platform for crop-cycle analysis using multi-temporal NDVI data, connecting data processing with a practical interface for agricultural analysis and interpretation.",
-    "portfolio-v3":
-        "Jyatin's personal developer portfolio, built with Next.js, TypeScript, Tailwind CSS, Framer Motion, and GSAP. It presents projects, skills, problem-solving work, and open-source contributions through an immersive interface and includes Supabase-backed visitor messaging with a protected owner inbox.",
+        "Crop Analysis is a web platform for extracting and analysing crop-cycle parameters from multi-temporal NDVI data, connecting data processing with a practical interface for agricultural analysis and interpretation.",
 };
 
 export function getProjectDescription(slug: string): string | undefined {
