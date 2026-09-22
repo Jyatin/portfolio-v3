@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 out.zip
+
+# generated RAG vectors (created by prebuild / npm run rag:ingest)
+/content/rag/index.json
