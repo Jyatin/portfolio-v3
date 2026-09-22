@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Github, MessageCircle, Moon, Sun, UsersRound, X, Menu } from "lucide-react";
+import { Download, FileText, Github, MessageCircle, Moon, Sun, UsersRound, X, Menu } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -9,9 +9,10 @@ const navItems = [
     { name: "ABOUT", href: "/#about" },
     { name: "PROJECTS", href: "/#projects" },
     { name: "ACHIEVEMENTS", href: "/#achievements" },
-    { name: "RESUME", href: "/resume" },
     { name: "CONTACT", href: "/#contact" },
 ];
+
+const RESUME_URL = "/GenCV12412494jyatinsingh%20(2).pdf";
 
 export default function AppNavbar() {
     const { theme, resolvedTheme, setTheme } = useTheme();
@@ -58,6 +59,14 @@ export default function AppNavbar() {
                                 {item.name}
                             </Link>
                         ))}
+                        <Link
+                            href="/resume"
+                            className="inline-flex items-center gap-1.5 rounded-full border border-foreground/20 bg-foreground px-3.5 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-background transition-opacity hover:opacity-80"
+                            aria-label="View resume"
+                        >
+                            <FileText className="h-3.5 w-3.5" />
+                            RESUME
+                        </Link>
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -105,6 +114,10 @@ export default function AppNavbar() {
                             {item.name}
                         </Link>
                     ))}
+                    <Link href="/resume" onClick={() => setMenuOpen(false)} className={`mt-2 inline-flex items-center gap-2 py-3 text-3xl font-black uppercase tracking-tight text-foreground transition-all duration-500 hover:text-foreground ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`} style={{ transitionDelay: `${navItems.length * 60}ms` }}>
+                        <FileText className="h-7 w-7" />
+                        RESUME
+                    </Link>
                     <a href="mailto:singhjyatin@gmail.com" onClick={() => setMenuOpen(false)} className={`mt-5 font-mono text-xs uppercase tracking-[0.25em] text-foreground/55 transition-all duration-500 ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}>
                         LET&apos;S CONNECT
                     </a>
