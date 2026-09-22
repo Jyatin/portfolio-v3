@@ -2,45 +2,164 @@
 
 <div align="center">
 
-### Full-Stack Developer · DSA · AI/RAG · Open Source
+## Full-Stack Developer Portfolio
 
-Building practical products, exploring modern web architecture, and contributing to open source.
+**Next.js · React · TypeScript · Tailwind CSS · Motion · Three.js · GSAP**
 
-**B.Tech Computer Science & Engineering · Lovely Professional University · 2028**
+A dark, editorial developer portfolio designed to present my projects, technical skills, open-source work, achievements, and engineering journey through a highly interactive frontend experience.
 
-[Portfolio](https://portfolio-v3-coral-five.vercel.app/) · [GitHub](https://github.com/Jyatin) · [LinkedIn](https://www.linkedin.com/in/jyatinsingh/) · [LeetCode](https://leetcode.com/u/Jyatin_singh/)
+[Live Portfolio](https://portfolio-v3-coral-five.vercel.app/) · [GitHub](https://github.com/Jyatin) · [LinkedIn](https://www.linkedin.com/in/jyatinsingh/) · [LeetCode](https://leetcode.com/u/Jyatin_singh/)
 
 </div>
 
 ---
 
-## About
+## Overview
 
-I'm **Jyatin Kumar Singh**, a Computer Science student focused on building full-stack applications with **JavaScript/TypeScript, React, Next.js, Node.js, and modern backend systems**.
+**Portfolio v3** is my personal developer portfolio, built as a frontend-first experience rather than a conventional resume website.
 
-Alongside development, I actively practice **DSA**, explore **AI/RAG systems**, work on research-oriented projects, and contribute to open-source projects.
+The design combines a **minimal black-and-white editorial visual language**, technical typography, grid-based layouts, micro-interactions, motion, project storytelling, responsive layouts, and interactive elements to make the portfolio feel like a real product.
 
-My approach is simple: **learn by building, solve problems consistently, and ship useful software.**
+The portfolio is built with the **Next.js App Router, React 19, TypeScript, and Tailwind CSS v4**, with additional animation and 3D technologies used where they improve the experience.
 
 ---
 
-## Tech Stack
+## Frontend Technology Stack
 
-### Frontend
+### Core Frontend
 
-`JavaScript` `TypeScript` `React` `Next.js` `HTML` `CSS` `Tailwind CSS`
+| Technology | Purpose |
+|---|---|
+| **Next.js 16** | React framework, App Router, routing, server/client architecture, deployment |
+| **React 19** | Component-based UI architecture |
+| **TypeScript** | Type-safe frontend development |
+| **Tailwind CSS v4** | Utility-first styling and responsive layouts |
+| **HTML5 / CSS** | Semantic structure and visual foundations |
 
-### Backend & Data
+### UI & Component System
 
-`Node.js` `Express.js` `REST APIs` `MongoDB` `MySQL` `SQL` `Redis`
+- **Radix UI** — accessible low-level UI primitives
+- **Lucide React** — interface icons
+- **class-variance-authority** — component variant management
+- **clsx** — conditional class composition
+- **tailwind-merge** — safe Tailwind class merging
+- **next-themes** — theme handling
+- **tw-animate-css** — Tailwind animation utilities
 
-### AI & Intelligent Systems
+### Animation & Motion
 
-`RAG` `Gemini` `Embeddings` `Vector Search` `AI Applications`
+The portfolio uses multiple animation systems for different interaction requirements instead of relying on a single animation library.
 
-### Programming & Tools
+- **Motion / Framer Motion** — React transitions, entrances, layout animation, interactive states
+- **GSAP** — advanced timeline-based animations and scroll-driven interactions
+- **Anime.js** — lightweight DOM/SVG animation
+- **Lenis** — smooth scrolling and scroll experience
 
-`C++` `Java` `Python` `Git` `GitHub` `Docker` `VS Code`
+### 3D & Visual Effects
+
+- **Three.js** — WebGL / 3D rendering
+- **React Three Fiber** — React renderer for Three.js
+- **@react-three/drei** — reusable Three.js helpers and abstractions
+- **@react-three/postprocessing** — post-processing effects
+- **postprocessing** — visual effects pipeline
+
+3D is treated as an enhancement layer rather than the primary interface, keeping the portfolio usable even when visitors are not interacting with the visual effects.
+
+### Backend / Platform Integrations
+
+The portfolio is primarily a frontend project, but it includes integrations for interactive features and deployment infrastructure:
+
+- **Supabase** — realtime/data infrastructure used for portfolio interactions
+- **Vercel Analytics** — production analytics
+- **Vercel Speed Insights** — performance monitoring
+- **Next.js API routes** — server-side functionality where required
+
+### Development Tooling
+
+- **ESLint 9**
+- **eslint-config-next**
+- **TypeScript 5**
+- **Node.js**
+- **npm**
+- **Git / GitHub**
+- **Vercel**
+
+---
+
+## Design System & UI Direction
+
+The visual direction intentionally avoids the typical AI-generated portfolio aesthetic.
+
+### Visual language
+
+- Dark editorial interface
+- High-contrast monochrome palette
+- Thin borders and subtle grid lines
+- Large display typography
+- Monospace technical metadata
+- Numbered sections and structured information hierarchy
+- Minimal rounded UI elements
+- Controlled use of motion
+- Strong whitespace and composition
+- Project-focused visual storytelling
+
+### Interaction principles
+
+The UI uses animation to communicate hierarchy and state rather than adding motion everywhere.
+
+Examples include:
+
+- Page and section reveal animations
+- Hover transitions
+- Project-card interactions
+- Smooth scrolling
+- Navigation transitions
+- Interactive buttons and controls
+- Scroll-based motion
+- Optional 3D visual layers
+
+The goal is to make the interface feel **designed and engineered**, not like a collection of pre-built template components.
+
+---
+
+## Main Sections
+
+### 01 — About
+
+Introduces my background, development interests, technical focus, and approach to building software.
+
+### 02 — Projects
+
+A visual project catalog highlighting selected work, including:
+
+- **JalDrishti 2030** — IoT + AI digital twin for predictive water-stress planning
+- **VOXSHIELD** — voice deepfake / spoof detection system
+- **AskPDF** — conversational RAG application for documents
+- **KiranaWala** — hyperlocal smart grocery platform
+- **FixMyWay** — civic issue reporting application
+- Additional development and research projects
+
+Project cards are designed around the actual technical problem, implementation, stack, and outcome rather than simply displaying screenshots.
+
+### 03 — Achievements
+
+Highlights include:
+
+- 200+ LeetCode problems
+- 100-day LeetCode streak
+- 150+ problems across GFG and Codeforces
+- Open-source contributions
+- Merged pull requests
+- Hackathons and technical competitions
+- Research-oriented work
+
+### 04 — Experience
+
+Presents professional and practical development experience, including work at **KaHo Technologies**, alongside relevant engineering work.
+
+### 05 — Contact
+
+Provides direct ways to connect through the portfolio, GitHub, LinkedIn, and email.
 
 ---
 
@@ -48,90 +167,291 @@ My approach is simple: **learn by building, solve problems consistently, and shi
 
 ### AskPDF — Conversational AI for Documents
 
-A document Q&A application built around **Retrieval-Augmented Generation (RAG)**. Users can interact with documents through natural-language questions using embeddings, vector search, Gemini, and streaming responses.
+A Retrieval-Augmented Generation application for interacting with documents through natural-language questions.
 
-- **Focus:** RAG · AI · Document Intelligence · Vector Search
-- [Live Demo](https://ask-pdf-vert.vercel.app/)
-- [Repository](https://github.com/Jyatin/AskPDF)
+**Stack:** Node.js · RAG · Embeddings · Vector Search · Gemini · Streaming
+
+[Live Demo](https://ask-pdf-vert.vercel.app/) · [Repository](https://github.com/Jyatin/AskPDF)
 
 ### KiranaWala — Hyperlocal Smart Grocery Platform
 
-A **MERN-based hyperlocal grocery platform** designed around local-store discovery, products, inventory, authentication, and shopping workflows, with AI-driven demand prediction as part of the project direction.
+A MERN-based platform focused on local-store discovery, product management, inventory, authentication, and shopping workflows, with AI-assisted demand prediction.
 
-- **Focus:** MERN · Full Stack · APIs · AI-assisted demand prediction
-- [Repository](https://github.com/Jyatin/KiranaWala)
+**Stack:** React · Node.js · Express · MongoDB · JavaScript · AI
 
-### JalDrishti 2030 — Smart-City Research Project
+[Repository](https://github.com/Jyatin/KiranaWala)
 
-An **IoT–AI digital twin for predictive water-stress and intervention planning in Bengaluru**, developed as a research-oriented smart-city project.
+### JalDrishti 2030 — Smart-City Research
 
-- **Focus:** IoT · AI · Digital Twins · Smart Cities · Predictive Analytics
+An IoT–AI digital twin concept for predictive water-stress analysis and intervention planning in Bengaluru.
+
+**Focus:** IoT · AI · Digital Twins · Predictive Analytics · Smart Cities
+
+### VOXSHIELD — Voice Authenticity Detection
+
+A voice-analysis application focused on detecting manipulated or synthetic speech using machine-learning based audio analysis.
+
+**Stack:** Next.js · React · TypeScript · Python · Audio Processing · ML
 
 ---
 
-## Problem Solving
+## Engineering Highlights
 
-I regularly practice algorithmic problem solving and interview-oriented DSA.
+### Frontend Engineering
 
-- **200+ LeetCode problems solved**
-- **100-day LeetCode streak**
-- **150+ problems across GFG and Codeforces**
-- Following structured DSA practice with a focus on fundamentals, patterns, and interview problems
+- Next.js App Router
+- React component architecture
+- TypeScript
+- Responsive design
+- Tailwind CSS
+- Advanced animation systems
+- Smooth scrolling
+- 3D/WebGL integrations
+- Performance-conscious rendering
+- Reusable UI primitives
 
-[View my LeetCode profile →](https://leetcode.com/u/Jyatin_singh/)
+### AI / RAG
+
+- Retrieval-Augmented Generation
+- Embeddings
+- Vector similarity search
+- Context retrieval
+- LLM integrations
+- Streaming responses
+- AI-powered document interaction
+
+### Backend
+
+- Node.js
+- Express.js
+- REST APIs
+- MongoDB
+- MySQL / SQL
+- Redis
+- Supabase
+
+### Programming
+
+- C++
+- Java
+- Python
+- JavaScript
+- TypeScript
+
+### Developer Tools
+
+- Git
+- GitHub
+- Docker
+- VS Code
+- Vercel
+- npm
 
 ---
 
 ## Open Source
 
-I actively explore and contribute to open-source software, with contributions across developer tools and JavaScript ecosystems.
+I actively contribute to open-source projects and developer ecosystems.
 
-- **5 merged open-source PRs**
-- **120+ GitHub contributions**
-- Contributions include work across projects such as **OpenStory** and **OpenFeature JS SDK**
+Highlights include contributions to projects such as:
+
+- **OpenStory**
+- **OpenFeature JS SDK**
+- Other developer tooling and JavaScript ecosystem projects
+
+Current profile highlights include merged pull requests and consistent GitHub activity.
 
 [View GitHub →](https://github.com/Jyatin)
 
 ---
 
-## What I'm Working On
+## Problem Solving
 
-- Building production-oriented **full-stack applications**
-- Strengthening **DSA and problem-solving** skills
-- Exploring **AI/RAG architectures and intelligent applications**
-- Contributing to **open source**
-- Improving **UI/UX and frontend engineering**
-- Turning research ideas into practical software systems
+I regularly practice algorithmic problem solving for technical interviews and competitive programming.
 
----
+- **200+ LeetCode problems solved**
+- **100-day LeetCode streak**
+- **150+ problems across GeeksforGeeks and Codeforces**
+- Structured DSA practice focused on patterns, fundamentals, and interview problems
 
-## Portfolio
-
-This repository contains **Portfolio v3**, my personal developer portfolio focused on presenting my work, projects, technical interests, and journey as a developer.
-
-**Live:** [portfolio-v3-coral-five.vercel.app](https://portfolio-v3-coral-five.vercel.app/)
+[View LeetCode →](https://leetcode.com/u/Jyatin_singh/)
 
 ---
 
-## Connect
+## Project Architecture
 
-- **GitHub:** [github.com/Jyatin](https://github.com/Jyatin)
-- **LinkedIn:** [linkedin.com/in/jyatinsingh](https://www.linkedin.com/in/jyatinsingh/)
-- **LeetCode:** [leetcode.com/u/Jyatin_singh](https://leetcode.com/u/Jyatin_singh/)
-- **Email:** [singhjyatin@gmail.com](mailto:singhjyatin@gmail.com)
+The portfolio follows a modern Next.js application structure with a clear separation between presentation, reusable components, content, and server-side functionality.
+
+```text
+portfolio-v3/
+├── app/
+│   ├── api/              # Server-side/API functionality
+│   ├── components/       # Reusable UI components
+│   ├── ...               # App Router pages and layouts
+│   └── globals.css       # Global design system/styles
+│
+├── content/              # Structured portfolio/RAG content
+├── public/               # Static images, PDFs and project assets
+├── scripts/              # Build-time utilities and ingestion scripts
+├── package.json
+├── tsconfig.json
+├── next.config.ts
+└── README.md
+```
+
+---
+
+## RAG / AI Portfolio Assistant
+
+The portfolio is also being extended with an embedded **RAG-powered portfolio assistant** designed to answer questions about my projects, skills, experience, and technical background.
+
+The intended architecture is:
+
+```text
+Visitor Question
+       ↓
+Query Embedding
+       ↓
+Semantic Retrieval
+       ↓
+Top-K Portfolio Chunks
+       ↓
+Similarity Threshold
+       ↓
+Grounded Context
+       ↓
+LLM Generation
+       ↓
+Streaming Response
+```
+
+The corpus is organized into semantic units such as projects, experience, skills, and background information rather than one large document.
+
+The feature is designed to demonstrate practical RAG engineering directly inside the portfolio while keeping the deployment serverless-friendly.
+
+---
+
+## Performance & Deployment
+
+The project is optimized for deployment on **Vercel** and uses Next.js production builds.
+
+Production tooling includes:
+
+- Vercel deployment
+- Vercel Analytics
+- Vercel Speed Insights
+- Next.js production optimization
+- Responsive layouts
+- Component-level rendering
+- Controlled animation and visual effects
+
+Live site:
+
+**https://portfolio-v3-coral-five.vercel.app/**
 
 ---
 
 ## Run Locally
 
+Clone the repository:
+
 ```bash
 git clone https://github.com/Jyatin/portfolio-v3.git
 cd portfolio-v3
+```
+
+Install dependencies:
+
+```bash
 npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Then open `http://localhost:3000` in your browser.
+Open:
+
+```text
+http://localhost:3000
+```
+
+### Production build
+
+```bash
+npm run build
+npm start
+```
+
+### RAG ingestion
+
+If working on the RAG assistant:
+
+```bash
+npm run rag:ingest
+```
+
+The production build also runs the ingestion step automatically through the configured `prebuild` script.
+
+---
+
+## Environment Variables
+
+Some interactive and AI-powered features require environment variables.
+
+Create a `.env.local` file for local development and configure the same variables in Vercel for production.
+
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+
+# AI / RAG
+OPENAI_API_KEY=
+ANTHROPIC_API_KEY=
+
+# Rate limiting
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+RATE_LIMIT_SALT=
+```
+
+Never commit real API keys or secrets to GitHub.
+
+---
+
+## Why This Portfolio
+
+This project is intentionally more than a static resume page.
+
+It serves as a practical demonstration of:
+
+- Frontend architecture
+- UI/UX engineering
+- Modern React development
+- Next.js App Router
+- TypeScript
+- Animation engineering
+- 3D/WebGL integration
+- API integration
+- AI/RAG engineering
+- Responsive design
+- Production deployment
+- Open-source engineering practices
+
+The objective is to show not only **what I have built**, but also **how I think about building software**.
+
+---
+
+## Connect
+
+- **GitHub:** https://github.com/Jyatin
+- **LinkedIn:** https://www.linkedin.com/in/jyatinsingh/
+- **LeetCode:** https://leetcode.com/u/Jyatin_singh/
+- **Portfolio:** https://portfolio-v3-coral-five.vercel.app/
+- **Email:** singhjyatin@gmail.com
 
 ---
 
