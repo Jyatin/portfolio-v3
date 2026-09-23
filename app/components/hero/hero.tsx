@@ -13,11 +13,10 @@ const RESUME_URL = "/GenCV12412494jyatinsingh%20(2).pdf";
 
 function FramedPhoto({ sizes }: { sizes: string }) {
     return (
-        <div className="group relative w-full aspect-[16/9] overflow-hidden border-[3px] border-white bg-muted/60 shadow-[0_0_0_1px_rgba(0,0,0,0.12)]">
+        <div className="group relative w-full aspect-[16/9] overflow-hidden border border-white/70 bg-muted/60 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
             <div className="pointer-events-none absolute inset-0 z-20" aria-hidden="true">
-                <span className="absolute left-[11%] top-0 h-full w-[2px] bg-white" />
-                <span className="absolute left-[11%] top-1/2 h-[2px] w-8 -translate-y-1/2 bg-white" />
-                <span className="absolute inset-2 border border-white/80" />
+                <span className="absolute left-[11%] top-[8%] h-[84%] w-px bg-white/70" />
+                <span className="absolute left-[11%] top-1/2 h-px w-8 -translate-y-1/2 bg-white/80" />
             </div>
             <Image
                 src="/images/jyatin.jpg"
