@@ -22,6 +22,7 @@ const navigation = [
     ["Skills", "skills"],
     ["Certifications", "certifications"],
     ["Achievements", "achievements"],
+    ["Ask an Assistant", "ask-an-assistant"],
     ["Contact", "contact"],
 ] as const;
 
