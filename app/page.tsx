@@ -10,6 +10,7 @@ const Stats = dynamic(() => import("./components/sections/stats"));
 const Projects = dynamic(() => import("./components/sections/projects"));
 const Experience = dynamic(() => import("./components/sections/experience"));
 const OpenSource = dynamic(() => import("./components/sections/open-source"));
+const Blog = dynamic(() => import("./components/sections/blog-v2"));
 const Certifications = dynamic(() => import("./components/sections/certifications"));
 const Recognition = dynamic(() => import("./components/sections/recognition"));
 const Achievements = dynamic(() => import("./components/sections/achievements"));
@@ -39,28 +40,33 @@ export default function Home() {
                 <OpenSource />
             </ScrollSection>
 
-            {/* 04 — ABOUT */}
+            {/* 04 — BLOG */}
+            <ScrollSection>
+                <Blog />
+            </ScrollSection>
+
+            {/* 05 — ABOUT */}
             <ScrollSection>
                 <Stats />
             </ScrollSection>
 
-            {/* 05 — PROJECTS */}
+            {/* 06 — PROJECTS */}
             <ScrollSection>
                 <Projects />
             </ScrollSection>
 
-            {/* 06 — RECOGNITION & MILESTONES */}
+            {/* 07 — RECOGNITION & MILESTONES */}
             <ScrollSection>
                 <Recognition />
             </ScrollSection>
 
-            {/* 07–08 — PROGRESS / PROOF OF WORK */}
+            {/* 08–09 — PROGRESS / PROOF OF WORK */}
             <ScrollSection>
                 <Achievements />
                 <Certifications />
             </ScrollSection>
 
-            {/* 09 — CONTACT */}
+            {/* 10 — CONTACT */}
             <ScrollSection>
                 <Contact />
             </ScrollSection>
