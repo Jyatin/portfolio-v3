@@ -52,6 +52,75 @@ function buildPrompt(context: string): string {
     return `${BASE_SYSTEM_PROMPT}\n\n<retrieved_context>\n${context}\n</retrieved_context>`;
 }
 
+async function* streamOpenAI(request: LLMRequest): AsyncGenerator<string, void, void> {
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) throw new Error("OPENAI_API_KEY is not configured.");
+
+    const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
+    const messages = [
+        { role: "system" as const, content: buildPrompt(request.context) },
+        ...request.history.slice(-6),
+        { role: "user" as const, content: request.userMessage },
+    ].map((message) => ({
+        role: message.role,
+        content: message.content.slice(0, 1200),
+    }));
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            model,
+            messages,
+            max_tokens: 500,
+            temperature: 0.2,
+            stream: true,
+        }),
+        cache: "no-store",
+    });
+
+    if (!response.ok || !response.body) {
+        const detail = await response.text();
+        throw new Error(`OpenAI request failed (${response.status}): ${detail.slice(0, 500)}`);
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+
+    try {
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const events = buffer.split("\n\n");
+            buffer = events.pop() ?? "";
+
+            for (const event of events) {
+                const dataLine = event
+                    .split("\n")
+                    .find((line) => line.startsWith("data: "));
+                if (!dataLine) continue;
+
+                const payload = dataLine.slice(6).trim();
+                if (payload === "[DONE]") return;
+
+                const data = JSON.parse(payload) as {
+                    choices?: Array<{ delta?: { content?: string } }>;
+                };
+                const text = data.choices?.[0]?.delta?.content;
+                if (text) yield text;
+            }
+        }
+    } finally {
+        reader.releaseLock();
+    }
+}
+
 async function* streamAnthropic(request: LLMRequest): AsyncGenerator<string, void, void> {
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) throw new Error("ANTHROPIC_API_KEY is not configured.");
@@ -122,7 +191,11 @@ async function* streamAnthropic(request: LLMRequest): AsyncGenerator<string, voi
 }
 
 export function getLLMProvider(): LLMProvider {
-    const provider = process.env.LLM_PROVIDER || "anthropic";
+    const provider = process.env.LLM_PROVIDER || "openai";
+
+    if (provider === "openai") {
+        return { stream: streamOpenAI };
+    }
 
     if (provider === "anthropic") {
         return { stream: streamAnthropic };
