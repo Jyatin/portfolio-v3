@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, BookOpen, Clock3 } from "lucide-react";
+import { ArrowUpRight, BookOpen } from "lucide-react";
 
 const posts = [
     {
@@ -16,17 +16,18 @@ const posts = [
     },
     {
         number: "02",
+        type: "Open Source",
+        title: "How Open Source Introduced Me to a Whole New World of Engineering",
+        excerpt: "A personal reflection on moving beyond coursework and learning what engineering looks like inside real open-source projects — from reading unfamiliar codebases and debugging issues to reviews, collaboration, and getting changes merged.",
+        tags: ["Open Source", "Engineering", "GitHub"],
+        mediumHref: "https://medium.com/@singhjyatin/how-open-source-introduced-me-to-a-whole-new-world-of-engineering-664e2ccdf97a?post",
+    },
+    {
+        number: "03",
         type: "AI / RAG",
         title: "Building RAG Systems Beyond the Demo",
         excerpt: "Practical notes from building document-aware applications: retrieval, embeddings, evaluation, failure modes, and the engineering decisions that matter after the prototype works.",
         tags: ["RAG", "AI", "Full Stack"],
-    },
-    {
-        number: "03",
-        type: "Web Engineering",
-        title: "From React Projects to Production-Ready Applications",
-        excerpt: "A running collection of lessons around React, Next.js, TypeScript, testing, performance, and the small engineering details that make applications easier to maintain.",
-        tags: ["React", "Next.js", "TypeScript"],
     },
 ];
 
@@ -61,6 +62,7 @@ export default function Blog() {
                                     {post.href && <a href={post.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/55 hover:text-foreground">LinkedIn <ArrowUpRight className="h-3.5 w-3.5" /></a>}
                                     {post.interactiveHref && <a href={post.interactiveHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/55 hover:text-foreground">Interactive <ArrowUpRight className="h-3.5 w-3.5" /></a>}
                                     {post.paperHref && <a href={post.paperHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/55 hover:text-foreground">IEEE PDF <ArrowUpRight className="h-3.5 w-3.5" /></a>}
+                                    {post.mediumHref && <a href={post.mediumHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/55 hover:text-foreground">Medium <ArrowUpRight className="h-3.5 w-3.5" /></a>}
                                 </div>
                             </div>
                         </motion.article>
