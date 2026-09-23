@@ -6,8 +6,11 @@ const SOURCE = resolve(ROOT, "content/rag/chunks.json");
 const OUTPUT = resolve(ROOT, "content/rag/index.json");
 const MODEL = process.env.RAG_EMBEDDING_MODEL || "text-embedding-3-small";
 
+// RAG indexing is optional during deployment. Vercel can build the portfolio
+// without an OpenAI key; when the key is configured, regenerate the index.
 if (!process.env.OPENAI_API_KEY) {
-    throw new Error("OPENAI_API_KEY is required to build the RAG index.");
+    console.warn("OPENAI_API_KEY is not configured; skipping RAG index generation.");
+    process.exit(0);
 }
 
 const chunks = JSON.parse(await readFile(SOURCE, "utf8"));
