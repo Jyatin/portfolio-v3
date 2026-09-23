@@ -18,16 +18,17 @@ const posts = [
         number: "02",
         type: "Open Source",
         title: "How Open Source Introduced Me to a Whole New World of Engineering",
-        excerpt: "A personal reflection on moving beyond coursework and learning what engineering looks like inside real open-source projects — from reading unfamiliar codebases and debugging issues to reviews, collaboration, and getting changes merged.",
+        excerpt: "Reflections on moving beyond personal projects into real production codebases — learning to read unfamiliar systems, debug real issues, collaborate with maintainers, and grow through open-source engineering.",
         tags: ["Open Source", "Engineering", "GitHub"],
-        mediumHref: "https://medium.com/@singhjyatin/how-open-source-introduced-me-to-a-whole-new-world-of-engineering-664e2ccdf97a?post",
+        href: "https://medium.com/@singhjyatin/how-open-source-introduced-me-to-a-whole-new-world-of-engineering-664e2ccdf97a?post",
     },
     {
         number: "03",
-        type: "AI / RAG",
-        title: "Building RAG Systems Beyond the Demo",
-        excerpt: "Practical notes from building document-aware applications: retrieval, embeddings, evaluation, failure modes, and the engineering decisions that matter after the prototype works.",
-        tags: ["RAG", "AI", "Full Stack"],
+        type: "Hackathons",
+        title: "How Hackathons Changed the Way I Work",
+        excerpt: "From Gear Up Season 5 at LPU to building under real deadlines, hackathons taught me to move from ideas to working systems faster, communicate better with teammates, stay calm when things break, and become more confident in solving unfamiliar problems.",
+        tags: ["Hackathons", "Teamwork", "Problem Solving"],
+        href: "https://www.linkedin.com/feed/update/urn:li:activity:7507220256428376064/",
     },
 ];
 
@@ -62,7 +63,6 @@ export default function Blog() {
                                     {post.href && <a href={post.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/55 hover:text-foreground">LinkedIn <ArrowUpRight className="h-3.5 w-3.5" /></a>}
                                     {post.interactiveHref && <a href={post.interactiveHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/55 hover:text-foreground">Interactive <ArrowUpRight className="h-3.5 w-3.5" /></a>}
                                     {post.paperHref && <a href={post.paperHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/55 hover:text-foreground">IEEE PDF <ArrowUpRight className="h-3.5 w-3.5" /></a>}
-                                    {post.mediumHref && <a href={post.mediumHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/55 hover:text-foreground">Medium <ArrowUpRight className="h-3.5 w-3.5" /></a>}
                                 </div>
                             </div>
                         </motion.article>
