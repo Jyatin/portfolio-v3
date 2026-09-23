@@ -7,9 +7,12 @@ const posts = [
     {
         number: "01",
         type: "Technical Notes",
-        title: "What I Learned Contributing to Production Open Source",
-        excerpt: "Notes on reading unfamiliar codebases, debugging real issues, working with maintainers, and turning a small contribution into a better engineering workflow.",
-        tags: ["Open Source", "Engineering", "GitHub"],
+        title: "Event-Driven Music Recommendation Systems",
+        excerpt: "A technical case study on building a recommendation platform around Kafka, stream processing, batch ML, and a learn-to-rank feedback loop — exploring how real-time events and offline learning can work together at scale.",
+        tags: ["Kafka", "Recommender Systems", "System Design"],
+        href: "https://www.linkedin.com/feed/update/urn:li:activity:7506870801317634048/",
+        interactiveHref: "https://lnkd.in/d6j6HcFR",
+        paperHref: "https://github.com/Jyatin/Event-Driven-Music-Recommendation-Systems/blob/main/Event-Driven%20Music%20Recommendation%20Systems%20-%20IEEE%20Format.pdf",
     },
     {
         number: "02",
@@ -54,9 +57,10 @@ export default function Blog() {
                             </div>
                             <div className="mt-8">
                                 <div className="mb-5 flex flex-wrap gap-2">{post.tags.map((tag) => <span key={tag} className="rounded-full border border-border px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.16em] text-foreground/45">{tag}</span>)}</div>
-                                <div className="flex items-center justify-between border-t border-border pt-4">
-                                    <span className="flex items-center gap-2 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/35"><Clock3 className="h-3.5 w-3.5" />Coming soon</span>
-                                    <span className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/30">Read soon <ArrowUpRight className="h-3.5 w-3.5" /></span>
+                                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border pt-4">
+                                    {post.href && <a href={post.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/55 hover:text-foreground">LinkedIn <ArrowUpRight className="h-3.5 w-3.5" /></a>}
+                                    {post.interactiveHref && <a href={post.interactiveHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/55 hover:text-foreground">Interactive <ArrowUpRight className="h-3.5 w-3.5" /></a>}
+                                    {post.paperHref && <a href={post.paperHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.18em] text-foreground/55 hover:text-foreground">IEEE PDF <ArrowUpRight className="h-3.5 w-3.5" /></a>}
                                 </div>
                             </div>
                         </motion.article>
