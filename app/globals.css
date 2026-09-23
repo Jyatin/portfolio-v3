@@ -161,6 +161,28 @@ body {
   line-height: 1.55;
 }
 
+/* Full-page editorial grid */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, color-mix(in oklch, var(--foreground) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 7%, transparent) 1px, transparent 1px);
+  background-size: 90px 90px;
+  background-position: 85px 59px;
+}
+
+/* Keep the grid behind fixed UI overlays and controls. */
+[data-shoot-controls],
+[data-chat-widget],
+[data-fixed-ui] {
+  position: relative;
+  z-index: 9995;
+}
+
 h1,
 h2,
 [data-display-text="true"] {
