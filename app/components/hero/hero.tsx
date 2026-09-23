@@ -14,11 +14,20 @@ const RESUME_URL = "/GenCV12412494jyatinsingh%20(2).pdf";
 function FramedPhoto({ sizes }: { sizes: string }) {
     return (
         <div className="group relative w-full aspect-[16/9] [perspective:1400px]">
+            {/* Soft image-backed extrusion: a quiet 3D block rather than a border/frame. */}
             <div
-                className="absolute inset-0 translate-x-3 translate-y-3 bg-foreground/10 transition-transform duration-500 ease-out group-hover:translate-x-4 group-hover:translate-y-4"
+                className="absolute inset-[2%] translate-x-5 translate-y-5 overflow-hidden rounded-[2px] bg-foreground/8 opacity-45 blur-[0.2px] transition-transform duration-500 ease-out group-hover:translate-x-6 group-hover:translate-y-6"
                 aria-hidden="true"
-            />
-            <div className="relative z-10 h-full w-full overflow-hidden bg-muted/60 shadow-[0_18px_35px_rgba(0,0,0,0.12)] transition-transform duration-500 ease-out [transform:rotateX(1deg)_rotateY(-1deg)] group-hover:-translate-y-1 group-hover:[transform:rotateX(0deg)_rotateY(0deg)]">
+            >
+                <Image
+                    src="/images/jyatin.jpg"
+                    alt=""
+                    fill
+                    sizes={sizes}
+                    className="object-cover object-[60%_50%] brightness-[0.82] saturate-[0.7]"
+                />
+            </div>
+            <div className="relative z-10 h-full w-full overflow-hidden rounded-[2px] bg-muted/30 shadow-[18px_22px_42px_rgba(0,0,0,0.14)] transition-transform duration-500 ease-out [transform:rotateX(1.5deg)_rotateY(-1.5deg)_translateZ(0)] group-hover:-translate-y-1 group-hover:[transform:rotateX(0deg)_rotateY(0deg)_translateZ(10px)]">
                 <Image
                     src="/images/jyatin.jpg"
                     alt="Jyatin Kumar Singh"
@@ -26,8 +35,9 @@ function FramedPhoto({ sizes }: { sizes: string }) {
                     loading="eager"
                     fill
                     sizes={sizes}
-                    className="h-full w-full object-cover object-[60%_50%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                    className="h-full w-full object-cover object-[60%_50%] brightness-[1.08] saturate-[0.88] contrast-[0.96] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
                 />
+                <div className="pointer-events-none absolute inset-0 bg-white/[0.035]" aria-hidden="true" />
             </div>
         </div>
     );
