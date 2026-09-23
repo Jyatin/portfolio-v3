@@ -13,12 +13,21 @@ const RESUME_URL = "/GenCV12412494jyatinsingh%20(2).pdf";
 
 function FramedPhoto({ sizes }: { sizes: string }) {
     return (
-        <div className="group relative w-full overflow-hidden border-2 border-white/90 bg-muted/60 aspect-[16/9] shadow-[0_0_0_1px_rgba(0,0,0,0.04)]">
-            <div className="pointer-events-none absolute inset-0 z-10" aria-hidden="true">
-                <span className="absolute left-[11%] top-0 h-full w-px bg-white/85" />
-                <span className="absolute left-[11%] top-1/2 h-px w-5 -translate-y-1/2 bg-white" />
+        <div className="group relative w-full aspect-[16/9] overflow-hidden border-[3px] border-white bg-muted/60 shadow-[0_0_0_1px_rgba(0,0,0,0.12)]">
+            <div className="pointer-events-none absolute inset-0 z-20" aria-hidden="true">
+                <span className="absolute left-[11%] top-0 h-full w-[2px] bg-white" />
+                <span className="absolute left-[11%] top-1/2 h-[2px] w-8 -translate-y-1/2 bg-white" />
+                <span className="absolute inset-2 border border-white/80" />
             </div>
-            <Image src="/images/jyatin.jpg" alt="Jyatin Kumar Singh" priority loading="eager" fill sizes={sizes} className="h-full w-full object-cover object-[60%_50%] transition-transform duration-500 group-hover:scale-[1.02]" />
+            <Image
+                src="/images/jyatin.jpg"
+                alt="Jyatin Kumar Singh"
+                priority
+                loading="eager"
+                fill
+                sizes={sizes}
+                className="h-full w-full object-cover object-[60%_50%] transition-transform duration-500 group-hover:scale-[1.02]"
+            />
         </div>
     );
 }
