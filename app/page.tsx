@@ -40,19 +40,19 @@ export default function Home() {
                 <OpenSource />
             </ScrollSection>
 
-            {/* 04 — BLOG */}
-            <ScrollSection>
-                <Blog />
-            </ScrollSection>
-
-            {/* 05 — ABOUT */}
+            {/* 04 — ABOUT */}
             <ScrollSection>
                 <Stats />
             </ScrollSection>
 
-            {/* 06 — PROJECTS */}
+            {/* 05 — PROJECTS */}
             <ScrollSection>
                 <Projects />
+            </ScrollSection>
+
+            {/* 06 — NOTES / WRITING */}
+            <ScrollSection>
+                <Blog />
             </ScrollSection>
 
             {/* 07 — RECOGNITION & MILESTONES */}
