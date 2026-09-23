@@ -71,6 +71,37 @@ export default function Home() {
                 <Contact />
             </ScrollSection>
 
+            {/* ASSISTANT LINKS — kept outside the footer so they are always visible */}
+            <section className="border-t border-border bg-background px-5 py-14 sm:px-8 sm:py-16 md:px-12 lg:px-20 xl:px-24">
+                <div className="mx-auto max-w-[1920px]">
+                    <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">
+                        Or ask an assistant
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                        <a
+                            href="https://chatgpt.com/"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="group inline-flex items-center gap-3 rounded-full border border-border bg-background px-5 py-3 text-sm text-foreground/70 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-muted/40 hover:text-foreground"
+                        >
+                            <span className="flex h-6 w-6 items-center justify-center rounded-full border border-border font-mono text-[10px] font-semibold">◉</span>
+                            <span>talk to chatgpt about me</span>
+                            <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                        </a>
+                        <a
+                            href="https://claude.ai/"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="group inline-flex items-center gap-3 rounded-full border border-border bg-background px-5 py-3 text-sm text-foreground/70 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-muted/40 hover:text-foreground"
+                        >
+                            <span className="flex h-6 w-6 items-center justify-center rounded-full border border-border font-mono text-[10px] font-semibold">IA</span>
+                            <span>talk to claude about me</span>
+                            <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
             <Footer />
             <LiveChatHost />
         </main>
