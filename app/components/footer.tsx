@@ -3,7 +3,7 @@
 import { useGSAP } from "@/app/hooks/useGSAP";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Mail, Github, Linkedin, ArrowUp, ExternalLink } from "lucide-react";
+import { Mail, Github, Linkedin, ArrowUp } from "lucide-react";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
@@ -25,19 +25,6 @@ const navigation = [
     ["Contact", "contact"],
 ] as const;
 
-const assistantLinks = [
-    {
-        name: "ChatGPT",
-        label: "talk to chatgpt about me",
-        url: "https://chatgpt.com/",
-    },
-    {
-        name: "Claude",
-        label: "talk to claude about me",
-        url: "https://claude.ai/",
-    },
-];
-
 export default function Footer() {
     const currentYear = new Date().getFullYear();
     const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -56,25 +43,6 @@ export default function Footer() {
         <footer ref={containerRef} className="relative w-full overflow-hidden border-t border-border bg-background pt-16 pb-8 sm:pt-20">
             <div className="mx-auto max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24">
                 <div className="footer-content flex flex-col gap-12">
-                    <div className="border-b border-border pb-12">
-                        <span className="mb-5 block font-mono text-xs uppercase tracking-[0.3em] text-foreground/40">Or ask an assistant</span>
-                        <div className="flex flex-wrap gap-3">
-                            {assistantLinks.map((assistant) => (
-                                <a
-                                    key={assistant.name}
-                                    href={assistant.url}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="group inline-flex items-center gap-3 rounded-full border border-border bg-background px-5 py-3 text-sm text-foreground/70 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-muted/40 hover:text-foreground"
-                                >
-                                    <span className="font-semibold">{assistant.name}</span>
-                                    <span className="text-foreground/70">{assistant.label}</span>
-                                    <ExternalLink className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-
                     <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
                         <div>
                             <span className="mb-5 block font-mono text-xs uppercase tracking-[0.3em] text-foreground/40">Navigation</span>
