@@ -9,6 +9,7 @@ import { Github, Linkedin, ArrowUpRight, Copy, Check, Code2, Download } from "lu
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/jyatinsingh/";
+const RESUME_URL = "/resume.pdf";
 
 export default function Contact() {
     const [copied, setCopied] = useState(false);
@@ -59,8 +60,8 @@ export default function Contact() {
                                     </a>
                                 ))}
                                 <a
-                                    href="/resume.pdf"
-                                    download
+                                    href={RESUME_URL}
+                                    download="Jyatin_Kumar_Singh_Resume.pdf"
                                     className="inline-flex h-12 items-center gap-2 border border-border bg-foreground px-5 font-mono text-[10px] uppercase tracking-[0.2em] text-background transition-opacity hover:opacity-80"
                                 >
                                     <Download className="h-4 w-4" aria-hidden />
