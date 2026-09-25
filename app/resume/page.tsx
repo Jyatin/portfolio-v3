@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, Download, ExternalLink } from "lucide-react";
 
-const RESUME_URL = "/GenCV12412494jyatinsingh%20(2).pdf";
+const RESUME_URL = "/resume.pdf";
 
 export default function ResumePage() {
     return (
@@ -23,7 +23,7 @@ export default function ResumePage() {
                             className="inline-flex items-center gap-2 rounded-full border border-foreground bg-foreground px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-background transition-opacity hover:opacity-85"
                         >
                             <Download className="h-3.5 w-3.5" />
-                            Download
+                            Download PDF
                         </a>
                         <a
                             href={RESUME_URL}
@@ -32,7 +32,7 @@ export default function ResumePage() {
                             className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70 transition-colors hover:border-foreground/40 hover:text-foreground"
                         >
                             <ExternalLink className="h-3.5 w-3.5" />
-                            Open
+                            Open PDF
                         </a>
                     </div>
                 </div>
@@ -51,6 +51,7 @@ export default function ResumePage() {
                     <iframe
                         src={`${RESUME_URL}#toolbar=1&navpanes=0&view=FitH`}
                         title="Jyatin Kumar Singh Resume"
+                        loading="lazy"
                         className="h-[calc(100vh-190px)] min-h-[720px] w-full bg-white"
                     />
                 </section>
