@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import ScrollSection from "./components/scroll-section";
 import LiveChatHost from "./components/chat/live-chat-host";
+import AssistantLinks from "./components/sections/assistant-links";
 
 const Marquee = dynamic(() => import("./components/sections/marquee"));
 const Stats = dynamic(() => import("./components/sections/stats"));
@@ -38,6 +39,7 @@ export default function Home() {
             <ScrollSection><Achievements /><Certifications /></ScrollSection>
             <ScrollSection><Contact /></ScrollSection>
 
+            <AssistantLinks />
             <Footer />
             <LiveChatHost />
         </main>
