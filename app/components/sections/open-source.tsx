@@ -13,11 +13,43 @@ const contributions = [
     description:
       "Migrated the Storybook mock-service-worker setup from msw-storybook-addon v2 to v3, replacing the removed initialize() flow with the v3 mswLoader approach and registering the addon correctly.",
     work:
-      "Also fixed Windows/Vite path resolution in the Storybook server stub by converting the runtime path to a file URL, then verified Storybook startup, preview rendering, diff cleanliness, linting, formatting, dead-code checks, and typechecking.",
+      "Also fixed Windows/Vite path resolution in the Storybook server stub by converting the runtime path to a file URL, then verified Storybook startup, preview rendering, linting, formatting, dead-code checks, and typechecking.",
     learned:
       "Production dependency migration, platform-specific debugging, Storybook configuration, CI validation, and maintainer review in a real open-source workflow.",
     tech: ["TypeScript", "Storybook", "MSW", "Vite", "Testing", "Git"],
     href: "https://github.com/openstory-so/openstory/pull/1307",
+    icon: CheckCircle2,
+  },
+  {
+    project: "Shep",
+    category: "Next.js / Dashboard",
+    status: "Merged",
+    statusTone: "merged",
+    title: "Redesigned fleet status bar placement",
+    description:
+      "Fixed the Control Center fleet status bar by moving FleetControl out of the canvas overlay and into dedicated dashboard header chrome, preventing it from covering canvas nodes or competing with the canvas toolbar.",
+    work:
+      "Restored server-side fleet data loading with graceful fallback, kept the canvas in a separate flex region, removed the temporary mount-guard test, and added behavior-focused dashboard tests covering placement, fleet counts, triage interaction, and failed fleet-data loading.",
+    learned:
+      "Production UI architecture, server/client data flow, resilient rendering, focused integration testing, and maintainer-driven iteration in a TypeScript/Next.js codebase.",
+    tech: ["TypeScript", "Next.js", "React", "Vitest", "Storybook", "Git"],
+    href: "https://github.com/shep-ai/shep/pull/891",
+    icon: CheckCircle2,
+  },
+  {
+    project: "Speech Dispatcher",
+    category: "Linux / Text-to-Speech",
+    status: "Merged",
+    statusTone: "merged",
+    title: "Added Edge TTS generic output module",
+    description:
+      "Added an Edge TTS generic output module for Speech Dispatcher with multilingual voice mappings, dependency checks, and a pipe-based audio pipeline.",
+    work:
+      "Integrated edge-tts with mpg123 and the existing playback command, added module distribution entries, switched the shell execution path to bash for the pipeline, and documented Edge TTS support in the project README.",
+    learned:
+      "Linux audio architecture, CLI integration, dependency management, maintainer-driven iteration, and working safely inside an established systems project.",
+    tech: ["C", "Bash", "Edge TTS", "Linux", "Audio", "Git"],
+    href: "https://github.com/brailcom/speechd/pull/1110",
     icon: CheckCircle2,
   },
   {
@@ -52,22 +84,6 @@ const contributions = [
     href: "https://github.com/open-feature/js-sdk/pull/1454",
     icon: Terminal,
   },
-  {
-    project: "Speech Dispatcher",
-    category: "Linux / Text-to-Speech",
-    status: "Merged",
-    statusTone: "merged",
-    title: "Added Edge TTS generic output module",
-    description:
-      "Added an Edge TTS generic output module for Speech Dispatcher with multilingual voice mappings, dependency checks, and a pipe-based audio pipeline.",
-    work:
-      "Integrated edge-tts with mpg123 and the existing playback command, added module distribution entries, switched the shell execution path to bash for the pipeline, and documented Edge TTS support in the project README.",
-    learned:
-      "Linux audio architecture, CLI integration, dependency management, maintainer-driven iteration, and working safely inside an established systems project.",
-    tech: ["C", "Bash", "Edge TTS", "Linux", "Audio", "Git"],
-    href: "https://github.com/brailcom/speechd/pull/1110",
-    icon: CheckCircle2,
-  },
 ];
 
 function StatusBadge({ status, tone }: { status: string; tone: string }) {
@@ -94,7 +110,7 @@ export default function OpenSource() {
         <div className="mb-10 sm:mb-14">
           <div className="mb-4 flex items-center gap-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45 sm:text-xs">
-              03 / Open Source
+              02 / Open Source
             </span>
             <span className="h-px flex-1 bg-border" />
           </div>
@@ -106,8 +122,7 @@ export default function OpenSource() {
               Source
             </h2>
             <p className="max-w-xl text-sm leading-relaxed text-foreground/50 sm:text-base">
-              Beyond building my own projects, I contribute to open-source software to work with production codebases,
-              collaborate with maintainers, debug real-world issues, and learn engineering practices that go beyond coursework.
+              Real production codebases, real issues, real maintainer feedback. These contributions show how I work when the codebase is not mine and the solution has to fit an existing system.
             </p>
           </div>
         </div>
