@@ -110,7 +110,7 @@ export default function OpenSource() {
         <div className="mb-10 sm:mb-14">
           <div className="mb-4 flex items-center gap-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45 sm:text-xs">
-              02 / Open Source
+              03 / Open Source
             </span>
             <span className="h-px flex-1 bg-border" />
           </div>
