@@ -6,8 +6,8 @@ const SOURCE = resolve(ROOT, "content/rag/chunks.json");
 const OUTPUT = resolve(ROOT, "content/rag/index.json");
 const MODEL = process.env.RAG_EMBEDDING_MODEL || "text-embedding-3-small";
 
-// RAG indexing is optional during deployment. Vercel can build the portfolio
-// without an OpenAI key; when the key is configured, regenerate the index.
+// RAG indexing is optional during deployment. The portfolio must still build
+// when the OpenAI API is unavailable, out of credits, or temporarily failing.
 if (!process.env.OPENAI_API_KEY) {
     console.warn("OPENAI_API_KEY is not configured; skipping RAG index generation.");
     process.exit(0);
@@ -48,22 +48,30 @@ async function createEmbeddings(inputs) {
         .map((item) => item.embedding);
 }
 
-const embeddings = await createEmbeddings(
-    chunks.map((chunk) => `${chunk.title}\n${chunk.content}`)
-);
+try {
+    const embeddings = await createEmbeddings(
+        chunks.map((chunk) => `${chunk.title}\n${chunk.content}`)
+    );
 
-const index = {
-    version: 1,
-    embeddingModel: MODEL,
-    dimensions: embeddings[0]?.length ?? 0,
-    generatedAt: new Date().toISOString(),
-    chunks: chunks.map((chunk, index) => ({
-        ...chunk,
-        embedding: embeddings[index],
-    })),
-};
+    const index = {
+        version: 1,
+        embeddingModel: MODEL,
+        dimensions: embeddings[0]?.length ?? 0,
+        generatedAt: new Date().toISOString(),
+        chunks: chunks.map((chunk, index) => ({
+            ...chunk,
+            embedding: embeddings[index],
+        })),
+    };
 
-await mkdir(dirname(OUTPUT), { recursive: true });
-await writeFile(OUTPUT, `${JSON.stringify(index, null, 2)}\n`, "utf8");
+    await mkdir(dirname(OUTPUT), { recursive: true });
+    await writeFile(OUTPUT, `${JSON.stringify(index, null, 2)}\n`, "utf8");
 
-console.log(`RAG index generated: ${chunks.length} chunks × ${index.dimensions} dimensions`);
+    console.log(`RAG index generated: ${chunks.length} chunks × ${index.dimensions} dimensions`);
+} catch (error) {
+    // Do not make the portfolio deployment depend on RAG/OpenAI availability.
+    // An existing checked-in index can continue serving RAG features.
+    console.warn("RAG index generation failed; continuing without regeneration.");
+    console.warn(error instanceof Error ? error.message : error);
+    process.exit(0);
+}
