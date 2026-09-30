@@ -12,29 +12,18 @@ if (typeof window !== "undefined") {
 }
 
 type LenisInstance = InstanceType<typeof Lenis>;
-
 type WindowWithLenis = Window & { lenis?: LenisInstance };
 
 function getWindowWithLenis(): WindowWithLenis {
   return window as WindowWithLenis;
 }
 
-/**
- * Lenis + touch after client-side navigations breaks scrolling on many mobile browsers.
- * Disable Lenis for coarse pointers and for touch-capable narrow viewports (iOS often reports "fine" pointer).
- */
+/** Keep smooth wheel scrolling enabled on normal laptop/desktop screens. */
 function shouldUseLenis(): boolean {
   if (typeof window === "undefined") return false;
-  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
-    return false;
-  }
-  if (
-    navigator.maxTouchPoints > 0 &&
-    window.matchMedia("(max-width: 1024px)").matches
-  ) {
-    return false;
-  }
-  return true;
+  const isSmallScreen = window.matchMedia("(max-width: 767px)").matches;
+  const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+  return !isSmallScreen && !isCoarsePointer;
 }
 
 interface SmoothScrollProps {
@@ -62,43 +51,39 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     }
 
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number): number => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 1.25,
+      easing: (t: number): number => 1 - Math.pow(1 - t, 4),
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.5,
       infinite: false,
     });
 
+    lenis.start();
     getWindowWithLenis().lenis = lenis;
-
     lenis.on("scroll", ScrollTrigger.update);
 
     let rafId: number | null = null;
-
     const raf = (time: number): void => {
       lenis.raf(time);
       rafId = window.requestAnimationFrame(raf);
     };
-
     rafId = window.requestAnimationFrame(raf);
 
-    const handleResize = (): void => {
+    const refresh = (): void => {
       lenis.resize();
       ScrollTrigger.refresh();
     };
 
-    window.addEventListener("resize", handleResize);
-
-    const refreshId = window.setTimeout(() => {
-      lenis.resize();
-      ScrollTrigger.refresh();
-    }, 100);
+    window.addEventListener("resize", refresh);
+    window.addEventListener("load", refresh);
+    const refreshId = window.setTimeout(refresh, 150);
 
     return () => {
       window.clearTimeout(refreshId);
       if (rafId !== null) window.cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", refresh);
+      window.removeEventListener("load", refresh);
       lenis.destroy();
       delete getWindowWithLenis().lenis;
       document.documentElement.style.overflowY = "";
@@ -108,8 +93,7 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
   }, [pathname]);
 
   useEffect(() => {
-    const win = getWindowWithLenis();
-    const lenis = win.lenis;
+    const lenis = getWindowWithLenis().lenis;
     logProjectsScroll("SmoothScroll pathname change", {
       pathname,
       lenisInstance: Boolean(lenis),
@@ -128,5 +112,3 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
 
   return children;
 }
-
-
