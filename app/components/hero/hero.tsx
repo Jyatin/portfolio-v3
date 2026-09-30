@@ -76,15 +76,15 @@ export default function Hero() {
                             </div>
                         </div>
 
-                        <div className="col-span-12 md:col-span-5 md:text-right">
-                            <div className="mb-7 max-w-md md:ml-auto"><p className="font-mono text-[11px] uppercase leading-relaxed tracking-[0.22em] text-foreground/72">Building practical full-stack applications<br />for real users.</p><div className="mt-2 font-mono text-[10px] uppercase leading-relaxed tracking-[0.24em] text-foreground/55">Based in India</div></div>
-                            <div className="font-black uppercase leading-[0.86] tracking-[-0.055em] text-[clamp(3.2rem,6.2vw,5.8rem)] text-foreground md:text-right">Jyatin<br />Kumar Singh</div>
-                            <div className="mt-5 font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55">2026 Portfolio / Selected work</div>
+                        <div className="col-span-12 md:col-span-5">
+                            <div className="mb-7 max-w-md md:ml-auto md:text-right"><p className="font-mono text-[11px] uppercase leading-relaxed tracking-[0.22em] text-foreground/72">Building practical full-stack applications<br />for real users.</p><div className="mt-2 font-mono text-[10px] uppercase leading-relaxed tracking-[0.24em] text-foreground/55">Based in India</div></div>
+                            <div className="font-black uppercase leading-[0.86] tracking-[-0.055em] text-[clamp(3.2rem,6.2vw,5.8rem)] text-foreground text-right">Jyatin<br />Kumar Singh</div>
+                            <div className="mt-5 font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55 text-right">2026 Portfolio / Selected work</div>
                             <div className="mt-7 flex flex-wrap justify-end gap-2"><a href="#projects" className="group inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-4 py-2.5 text-[10px] font-mono uppercase tracking-[0.24em] text-foreground/70 transition-all hover:-translate-y-0.5 hover:bg-muted"><span>Selected work</span><ArrowDownRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" /></a><a href={RESUME_URL} download="Jyatin_Kumar_Singh_Resume.pdf" className="group inline-flex items-center gap-2 rounded-full border border-foreground bg-foreground px-4 py-2.5 text-[10px] font-mono uppercase tracking-[0.24em] text-background transition-all hover:-translate-y-0.5 hover:bg-foreground/85"><span>Download CV</span><Download className="h-3.5 w-3.5" /></a></div>
 
-                            <div className="mt-16 grid grid-cols-2 gap-3 text-left md:text-right">
-                                <div className="border border-border bg-muted/30 p-4"><MapPin className="ml-auto mb-6 h-4 w-4 text-foreground/40" /><p className="font-mono text-[9px] uppercase leading-relaxed tracking-[0.2em] text-foreground/55">Location<br /><span className="text-foreground/80">India</span></p></div>
-                                <div className="border border-border bg-muted/30 p-4"><p className="mb-6 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/40">Focus</p><p className="font-mono text-[9px] uppercase leading-relaxed tracking-[0.2em] text-foreground/70">Products<br />Systems<br />AI / RAG</p></div>
+                            <div className="mt-16 grid grid-cols-2 gap-4 text-left">
+                                <div className="flex min-h-[140px] flex-col justify-between border border-border bg-muted/30 p-5 transition-colors duration-200 hover:bg-muted/50"><MapPin className="h-4 w-4 text-foreground/45" /><p className="font-mono text-[9px] uppercase leading-relaxed tracking-[0.2em] text-foreground/55">Location<br /><span className="text-foreground/85">India</span></p></div>
+                                <div className="flex min-h-[140px] flex-col justify-between border border-border bg-muted/30 p-5 transition-colors duration-200 hover:bg-muted/50"><p className="font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/45">Focus</p><p className="font-mono text-[9px] uppercase leading-relaxed tracking-[0.2em] text-foreground/75">Products<br />Systems<br />AI / RAG</p></div>
                             </div>
                         </div>
                     </div>
