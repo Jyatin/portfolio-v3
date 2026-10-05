@@ -1,4 +1,4 @@
-import { embedQuery, retrieve } from "@/app/lib/rag";
+import { embedQuery, retrieve, retrieveLexical } from "@/app/lib/rag";
 import { enforceRagRateLimit, RAG_RATE_LIMIT } from "@/app/lib/rag-rate-limit";
 import { getLLMProvider, type ChatHistoryMessage } from "@/app/lib/rag-llm";
 
@@ -76,11 +76,27 @@ export async function POST(request: Request) {
     const history = cleanHistory(body.history);
 
     try {
-        // Stage 1: embed the visitor's question.
-        const queryEmbedding = await embedQuery(message);
+        let matches: Awaited<ReturnType<typeof retrieve>> = [];
+        let retrievalMode = "lexical";
 
-        // Stage 2: retrieve the top semantic matches and enforce the 0.70 floor.
-        const matches = await retrieve(queryEmbedding);
+        // Prefer semantic retrieval when the optional vector index and
+        // embedding provider are available. Any embedding/index failure
+        // falls back to the committed local corpus instead of taking down
+        // the entire assistant.
+        if (process.env.OPENAI_API_KEY) {
+            try {
+                const queryEmbedding = await embedQuery(message);
+                matches = await retrieve(queryEmbedding);
+                if (matches.length > 0) retrievalMode = "semantic";
+            } catch (error) {
+                console.warn("Semantic RAG unavailable; using lexical fallback.", error);
+            }
+        }
+
+        if (matches.length === 0) {
+            matches = await retrieveLexical(message);
+            retrievalMode = "lexical";
+        }
 
         if (matches.length === 0) {
             return new Response(
@@ -93,12 +109,12 @@ export async function POST(request: Request) {
                         "Content-Type": "text/plain; charset=utf-8",
                         "Cache-Control": "no-store",
                         "X-RAG-Retrieved": "0",
+                        "X-RAG-Mode": retrievalMode,
                     },
                 }
             );
         }
 
-        // Stage 3: only the grounded chunks cross the generation boundary.
         const context = matches
             .map(
                 ({ chunk }) =>
@@ -106,7 +122,6 @@ export async function POST(request: Request) {
             )
             .join("\n\n");
 
-        // Stage 4/5: generate and stream a first-person answer from the grounded context.
         const provider = getLLMProvider();
         const generator = provider.stream({
             context,
@@ -141,10 +156,11 @@ export async function POST(request: Request) {
                 "Cache-Control": "no-store, no-cache",
                 "X-Content-Type-Options": "nosniff",
                 "X-RAG-Retrieved": String(matches.length),
+                "X-RAG-Mode": retrievalMode,
             },
         });
     } catch (error) {
-        console.error("Portfolio RAG error", error);
+        console.error("Portfolio RAG retrieval error", error);
         return jsonError("The portfolio assistant is temporarily unavailable.", 500);
     }
 }
