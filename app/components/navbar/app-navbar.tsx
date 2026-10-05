@@ -14,9 +14,15 @@ const navItems = [
     { name: "CONTACT", href: "/#contact" },
 ];
 
-const chatGptPrompt = encodeURIComponent(
-    "Tell me about Jyatin Kumar Singh based on his portfolio, including his projects, experience, open-source contributions, skills, research, and engineering interests."
-);
+const AI_PROMPT = "Tell me about Jyatin Kumar Singh based on his portfolio, including his projects, experience, open-source contributions, skills, research, and engineering interests. Use his portfolio as the primary context and distinguish documented facts from anything not stated. Portfolio URL: ";
+
+function openAI(provider: "chatgpt" | "claude") {
+    const prompt = encodeURIComponent(`${AI_PROMPT}${window.location.origin}/`);
+    const url = provider === "chatgpt"
+        ? `https://chatgpt.com/?q=${prompt}`
+        : `https://claude.ai/new?prompt=${prompt}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+}
 
 export default function AppNavbar() {
     const { theme, resolvedTheme, setTheme } = useTheme();
@@ -55,8 +61,8 @@ export default function AppNavbar() {
                         <Link href="/resume" className="ml-1 inline-flex items-center gap-1.5 rounded-full border border-foreground/20 bg-foreground px-3 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-background transition-opacity hover:opacity-80" aria-label="View resume"><FileText className="h-3.5 w-3.5" />RESUME</Link>
                     </div>
                     <div className="flex items-center gap-1.5 sm:gap-2">
-                        <a href={`https://chatgpt.com/?q=${chatGptPrompt}`} target="_blank" rel="noopener noreferrer" className="inline-flex whitespace-nowrap rounded-full bg-black px-2.5 py-2 font-mono text-[8px] font-semibold tracking-tight text-white transition-opacity hover:opacity-80 sm:px-3 sm:text-[9px]" aria-label="Talk to ChatGPT about me">Talk to ChatGPT about me</a>
-                        <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" className="inline-flex whitespace-nowrap rounded-full bg-black px-2.5 py-2 font-mono text-[8px] font-semibold tracking-tight text-white transition-opacity hover:opacity-80 sm:px-3 sm:text-[9px]" aria-label="Talk to Claude about me">Talk to Claude about me</a>
+                        <button type="button" onClick={() => openAI("chatgpt")} className="inline-flex whitespace-nowrap rounded-full bg-black px-2.5 py-2 font-mono text-[8px] font-semibold tracking-tight text-white transition-opacity hover:opacity-80 sm:px-3 sm:text-[9px]" aria-label="Talk to ChatGPT about me">Talk to ChatGPT about me</button>
+                        <button type="button" onClick={() => openAI("claude")} className="inline-flex whitespace-nowrap rounded-full bg-black px-2.5 py-2 font-mono text-[8px] font-semibold tracking-tight text-white transition-opacity hover:opacity-80 sm:px-3 sm:text-[9px]" aria-label="Talk to Claude about me">Talk to Claude about me</button>
                         <div className="hidden items-center gap-2 text-foreground/55 xl:flex"><UsersRound className="h-5 w-5" /><span className="font-mono text-xs">1</span></div>
                         <button type="button" onClick={() => window.dispatchEvent(new CustomEvent("toggle-portfolio-chat"))} className="relative inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1 text-foreground/80 transition-colors hover:border-foreground/30 hover:bg-muted" aria-label="Open chat"><MessageCircle className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" /><span className="hidden min-[420px]:inline text-[10px] font-semibold uppercase tracking-wide sm:text-xs">Messages</span></button>
                         <a href="https://github.com/Jyatin" target="_blank" rel="noreferrer" aria-label="GitHub" className="hidden h-9 items-center justify-center rounded-lg border border-border px-2.5 text-foreground/75 transition-colors hover:border-foreground/30 hover:bg-muted sm:flex"><Github className="h-4 w-4" /></a>
@@ -70,8 +76,8 @@ export default function AppNavbar() {
                     {navItems.map((item, index) => <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className={`py-3 text-3xl font-black uppercase tracking-tight text-foreground/55 transition-all duration-500 hover:text-foreground ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`} style={{ transitionDelay: `${index * 60}ms` }}>{item.name}</Link>)}
                     <Link href="/resume" onClick={() => setMenuOpen(false)} className={`mt-2 inline-flex items-center gap-2 py-3 text-3xl font-black uppercase tracking-tight text-foreground transition-all duration-500 hover:text-foreground ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`} style={{ transitionDelay: `${navItems.length * 60}ms` }}><FileText className="h-7 w-7" />RESUME</Link>
                     <div className={`mt-5 flex flex-col items-center gap-3 transition-all duration-500 ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}>
-                        <a href={`https://chatgpt.com/?q=${chatGptPrompt}`} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="rounded-full bg-black px-4 py-2.5 font-mono text-[10px] font-semibold text-white">Talk to ChatGPT about me</a>
-                        <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="rounded-full bg-black px-4 py-2.5 font-mono text-[10px] font-semibold text-white">Talk to Claude about me</a>
+                        <button type="button" onClick={() => { openAI("chatgpt"); setMenuOpen(false); }} className="rounded-full bg-black px-4 py-2.5 font-mono text-[10px] font-semibold text-white">Talk to ChatGPT about me</button>
+                        <button type="button" onClick={() => { openAI("claude"); setMenuOpen(false); }} className="rounded-full bg-black px-4 py-2.5 font-mono text-[10px] font-semibold text-white">Talk to Claude about me</button>
                     </div>
                     <a href="mailto:singhjyatin@gmail.com" onClick={() => setMenuOpen(false)} className={`mt-5 font-mono text-xs uppercase tracking-[0.25em] text-foreground/55 transition-all duration-500 ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}>LET&apos;S CONNECT</a>
                 </div>
