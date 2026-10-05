@@ -15,7 +15,7 @@
     "id": "resume-summary",
     "type": "resume",
     "title": "Resume summary",
-    "content": "Jyatin Kumar Singh is a Computer Science undergraduate at Lovely Professional University, graduating in 2028. His portfolio demonstrates full-stack work with Next.js, React, Node.js, Express.js, MongoDB and TypeScript; AI/RAG work through AskPDF and VOXSHIELD; research work through JalDrishti 2030; mobile development through FixMyWay; and C++ systems fundamentals through MyString. His public portfolio also documents 200+ LeetCode problems, a 100-day LeetCode streak, 5 merged open-source pull requests, 120+ GitHub contributions, a submitted research paper, and hackathon/event participation."
+    "content": "Jyatin Kumar Singh is a Computer Science undergraduate at Lovely Professional University, graduating in 2028. His portfolio demonstrates full-stack work with Next.js, React, Node.js, Express.js, MongoDB and TypeScript; AI/RAG work through AskPDF and VOXSHIELD; research work through JalDrishti 2030; mobile development through FixMyWay; and C++ systems fundamentals through MyString. His public portfolio also documents 200+ LeetCode problems, a 100-day LeetCode streak, 8+ merged open-source pull requests, 500+ GitHub contributions, a submitted research paper, and hackathon/event participation."
   },
   {
     "id": "experience-kaho",
@@ -87,7 +87,8 @@
     "id": "project-portfolio",
     "type": "project",
     "title": "Portfolio v3",
-    "content": "Portfolio v3 is Jyatin's personal developer portfolio, built with Next.js, TypeScript, Tailwind CSS, Framer Motion and GSAP. It presents projects, skills, problem-solving work and open-source contributions through an immersive editorial interface."
+    "type": "project",
+    "content": "Portfolio v3 is Jyatin's personal developer portfolio, built with Next.js, TypeScript, Tailwind CSS, Framer Motion and GSAP. It presents projects, skills, problem-solving work and open-source contributions through an immersive editorial interface and includes a grounded RAG assistant with semantic retrieval plus a local lexical fallback."
   },
   {
     "id": "certifications",
@@ -99,12 +100,12 @@
     "id": "proof-of-work",
     "type": "achievements",
     "title": "Proof of work",
-    "content": "The portfolio documents 200+ LeetCode problems, a 100-day LeetCode practice streak, 5 merged open-source pull requests, 120+ GitHub contributions, an authored and submitted research paper on an IoT-AI digital twin for predictive water-stress and intervention planning in Bengaluru, 6th place at DevStorm 2026, and a Badge of Appreciation for participation in Clash of Minds."
+    "content": "The portfolio documents 200+ LeetCode problems, a 100-day LeetCode practice streak, 8+ merged open-source pull requests, 500+ GitHub contributions, ongoing work across OpenStory, OpenDesign and Shep AI, an authored and submitted research paper on an IoT-AI digital twin for predictive water-stress and intervention planning in Bengaluru, 6th place at DevStorm 2026, and a Badge of Appreciation for participation in Clash of Minds."
   },
   {
     "id": "rag-portfolio-feature",
     "type": "technical",
     "title": "Portfolio RAG assistant architecture",
-    "content": "The portfolio assistant uses a small fixed corpus of semantically structured chunks. Each chunk represents a meaningful unit such as a project, experience entry, skill category, certification group or background section. The ingestion script embeds these chunks once. At query time the API embeds the question, computes cosine similarity against the local bundled vector index, keeps the top 5 candidates and only passes candidates above a 0.70 similarity threshold to the generation model. No visitor chat logs are persisted."
+    "content": "The portfolio assistant uses a small fixed corpus of semantically structured chunks. Each chunk represents a meaningful unit such as a project, experience entry, skill category, certification group or background section. When an OpenAI embedding index is available, the API embeds the question, computes cosine similarity against the local vector index, keeps the top 5 candidates and only passes candidates above a 0.70 similarity threshold to the generation model. If the vector index or embedding provider is unavailable, the API falls back to dependency-free lexical retrieval over the committed chunks.json corpus. No visitor chat logs are persisted."
   }
 ]
