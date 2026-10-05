@@ -121,6 +121,86 @@ async function* streamOpenAI(request: LLMRequest): AsyncGenerator<string, void, 
     }
 }
 
+async function* streamGemini(request: LLMRequest): AsyncGenerator<string, void, void> {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) throw new Error("GEMINI_API_KEY is not configured.");
+
+    const model = process.env.GEMINI_MODEL || "gemini-2.5-flash-lite";
+    const contents = [
+        ...request.history.slice(-6),
+        { role: "user" as const, parts: [{ text: request.userMessage.slice(0, 1200) }] },
+    ].map((message) => ({
+        role: message.role === "assistant" ? "model" : "user",
+        parts: [{ text: message.content.slice(0, 1200) }],
+    }));
+
+    const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:streamGenerateContent?alt=sse&key=${encodeURIComponent(apiKey)}`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                systemInstruction: {
+                    parts: [{ text: buildPrompt(request.context) }],
+                },
+                contents,
+                generationConfig: {
+                    maxOutputTokens: 500,
+                    temperature: 0.2,
+                },
+            }),
+            cache: "no-store",
+        }
+    );
+
+    if (!response.ok || !response.body) {
+        const detail = await response.text();
+        throw new Error(`Gemini request failed (${response.status}): ${detail.slice(0, 500)}`);
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+
+    try {
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const events = buffer.split("\n\n");
+            buffer = events.pop() ?? "";
+
+            for (const event of events) {
+                const dataLine = event
+                    .split("\n")
+                    .find((line) => line.startsWith("data:"));
+                if (!dataLine) continue;
+
+                const payload = dataLine.slice(dataLine.indexOf(":") + 1).trim();
+                if (!payload) continue;
+
+                const data = JSON.parse(payload) as {
+                    candidates?: Array<{
+                        content?: {
+                            parts?: Array<{ text?: string }>;
+                        };
+                    }>;
+                };
+
+                const text = data.candidates?.[0]?.content?.parts
+                    ?.map((part) => part.text ?? "")
+                    .join("");
+                if (text) yield text;
+            }
+        }
+    } finally {
+        reader.releaseLock();
+    }
+}
+
 async function* streamAnthropic(request: LLMRequest): AsyncGenerator<string, void, void> {
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) throw new Error("ANTHROPIC_API_KEY is not configured.");
@@ -191,7 +271,7 @@ async function* streamAnthropic(request: LLMRequest): AsyncGenerator<string, voi
 }
 
 export function getLLMProvider(): LLMProvider {
-    const provider = process.env.LLM_PROVIDER || "openai";
+    const provider = process.env.LLM_PROVIDER || "gemini";
 
     if (provider === "openai") {
         return { stream: streamOpenAI };
@@ -199,6 +279,10 @@ export function getLLMProvider(): LLMProvider {
 
     if (provider === "anthropic") {
         return { stream: streamAnthropic };
+    }
+
+    if (provider === "gemini") {
+        return { stream: streamGemini };
     }
 
     throw new Error(`Unsupported LLM_PROVIDER: ${provider}`);
