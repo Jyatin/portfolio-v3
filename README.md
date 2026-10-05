@@ -1,165 +1,130 @@
 # Jyatin Kumar Singh — Portfolio v3
 
-<div align="center">
+**Full-Stack Developer · AI/RAG · DSA · Open Source**
 
-### Full-Stack Developer · DSA · AI/RAG · Open Source
+A personal engineering portfolio built with Next.js, React, TypeScript, Tailwind CSS, and motion/3D tooling. It includes a portfolio RAG assistant, project case studies, open-source work, and interactive UI.
 
-**Next.js · React · TypeScript · Tailwind CSS · Motion · Three.js · GSAP**
-
-A dark, editorial developer portfolio built to showcase projects, technical work, open source, and engineering skills.
-
-[Live Portfolio](https://portfolio-v3-coral-five.vercel.app/) · [GitHub](https://github.com/Jyatin) · [LinkedIn](https://www.linkedin.com/in/jyatinsingh/) · [LeetCode](https://leetcode.com/u/Jyatin_singh/)
-
-</div>
+**[Live Portfolio](https://portfolio-v3-coral-five.vercel.app/) · [GitHub](https://github.com/Jyatin) · [LinkedIn](https://www.linkedin.com/in/jyatinsingh/) · [LeetCode](https://leetcode.com/u/Jyatin_singh/)**
 
 ---
 
-## ✦ Tech Stack
+## Stack
 
-### Frontend
-`Next.js 16` `React 19` `TypeScript` `Tailwind CSS v4` `HTML5` `CSS`
+**Frontend** — Next.js 16, React 19, TypeScript, Tailwind CSS v4
 
-### UI / Motion
-`Radix UI` `Lucide React` `Framer Motion` `Motion` `GSAP` `Anime.js` `Lenis`
+**UI / Motion** — Framer Motion, Motion, GSAP, Anime.js, Lenis, Radix UI, Lucide
 
-### 3D / Visuals
-`Three.js` `React Three Fiber` `Drei` `Postprocessing`
+**3D** — Three.js, React Three Fiber, Drei, Postprocessing
 
-### Platform
-`Supabase` `Vercel Analytics` `Vercel Speed Insights`
+**Backend / Data** — Node.js, Express, MongoDB, SQL, Supabase, Redis
 
-### Engineering
-`ESLint` `Git` `GitHub` `Vercel` `RAG` `Embeddings`
+**AI** — RAG, embeddings, vector retrieval, LLM APIs, streaming
+
+**Tooling** — Git, GitHub, ESLint, Vercel, Docker
 
 ---
 
-## ✦ UI / UX
+## What is here
 
-The design follows a **dark editorial, developer-focused aesthetic** instead of a generic portfolio template.
-
-- High-contrast monochrome visual system
-- Typography-driven layouts and structured grids
-- Numbered sections and technical metadata
-- Responsive desktop/mobile design
-- Smooth scrolling and controlled motion
-- GSAP / Motion micro-interactions
-- Three.js visual layers where useful
-- Minimal, performance-conscious interface
+- Personal portfolio and engineering profile
+- Interactive RAG assistant grounded in portfolio content
+- Project showcases for AskPDF, KiranaWala, JalDrishti 2030, VOXSHIELD, and FixMyWay
+- Open-source contribution section
+- DSA and competitive-programming profile
+- Responsive UI with motion and selected WebGL/3D elements
 
 ---
 
-## ✦ Architecture
+## RAG Assistant
+
+The portfolio assistant retrieves relevant content from the site's structured knowledge base before generating an answer.
 
 ```text
-┌──────────────┐
-│    Visitor   │
-└──────┬───────┘
-       ↓
-┌──────────────────────┐
-│ Next.js App Router   │
-└──────┬───────────────┘
-       ↓
-┌──────────────────────┐
-│ Pages + Components   │
-└──────┬───────────────┘
-       ↓
-┌──────────────────────┐
-│ Tailwind · Motion    │
-│ GSAP · Three.js      │
-└──────┬───────────────┘
-       ↓
-┌──────────────────────┐
-│ APIs · Supabase · AI │
-│ RAG / Embeddings     │
-└──────┬───────────────┘
-       ↓
-┌──────────────────────┐
-│       Vercel         │
-└──────────────────────┘
-```
-
-### RAG Assistant Flow
-
-```text
-User Question
-      ↓
-Query Embedding
-      ↓
+Question
+   ↓
+Embedding
+   ↓
 Vector Retrieval
-      ↓
-Top-K Relevant Chunks
-      ↓
-Similarity Threshold
-      ↓
-Grounded Context
-      ↓
-LLM Generation
-      ↓
-Streamed Answer
+   ↓
+Relevant Content
+   ↓
+Context
+   ↓
+LLM
+   ↓
+Streamed Response
 ```
 
-The RAG corpus is organized into semantic units such as projects, experience, skills, and background rather than one large document.
+The content is split into semantic records such as projects, experience, skills, and background rather than treated as one large document.
 
 ---
 
-## ✦ Featured Projects
+## Projects
 
 ### AskPDF
-Conversational document intelligence using **RAG, embeddings, vector search, Gemini, and streaming**.
+Conversational document application using RAG, embeddings, vector search, Gemini, and streaming.
 
-[Live Demo](https://ask-pdf-vert.vercel.app/) · [Repository](https://github.com/Jyatin/AskPDF)
+**[Live Demo](https://ask-pdf-vert.vercel.app/) · [Repository](https://github.com/Jyatin/AskPDF)**
 
 ### KiranaWala
-**MERN-based hyperlocal grocery platform** with product discovery, inventory, authentication, and AI-assisted demand prediction.
+MERN-based hyperlocal grocery platform with product discovery, inventory, authentication, payments, and AI-assisted demand prediction.
 
-[Repository](https://github.com/Jyatin/KiranaWala)
+**[Repository](https://github.com/Jyatin/KiranaWala)**
 
 ### JalDrishti 2030
-**IoT–AI digital twin** for predictive water-stress and intervention planning in Bengaluru.
+IoT–AI digital-twin framework for predictive water-stress assessment and intervention planning in Bengaluru.
 
 ### VOXSHIELD
-Voice authenticity / deepfake detection application using a modern web frontend and ML-based audio analysis.
+Voice-authenticity and deepfake-detection project combining a modern web interface with ML-based audio analysis.
 
 ### FixMyWay
-Civic issue reporting application built with **React Native, Expo, and Firebase**.
+Civic issue reporting application built with React Native, Expo, and Firebase.
 
 ---
 
-## ✦ Engineering Focus
+## Open Source
 
-- **Frontend:** Next.js, React, TypeScript, Tailwind, animation, 3D/WebGL
-- **Backend:** Node.js, Express, REST APIs, MongoDB, SQL, Redis, Supabase
-- **AI:** RAG, embeddings, vector search, LLM integrations, streaming
-- **Languages:** C++, Java, Python, JavaScript, TypeScript
-- **Tools:** Git, GitHub, Docker, VS Code, Vercel
+**500+ GitHub contributions · 8+ merged PRs**
 
----
+Contributing to real-world open-source codebases, including:
 
-## ✦ Open Source & DSA
+- **OpenStory** — merged contributions to Storybook/MSW and workflow/product improvements
+- **Shep AI** — merged dashboard and frontend engineering work
+- **OpenDesign** — active contribution
+- **OpenFeature JS SDK** — TypeScript/React SDK and test improvements
+- **Speech Dispatcher** — Linux/TTS integration
+- Other community and developer-tool projects
 
-- 200+ LeetCode problems
-- 100-day LeetCode streak
-- 150+ problems across GFG and Codeforces
-- Contributions and merged PRs across open-source projects including OpenStory and OpenFeature JS SDK
+The portfolio keeps the detailed PR history separate from this README so the repository description stays focused on the engineering work rather than becoming a contribution log.
 
-[GitHub →](https://github.com/Jyatin) · [LeetCode →](https://leetcode.com/u/Jyatin_singh/)
+**[GitHub](https://github.com/Jyatin)**
 
 ---
 
-## ✦ Project Structure
+## DSA
+
+- **200+** LeetCode problems
+- **100-day** LeetCode streak
+- **150+** problems across GFG and Codeforces
+
+**[LeetCode](https://leetcode.com/u/Jyatin_singh/)**
+
+---
+
+## Structure
 
 ```text
 portfolio-v3/
-├── app/          # App Router, pages, components, APIs
-├── content/      # Portfolio + RAG content
-├── public/       # Images and static assets
-├── scripts/      # Build-time utilities
+├── app/          # App Router, UI, pages and API routes
+├── content/      # Portfolio and RAG source content
+├── public/       # Static assets
+├── scripts/      # Build / ingestion utilities
 └── next.config.ts
 ```
 
 ---
 
-## ✦ Run Locally
+## Run locally
 
 ```bash
 git clone https://github.com/Jyatin/portfolio-v3.git
@@ -170,7 +135,7 @@ npm run dev
 
 Open `http://localhost:3000`.
 
-For the RAG assistant:
+If you are using the portfolio RAG assistant locally, run the ingestion command after configuring the required environment variables:
 
 ```bash
 npm run rag:ingest
@@ -178,7 +143,9 @@ npm run rag:ingest
 
 ---
 
-## ✦ Environment Variables
+## Environment
+
+Create a `.env.local` file with the variables required by the services enabled in your local setup. Do not commit real API keys or credentials.
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=
@@ -190,12 +157,6 @@ UPSTASH_REDIS_REST_TOKEN=
 RATE_LIMIT_SALT=
 ```
 
-Never commit real secrets to GitHub.
-
 ---
 
-<div align="center">
-
-### Build · Learn · Ship · Repeat
-
-</div>
+**Build · Learn · Ship · Repeat**
