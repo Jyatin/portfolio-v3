@@ -125,7 +125,7 @@ async function* streamGemini(request: LLMRequest): AsyncGenerator<string, void, 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) throw new Error("GEMINI_API_KEY is not configured.");
 
-    const model = process.env.GEMINI_MODEL || "gemini-2.5-flash-lite";
+    const model = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
     const contents = [
         ...request.history.slice(-6),
         { role: "user" as const, parts: [{ text: request.userMessage.slice(0, 1200) }] },
