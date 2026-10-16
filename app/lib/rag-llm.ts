@@ -127,12 +127,15 @@ async function* streamGemini(request: LLMRequest): AsyncGenerator<string, void, 
 
     const model = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
     const contents = [
-        ...request.history.slice(-6),
-        { role: "user" as const, parts: [{ text: request.userMessage.slice(0, 1200) }] },
-    ].map((message) => ({
-        role: message.role === "assistant" ? "model" : "user",
-        parts: [{ text: message.content.slice(0, 1200) }],
-    }));
+        ...request.history.slice(-6).map((message) => ({
+            role: message.role === "assistant" ? "model" : "user",
+            parts: [{ text: message.content.slice(0, 1200) }],
+        })),
+        {
+            role: "user",
+            parts: [{ text: request.userMessage.slice(0, 1200) }],
+        },
+    ];
 
     const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:streamGenerateContent?alt=sse&key=${encodeURIComponent(apiKey)}`,
