@@ -31,10 +31,19 @@ const milestones = [
         icon: GitPullRequest,
         year: "2026",
         category: "Open Source",
-        title: "5 Merged Open-Source PRs",
+        title: "8 Merged Open-Source PRs",
         description:
-            "Contributed fixes and improvements across 120+ GitHub contributions, learning from real production codebases",
+            "Contributed fixes and improvements across real production codebases, learning from maintainers and collaborating through code review.",
         iconClassName: "text-purple-300",
+    },
+    {
+        icon: Code2,
+        year: "2025",
+        category: "Hackathon Achievement",
+        title: "2nd Place — TRINETRA 20-Hour Hackathon",
+        description:
+            "Secured second position at the TRINETRA Hackathon hosted by VentureSpace, LPU, on 8–9 February 2025.",
+        iconClassName: "text-amber-300",
     },
     {
         icon: BriefcaseBusiness,
