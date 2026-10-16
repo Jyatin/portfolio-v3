@@ -40,7 +40,7 @@ const achievements = [
     {
         icon: Trophy,
         title: "B-SMART 2030 International Semifinalist",
-        description: "Selected as a semifinalist in the III International Competition of Student and Young Researcher Projects “SMART CITY 2030: Managing Sustainable Urban Development in the BRICS Countries,” presenting JalDrishti 2030, an IoT–AI digital twin for predictive water-stress and intervention planning in Bengaluru.",
+        description: "Earned semifinalist recognition in the III International Competition of Student and Young Researcher Projects “SMART CITY 2030: Managing Sustainable Urban Development in the BRICS Countries,” an international platform bringing together student innovators from countries around the world. Presented JalDrishti 2030, an IoT–AI digital twin designed to anticipate urban water stress and support data-driven intervention planning in Bengaluru.",
         year: "2026",
         category: "International Recognition",
     },
