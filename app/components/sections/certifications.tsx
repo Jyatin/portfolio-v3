@@ -9,11 +9,31 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const certifications = [
-    "Oracle Java SE 21 Developer Professional (1Z0-830)",
-    "ReactJS (Infosys Springboard)",
-    "Database Management Systems Part-1 (Infosys Springboard)",
-    "C++ with OOP (Cipher Schools)",
-    "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
+    {
+        title: "Tata Steel Prashikshan 2026 — Vocational Training Completion",
+        issuer: "Shavak Nanavati Technical Institute, Tata Steel Ltd.",
+        detail: "Software Engineering (Digital Solutions & Automation) · 01 Jun – 13 Jul 2026",
+    },
+    {
+        title: "Oracle Java SE 21 Developer Professional (1Z0-830)",
+        issuer: "Oracle",
+    },
+    {
+        title: "ReactJS",
+        issuer: "Infosys Springboard",
+    },
+    {
+        title: "Database Management Systems Part-1",
+        issuer: "Infosys Springboard",
+    },
+    {
+        title: "C++ with OOP",
+        issuer: "Cipher Schools",
+    },
+    {
+        title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
+        issuer: "Oracle",
+    },
 ];
 
 export default function Certifications() {
@@ -50,7 +70,7 @@ export default function Certifications() {
                 <div className="grid gap-px border border-border bg-border md:grid-cols-2">
                     {certifications.map((certification, index) => (
                         <article
-                            key={certification}
+                            key={certification.title}
                             className={`certification-item group flex min-h-28 items-start gap-4 bg-background p-5 transition-colors duration-300 hover:bg-muted/30 sm:p-7 ${index === certifications.length - 1 ? "md:col-span-2" : ""}`}
                         >
                             <span className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center border border-border bg-muted/20">
@@ -61,8 +81,16 @@ export default function Certifications() {
                                     {String(index + 1).padStart(2, "0")} / Credential
                                 </p>
                                 <h2 className="mt-2 text-base font-bold leading-snug tracking-tight sm:text-lg">
-                                    {certification}
+                                    {certification.title}
                                 </h2>
+                                <p className="mt-2 text-sm text-foreground/55">
+                                    {certification.issuer}
+                                </p>
+                                {certification.detail && (
+                                    <p className="mt-1 text-xs leading-relaxed text-foreground/40">
+                                        {certification.detail}
+                                    </p>
+                                )}
                             </div>
                             <ExternalLink className="mt-1 h-4 w-4 shrink-0 text-foreground/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
                         </article>
