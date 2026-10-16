@@ -45,6 +45,16 @@ const contributions = [
     pr: "#891",
   },
   {
+    date: "16 OCT 2026",
+    project: "OpenStory",
+    status: "Merged",
+    title: "Sequence location links",
+    description: "Added sequence-location to library support with authorization checks, React Query cache invalidation, and test coverage.",
+    tech: ["TypeScript", "React", "React Query", "Testing"],
+    href: "https://github.com/openstory-so/openstory/pull/2019",
+    pr: "#2019",
+  },
+  {
     date: "25 AUG 2026",
     project: "OpenStory",
     status: "Merged",
