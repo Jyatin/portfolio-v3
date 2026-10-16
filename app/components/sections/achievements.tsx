@@ -3,74 +3,51 @@
 import { useGSAP } from "@/app/hooks/useGSAP";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BookOpen, Code2, GitPullRequest, Trophy, Zap, MessageCircle } from "lucide-react";
+import { BookOpen, BriefcaseBusiness, GitPullRequest, MessageCircle, Trophy } from "lucide-react";
 import { useRef } from "react";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
-const achievements = [
+const proofItems = [
     {
-        icon: Code2,
-        title: "200+ LeetCode Problems",
-        description: "Consistent DSA practice focused on problem solving, with Java as a primary language for interview preparation.",
-        year: "2026",
-        category: "Problem Solving",
+        icon: BriefcaseBusiness,
+        title: "Software Development Engineer Intern — KaHo Technologies",
+        description:
+            "Currently building and shipping customer-facing features for the Parent App using Next.js, React, JavaScript, and TypeScript. Work includes parent verification flows, structured error handling, and image-loading improvements.",
+        year: "2026 · Present",
+        category: "Internship",
     },
     {
-        icon: Zap,
-        title: "100-Day Streak",
-        description: "Maintained a 100-day LeetCode practice streak while building consistency in algorithms and data structures.",
+        icon: BriefcaseBusiness,
+        title: "Software Engineering Trainee — Tata Steel",
+        description:
+            "Completed the Prashikshan 2026 programme at Shavak Nanavati Technical Institute, Jamshedpur, contributing to the development and deployment of a full-stack preventive maintenance management system focused on digital solutions and automation.",
         year: "2026",
-        category: "Consistency",
+        category: "Industry Experience",
     },
     {
         icon: GitPullRequest,
-        title: "5 Merged Open-Source PRs",
-        description: "Contributed fixes and improvements to open-source projects while learning from real production codebases.",
+        title: "Open-Source Contributions",
+        description:
+            "Contribute to real-world codebases including InfiScal, OpenStory, OpenDesign, and other open-source projects. Work spans code improvements, bug fixes, feature development, tests, and collaboration through pull requests and code review.",
         year: "2026",
-        category: "Open Source",
+        category: "Engineering in Public",
     },
     {
         icon: Trophy,
-        title: "120+ GitHub Contributions",
-        description: "Built and maintained projects across full-stack development, AI/RAG exploration, and developer tooling.",
-        year: "2026",
-        category: "Building",
-    },
-    {
-        icon: Trophy,
-        title: "B-SMART 2030 International Semifinalist",
-        description: "Earned semifinalist recognition in the III International Competition of Student and Young Researcher Projects “SMART CITY 2030: Managing Sustainable Urban Development in the BRICS Countries,” an international platform bringing together student innovators from countries around the world. Presented JalDrishti 2030, an IoT–AI digital twin designed to anticipate urban water stress and support data-driven intervention planning in Bengaluru.",
-        year: "2026",
-        category: "International Recognition",
+        title: "Hackathons, Debate & Communication",
+        description:
+            "Earned 2nd place at the TRINETRA 20-hour hackathon and 6th place at DevStorm 2026. Also participated in Clash of Minds group discussion and extempore speaking, receiving a Badge of Appreciation.",
+        year: "2025–2026",
+        category: "Competitions",
     },
     {
         icon: BookOpen,
-        title: "2nd Place — TRINETRA 20-Hour Hackathon",
-        description: "Secured second position at the TRINETRA Hackathon hosted by VentureSpace, LPU, on 8–9 February 2025.",
-        year: "2025",
-        category: "Hackathon Achievement",
-    },
-    {
-        icon: BookOpen,
-        title: "Authored & Submitted Research Paper",
-        description: "Authored and submitted a research paper on an IoT–AI digital twin for predictive water-stress and intervention planning in Bengaluru.",
+        title: "Research & B-SMART 2030 International Semifinalist",
+        description:
+            "Writing research on JalDrishti 2030, an IoT–AI digital twin for predictive water-stress and intervention planning in Bengaluru. Reached the semifinal stage of the international SMART CITY 2030 student and young researcher competition, featuring participants from countries around the world.",
         year: "2026",
-        category: "Research & AI",
-    },
-    {
-        icon: Trophy,
-        title: "DevStorm 2026 — 6th Place",
-        description: "Secured 6th place in DevStorm 2026, a 36-hour hackathon organized by SPIRIT under the Division of Youth Affairs and Student Welfare Wing, LPU.",
-        year: "2026",
-        category: "Hackathon · 28 Aug",
-    },
-    {
-        icon: MessageCircle,
-        title: "Clash of Minds — Badge of Appreciation",
-        description: "Successfully participated in the competitive Group Discussion and Extempore Speaking event organized by CPE and Mittal School of Business at LPU.",
-        year: "2026",
-        category: "Communication · 20 Aug",
+        category: "Research & International Recognition",
     },
 ];
 
@@ -85,7 +62,7 @@ export default function Achievements() {
                 opacity: 0,
                 scrollTrigger: { trigger: sectionRef.current, start: "top 80%", end: "top 55%", scrub: 1 },
             });
-            achievements.forEach((_, i) => {
+            proofItems.forEach((_, i) => {
                 gsap.from(`.achievement-card-${i}`, {
                     scrollTrigger: { trigger: `.achievement-card-${i}`, start: "top 85%", end: "top 55%", scrub: 1 },
                     x: 60,
@@ -108,24 +85,24 @@ export default function Achievements() {
         <section ref={sectionRef} id="achievements" className="achievements-section relative overflow-hidden bg-background py-16 sm:py-20 lg:py-28">
             <div className="mx-auto max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24">
                 <div className="achievements-header mb-10 md:mb-14">
-                    <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">07 / Progress</span>
-                    <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter sm:text-5xl lg:text-7xl">Achievements &amp; Recognition</h2>
+                    <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">07 / Proof of Work</span>
+                    <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter sm:text-5xl lg:text-7xl">Proof of Work</h2>
                     <p className="mt-5 max-w-2xl text-sm leading-relaxed text-foreground/50 sm:text-base">
-                        International recognition, competition results, research milestones, and achievements from my development journey.
+                        A record of industry experience, open-source engineering, competition results, and research in progress.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-                    {achievements.map((achievement, index) => {
-                        const Icon = achievement.icon;
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                    {proofItems.map((item, index) => {
+                        const Icon = item.icon;
                         return (
-                            <article key={achievement.title} className={`achievement-card achievement-card-${index} group border border-border bg-muted/20 p-5 transition-colors duration-300 hover:bg-muted/50 md:p-6`}>
+                            <article key={item.title} className={`achievement-card achievement-card-${index} group border border-border bg-muted/20 p-5 transition-colors duration-300 hover:bg-muted/50 md:p-6`}>
                                 <div className="mb-6 flex items-center gap-3 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/40">
-                                    <span>{achievement.year}</span><div className="h-px flex-1 bg-border" /><span>{achievement.category}</span>
+                                    <span>{item.year}</span><div className="h-px flex-1 bg-border" /><span>{item.category}</span>
                                 </div>
                                 <Icon className="mb-6 h-7 w-7 text-foreground/60" />
-                                <h3 className="mb-3 text-xl font-black uppercase leading-tight tracking-tight">{achievement.title}</h3>
-                                <p className="text-sm leading-relaxed text-foreground/55">{achievement.description}</p>
+                                <h3 className="mb-3 text-xl font-black uppercase leading-tight tracking-tight">{item.title}</h3>
+                                <p className="text-sm leading-relaxed text-foreground/55">{item.description}</p>
                             </article>
                         );
                     })}
