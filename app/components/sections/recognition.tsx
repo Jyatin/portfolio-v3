@@ -37,15 +37,6 @@ const milestones = [
         iconClassName: "text-purple-300",
     },
     {
-        icon: Code2,
-        year: "2025",
-        category: "Hackathon Achievement",
-        title: "2nd Place — TRINETRA 20-Hour Hackathon",
-        description:
-            "Secured second position at the TRINETRA Hackathon hosted by VentureSpace, LPU, on 8–9 February 2025.",
-        iconClassName: "text-amber-300",
-    },
-    {
         icon: BriefcaseBusiness,
         year: "2026",
         category: "Software Engineering",

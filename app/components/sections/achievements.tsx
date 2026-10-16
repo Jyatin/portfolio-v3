@@ -46,6 +46,13 @@ const achievements = [
     },
     {
         icon: BookOpen,
+        title: "2nd Place — TRINETRA 20-Hour Hackathon",
+        description: "Secured second position at the TRINETRA Hackathon hosted by VentureSpace, LPU, on 8–9 February 2025.",
+        year: "2025",
+        category: "Hackathon Achievement",
+    },
+    {
+        icon: BookOpen,
         title: "Authored & Submitted Research Paper",
         description: "Authored and submitted a research paper on an IoT–AI digital twin for predictive water-stress and intervention planning in Bengaluru.",
         year: "2026",
@@ -102,9 +109,9 @@ export default function Achievements() {
             <div className="mx-auto max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24">
                 <div className="achievements-header mb-10 md:mb-14">
                     <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">07 / Progress</span>
-                    <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter sm:text-5xl lg:text-7xl">Proof of Work</h2>
+                    <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter sm:text-5xl lg:text-7xl">Achievements &amp; Recognition</h2>
                     <p className="mt-5 max-w-2xl text-sm leading-relaxed text-foreground/50 sm:text-base">
-                        A snapshot of the habits, research, hackathons, communication, and work that shape my development journey.
+                        International recognition, competition results, research milestones, and achievements from my development journey.
                     </p>
                 </div>
 
