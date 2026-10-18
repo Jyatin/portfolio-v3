@@ -19,9 +19,9 @@ const proofItems = [
     },
     {
         icon: BriefcaseBusiness,
-        title: "Software Engineering Trainee — Tata Steel",
+        title: "Software Engineering Intern — Tata Steel",
         description:
-            "Completed the Prashikshan 2026 programme at Shavak Nanavati Technical Institute, Jamshedpur, contributing to the development and deployment of a full-stack preventive maintenance management system focused on digital solutions and automation.",
+            "Developed and deployed SteelCare PMMS, a full-stack Preventive Maintenance Management System for terminal shopfloor computer health monitoring, using React.js and Spring Boot 3. Implemented asynchronous email notifications, JWT authentication, role-based access control, cloud deployment, and Excel-compatible CSV exports.",
         year: "2026",
         category: "Industry Experience",
     },
