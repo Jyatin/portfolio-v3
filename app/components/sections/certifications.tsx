@@ -10,11 +10,6 @@ if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const certifications = [
     {
-        title: "Tata Steel Prashikshan 2026 — Vocational Training Completion",
-        issuer: "Shavak Nanavati Technical Institute, Tata Steel Ltd.",
-        detail: "Software Engineering (Digital Solutions & Automation) · 01 Jun – 13 Jul 2026",
-    },
-    {
         title: "Oracle Java SE 21 Developer Professional (1Z0-830)",
         issuer: "Oracle",
     },
