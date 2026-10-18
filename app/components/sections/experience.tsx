@@ -22,19 +22,20 @@ const experiences = [
         iconClassName: "text-cyan-300",
     },
     {
-        title: "Software Engineering Trainee",
-        company: "Tata Steel Ltd. — Prashikshan 2026",
-        location: "Shavak Nanavati Technical Institute, Jamshedpur, India",
-        period: "01 Jun 2026 – 13 Jul 2026",
-        category: "Vocational Training",
+        title: "Software Engineering Intern",
+        company: "Tata Steel",
+        location: "Jamshedpur, India",
+        period: "Jun 2026 – Jul 2026",
+        category: "Software Engineering Internship",
         description:
-            "Completed a vocational training programme in Software Engineering (Digital Solutions & Automation), developing and deploying a full-stack preventive maintenance management system.",
+            "Developed and deployed SteelCare PMMS, a full-stack Preventive Maintenance Management System for health monitoring of terminal shopfloor computers.",
         highlights: [
-            "Worked on the development and deployment of a full-stack preventive maintenance management system.",
-            "Completed the Tata Steel Prashikshan 2026 vocational training programme through Shavak Nanavati Technical Institute.",
-            "Focused on software engineering, digital solutions, and automation in an industrial learning environment.",
+            "Built and deployed SteelCare PMMS using React.js and Spring Boot 3, delivering a full-stack preventive maintenance workflow for terminal shopfloor computers.",
+            "Engineered an asynchronous HTML email notification service using Spring @Async threads and SMTP over Port 465 SSL, reducing API response latency by 99% from a 60-second timeout to under 50 ms.",
+            "Implemented stateless JWT authentication and role-based access control (RBAC), adding backend validation to prevent unauthorized privilege escalation.",
+            "Deployed the React frontend on Netlify and Spring Boot API on Render, integrated a cloud-hosted Aiven MySQL database, and built an Excel-compliant CSV export using UTF-8 BOM serialization.",
         ],
-        tech: ["Software Engineering", "Full-Stack Development", "Digital Solutions", "Automation"],
+        tech: ["React.js", "Vite", "Tailwind CSS", "Spring Boot 3", "Spring Security", "JWT", "Hibernate JPA", "Java 17", "MySQL"],
         year: "2026",
         iconClassName: "text-amber-300",
     },
@@ -75,7 +76,7 @@ export default function Experience() {
                                 </span>
                             </div>
 
-                            <div className="mt-7 grid gap-5 border-t border-border pt-7 md:grid-cols-3">
+                            <div className="mt-7 grid gap-5 border-t border-border pt-7 md:grid-cols-2 xl:grid-cols-4">
                                 {experience.highlights.map((highlight, index) => (
                                     <div key={highlight} className="border-l border-border pl-4">
                                         <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/30">
