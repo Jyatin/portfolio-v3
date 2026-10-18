@@ -31,9 +31,9 @@ const experiences = [
             "Developed and deployed SteelCare PMMS, a full-stack Preventive Maintenance Management System for health monitoring of terminal shopfloor computers.",
         highlights: [
             "Built and deployed SteelCare PMMS using React.js and Spring Boot 3, delivering a full-stack preventive maintenance workflow for terminal shopfloor computers.",
-            "Engineered an asynchronous HTML email notification service using Spring @Async threads and SMTP over Port 465 SSL, reducing API response latency by 99% from a 60-second timeout to under 50 ms.",
+            "Engineered an asynchronous HTML email notification engine using Spring @Async threads and SMTP over Port 465 SSL, reducing API response latency by 99%—from a 60-second timeout to under 50 ms.",
             "Implemented stateless JWT authentication and role-based access control (RBAC), adding backend validation to prevent unauthorized privilege escalation.",
-            "Deployed the React frontend on Netlify and Spring Boot API on Render, integrated a cloud-hosted Aiven MySQL database, and built an Excel-compliant CSV export using UTF-8 BOM serialization.",
+            "Deployed the React frontend on Netlify and Spring Boot API on Render, integrated a cloud-hosted Aiven MySQL database, and built an Excel-compliant CSV export using UTF-8 BOM serialization to prevent metadata formatting conflicts.",
         ],
         tech: ["React.js", "Vite", "Tailwind CSS", "Spring Boot 3", "Spring Security", "JWT", "Hibernate JPA", "Java 17", "MySQL"],
         year: "2026",
