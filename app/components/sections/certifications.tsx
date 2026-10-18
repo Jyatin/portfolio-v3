@@ -10,6 +10,11 @@ if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const certifications = [
     {
+        title: "Software Engineering Intern — Internship Certificate",
+        issuer: "Tata Steel Ltd. · Shavak Nanavati Technical Institute, Jamshedpur",
+        detail: "SteelCare PMMS · Full-stack development, backend security, asynchronous notifications, and deployment · Jun–Jul 2026",
+    },
+    {
         title: "Oracle Java SE 21 Developer Professional (1Z0-830)",
         issuer: "Oracle",
     },
