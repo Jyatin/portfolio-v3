@@ -22,7 +22,7 @@ const certifications = [
     {
         title: "ReactJS",
         issuer: "Infosys Springboard",
-        href: "https://drive.google.com/drive/u/0/home",
+        href: "https://drive.google.com/file/d/1y5mzR8kVSMSUXAd2bzmO4c73DsayqEWf/view?usp=sharing",
     },
     {
         title: "Database Management Systems Part-1",
