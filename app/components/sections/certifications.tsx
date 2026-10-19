@@ -27,6 +27,7 @@ const certifications = [
     {
         title: "Database Management Systems Part-1",
         issuer: "Infosys Springboard",
+        href: "https://drive.google.com/file/d/1Q56_oPv5SutdwEg0Ud9rKsw8Apw4hHRb/view?usp=sharing",
     },
     {
         title: "C++ with OOP",
