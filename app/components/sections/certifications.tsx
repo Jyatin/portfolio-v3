@@ -22,6 +22,7 @@ const certifications = [
     {
         title: "ReactJS",
         issuer: "Infosys Springboard",
+        href: "https://drive.google.com/drive/u/0/home",
     },
     {
         title: "Database Management Systems Part-1",
@@ -75,7 +76,7 @@ export default function Certifications() {
                             href={certification.href}
                             target={certification.href ? "_blank" : undefined}
                             rel={certification.href ? "noopener noreferrer" : undefined}
-                            aria-label={certification.href ? `Open certificate folder for ${certification.title}` : undefined}
+                            aria-label={certification.href ? `Open certificate for ${certification.title}` : undefined}
                             className={`certification-item group flex min-h-28 items-start gap-4 bg-background p-5 transition-colors duration-300 hover:bg-muted/30 sm:p-7 ${index === certifications.length - 1 ? "md:col-span-2" : ""} ${certification.href ? "cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground" : ""}`}
                         >
                             <span className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center border border-border bg-muted/20">
