@@ -13,7 +13,7 @@ const certifications = [
         title: "Software Engineering Intern — Internship Certificate",
         issuer: "Tata Steel Ltd. · Shavak Nanavati Technical Institute, Jamshedpur",
         detail: "SteelCare PMMS · Full-stack development, backend security, asynchronous notifications, and deployment · Jun–Jul 2026",
-        href: "https://drive.google.com/drive/folders/12VNg2WrlGB4_YRvLliLZppzlty2RC3aS",
+        href: "https://drive.google.com/file/d/18Vm_sO2Eu5LD0yWR7w5uXSGsqwNraedO/view?usp=sharing",
     },
     {
         title: "Oracle Java SE 21 Developer Professional (1Z0-830)",
