@@ -31,7 +31,7 @@ const certifications = [
     {
         title: "C++ with OOP",
         issuer: "Cipher Schools",
-        href: "https://drive.google.com/drive/u/0/home",
+        href: "https://drive.google.com/file/d/1ySeFrsSg2-PPpAHdvzTrdXJNjEqx9I_Z/view?usp=sharing",
     },
     {
         title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
