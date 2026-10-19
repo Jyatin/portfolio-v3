@@ -36,7 +36,7 @@ const certifications = [
     {
         title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
         issuer: "Oracle",
-        href: "https://drive.google.com/drive/u/0/home",
+        href: "https://drive.google.com/file/d/1PwjX0FWZzEICPUjJhWTCdRx2tx5YO5bF/view?usp=sharing",
     },
 ];
 
