@@ -9,7 +9,7 @@ const STACK_TAGS = [
     { label: "Node.js", href: "#about" },
 ] as const;
 
-const RESUME_URL = "/resume.pdf";
+const RESUME_URL = "/jyatin_resume%20(8).pdf";
 
 export default function Hero() {
     return (
