@@ -9,7 +9,7 @@ import { Github, Linkedin, ArrowUpRight, Copy, Check, Code2, Download } from "lu
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/jyatinsingh/";
-const RESUME_URL = "/jyatin_resume%20(8).pdf";
+const RESUME_URL = "/jyatin_resume%20(11).pdf";
 
 export default function Contact() {
     const [copied, setCopied] = useState(false);
