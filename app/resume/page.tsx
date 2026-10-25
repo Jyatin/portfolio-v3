@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, Download, ExternalLink } from "lucide-react";
 
-const RESUME_URL = "/jyatin_resume%20(8).pdf";
+const RESUME_URL = "/jyatin_resume%20(11).pdf";
 
 export default function ResumePage() {
     return (
