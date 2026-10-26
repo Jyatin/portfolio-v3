@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101827"/>
+      <stop offset="1" stop-color="#03060b"/>
+    </linearGradient>
+    <linearGradient id="bezel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#151c26"/>
+      <stop offset="1" stop-color="#05080d"/>
+    </linearGradient>
+    <linearGradient id="base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#252d38"/>
+      <stop offset="0.5" stop-color="#111720"/>
+      <stop offset="1" stop-color="#070b10"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="46%" r="55%">
+      <stop offset="0" stop-color="#20314a" stop-opacity=".75"/>
+      <stop offset="1" stop-color="#03060b" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feGaussianBlur ²×evAy="22"/>
+    </filter>
+    <clipPath id="screenClip">
+      <rect x="285" y="105" width="1030" height="620" rx="12"/>
+    </clipPath>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <ellipse cx="800" cy="470" rx="650" ry="430" fill="url(#glow)"/>
+  <ellipse cx="800" cy="850" rx="560" ry="65" fill="#000" opacity=".7" filter="url(#shadow)"/>
+  <rect x="250" y="70" width="1100" height="700" rx="28" fill="url(#bezel)" stroke="#34404d" stroke-width="2"/>
+  <rect x="275" y="95" width="1050" height="650" rx="16" fill="#000"/>
+  <g transform="translate(285 105)" clip-path="url(#screenClip)">
+    <rect width="1030" height="620" fill="#fff"/>
+    <image href="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAAAQABAAD" x="0" y="0" width="1030" height="620" preserveAspectRatio="xMidYMid meet"/>
+  </g>
+  <circle cx="800" cy="84" r="4" fill="#05070a"/>
+  <rect x="292" y="112" width="1016" height="606" rx="10" fill="none" stroke="#000" stroke-opacity=".22"/>
+  <rect x="265" y="748" width="1070" height="24" rx="8" fill="#070a0f"/>
+  <path d="M170 775 Q800 754 1430 775 L1325 850 Q800 884 275 850 Z" fill="url(#base)" stroke="#3a4552" stroke-width="2"/>
+  <path d="M270 824 Q800 842 1330 824" fill="none" stroke="#0a0e14" stroke-width="3" opacity=".85"/>
+  <path d="M650 820 Q800 812 950 820 L920 842 Q800 849 680 842 Z" fill="#0a0e14" opacity=".8"/>
+  <rect x="755" y="825" width="90" height="4" rx="2" fill="#6d7783" opacity=".25"/>
+  <text x="800" y="930" text-anchor="middle" fill="#778395" font-family="Arial, Helvetica, sans-serif" font-size="16" letter-spacing="4" opacity=".55">PORTFOLIO V3</text>
+</svg>

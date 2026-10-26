@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">VOXSHIELD</title>
+  <desc id="desc">Audio deepfake detection interface concept for VOXSHIELD.</desc>
+  <rect width="1600" height="1000" fill="#090909"/>
+  <g opacity=".16" stroke="#fff" stroke-width="1">
+    <path d="M0 200H1600M0 400H1600M0 600H1600M0 800H1600"/>
+    <path d="M200 0V1000M400 0V1000M600 0V1000M800 0V1000M1000 0V1000M1200 0V1000M1400 0V1000"/>
+  </g>
+  <text x="100" y="180" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700" letter-spacing="12">AUDIO FORENSICS</text>
+  <text x="100" y="390" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="150" font-weight="900" letter-spacing="-5">VOXSHIELD</text>
+  <text x="105" y="470" fill="#999" font-family="monospace" font-size="26" letter-spacing="5">REAL-TIME VOICE DEEPFAKE DETECTION</text>
+  <g fill="none" stroke="#fff" stroke-width="5" opacity=".9">
+    <path d="M100 690 C150 690 150 570 200 570 S250 810 300 810 S350 630 400 630 S450 740 500 740 S550 540 600 540 S650 780 700 780 S750 610 800 610 S850 760 900 760 S950 570 1000 570 S1050 820 1100 820 S1150 650 1200 650 S1250 730 1300 730 S1350 590 1400 590 S1450 700 1500 700"/>
+  </g>
+  <circle cx="1450" cy="180" r="9" fill="#fff"/>
+  <text x="100" y="910" fill="#666" font-family="monospace" font-size="22" letter-spacing="4">E4 MULTI-SCALE RAW-WAVEFORM CNN · FASTAPI · NEXT.JS</text>
+</svg>

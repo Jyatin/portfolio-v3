@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="316" viewBox="0 0 600 316" role="img" aria-label="JalDrishti 2030 dashboard displayed on a laptop">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#07111f"/><stop offset="0.55" stop-color="#0b1421"/><stop offset="1" stop-color="#02060c"/></linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#394351"/><stop offset="0.45" stop-color="#151b24"/><stop offset="1" stop-color="#080c12"/></linearGradient>
+  <linearGradient id="bezel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#202936"/><stop offset="1" stop-color="#090e15"/></linearGradient>
+  <radialGradient id="glow" cx="50%" cy="42%" r="65%"><stop offset="0" stop-color="#18304a" stop-opacity=".6"/><stop offset="1" stop-color="#02060c" stop-opacity="0"/></radialGradient>
+  <clipPath id="screenClip"><rect x="126" y="45" width="348" height="205" rx="5"/></clipPath>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>
+<rect width="600" height="316" rx="8" fill="url(#bg)"/>
+<rect width="600" height="316" rx="8" fill="url(#glow)"/>
+<ellipse cx="300" cy="282" rx="225" ry="18" fill="#000" opacity=".55" filter="url(#shadow)"/>
+<rect x="116" y="35" width="368" height="224" rx="12" fill="#03070c" stroke="#35404d" stroke-width="1.2"/>
+<rect x="122" y="41" width="356" height="212" rx="7" fill="url(#bezel)"/>
+<rect x="126" y="45" width="348" height="205" rx="5" fill="#f4f3ef"/>
+<g clip-path="url(#screenClip)">
+  <image href="/images/projects/jaldrishti_laptop.svg" x="126" y="45" width="348" height="205" preserveAspectRatio="xMidYMid slice"/>
+</g>
+<circle cx="300" cy="39" r="1.8" fill="#66717e"/>
+<path d="M116 259 H484 L511 274 Q517 278 506 280 H94 Q83 278 89 274 Z" fill="url(#metal)" stroke="#3c4653" stroke-width="1"/>
+<path d="M89 274 Q84 279 96 283 H504 Q516 279 511 274 Z" fill="#070b10"/>
+<path d="M263 268 H337 L344 273 H256 Z" fill="#1c2430" opacity=".9"/>
+<path d="M273 269 H327 L331 271 H269 Z" fill="#566170" opacity=".35"/>
+<ellipse cx="300" cy="290" rx="170" ry="5" fill="#17314a" opacity=".16"/>
+</svg>

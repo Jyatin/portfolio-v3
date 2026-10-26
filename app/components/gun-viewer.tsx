@@ -32,7 +32,6 @@ function ModelLoadingFallback(): React.JSX.Element {
 function GunRig({ aimX, aimY }: GunViewerProps): React.JSX.Element {
     const yawRef = React.useRef<Group | null>(null);
     const pitchRef = React.useRef<Group | null>(null);
-    // Neutral facing direction when cursor is centered.
     const baseY = Math.PI * 1.20;
     const baseX = -0.08;
 
@@ -41,7 +40,6 @@ function GunRig({ aimX, aimY }: GunViewerProps): React.JSX.Element {
         const pitchGroup = pitchRef.current;
         if (!yawGroup || !pitchGroup) return;
 
-        // Keep both sides closer in feel, but retain slight right bias.
         const yawLeftStrength = 1.20;
         const yawRightStrength = 1.20;
         const yawOffset = aimX < 0
@@ -90,5 +88,5 @@ export default function GunViewer({ aimX, aimY }: GunViewerProps): React.JSX.Ele
     );
 }
 
-useGLTF.preload("/paintball_gun.glb");
-
+// Intentionally do not preload the 10 MB GLB. The model is an optional shoot-mode feature
+// and should only download after the user enables that interaction.

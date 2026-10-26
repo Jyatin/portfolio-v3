@@ -9,11 +9,36 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 const certifications = [
-    "Oracle Java SE 21 Developer Professional (1Z0-830)",
-    "ReactJS (Infosys Springboard)",
-    "Database Management Systems Part-1 (Infosys Springboard)",
-    "C++ with OOP (Cipher Schools)",
-    "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
+    {
+        title: "Software Engineering Intern — Internship Certificate",
+        issuer: "Tata Steel Ltd. · Shavak Nanavati Technical Institute, Jamshedpur",
+        detail: "SteelCare PMMS · Full-stack development, backend security, asynchronous notifications, and deployment · Jun–Jul 2026",
+        href: "https://drive.google.com/file/d/18Vm_sO2Eu5LD0yWR7w5uXSGsqwNraedO/view?usp=sharing",
+    },
+    {
+        title: "Oracle Java SE 21 Developer Professional (1Z0-830)",
+        issuer: "Oracle",
+    },
+    {
+        title: "ReactJS",
+        issuer: "Infosys Springboard",
+        href: "https://drive.google.com/file/d/1y5mzR8kVSMSUXAd2bzmO4c73DsayqEWf/view?usp=sharing",
+    },
+    {
+        title: "Database Management Systems Part-1",
+        issuer: "Infosys Springboard",
+        href: "https://drive.google.com/file/d/1Q56_oPv5SutdwEg0Ud9rKsw8Apw4hHRb/view?usp=sharing",
+    },
+    {
+        title: "C++ with OOP",
+        issuer: "Cipher Schools",
+        href: "https://drive.google.com/file/d/1ySeFrsSg2-PPpAHdvzTrdXJNjEqx9I_Z/view?usp=sharing",
+    },
+    {
+        title: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
+        issuer: "Oracle",
+        href: "https://drive.google.com/file/d/1PwjX0FWZzEICPUjJhWTCdRx2tx5YO5bF/view?usp=sharing",
+    },
 ];
 
 export default function Certifications() {
@@ -49,9 +74,13 @@ export default function Certifications() {
 
                 <div className="grid gap-px border border-border bg-border md:grid-cols-2">
                     {certifications.map((certification, index) => (
-                        <article
-                            key={certification}
-                            className={`certification-item group flex min-h-28 items-start gap-4 bg-background p-5 transition-colors duration-300 hover:bg-muted/30 sm:p-7 ${index === certifications.length - 1 ? "md:col-span-2" : ""}`}
+                        <a
+                            key={certification.title}
+                            href={certification.href}
+                            target={certification.href ? "_blank" : undefined}
+                            rel={certification.href ? "noopener noreferrer" : undefined}
+                            aria-label={certification.href ? `Open certificate for ${certification.title}` : undefined}
+                            className={`certification-item group flex min-h-28 items-start gap-4 bg-background p-5 transition-colors duration-300 hover:bg-muted/30 sm:p-7 ${index === certifications.length - 1 ? "md:col-span-2" : ""} ${certification.href ? "cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground" : ""}`}
                         >
                             <span className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center border border-border bg-muted/20">
                                 <Award className="h-4 w-4 text-foreground/50" aria-hidden />
@@ -61,11 +90,19 @@ export default function Certifications() {
                                     {String(index + 1).padStart(2, "0")} / Credential
                                 </p>
                                 <h2 className="mt-2 text-base font-bold leading-snug tracking-tight sm:text-lg">
-                                    {certification}
+                                    {certification.title}
                                 </h2>
+                                <p className="mt-2 text-sm text-foreground/55">
+                                    {certification.issuer}
+                                </p>
+                                {certification.detail && (
+                                    <p className="mt-1 text-xs leading-relaxed text-foreground/40">
+                                        {certification.detail}
+                                    </p>
+                                )}
                             </div>
                             <ExternalLink className="mt-1 h-4 w-4 shrink-0 text-foreground/20 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
-                        </article>
+                        </a>
                     ))}
                 </div>
             </div>

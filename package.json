@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "rag:ingest": "node scripts/ingest-rag.mjs",
+    "prebuild": "node scripts/ingest-rag.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

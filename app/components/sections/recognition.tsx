@@ -31,9 +31,9 @@ const milestones = [
         icon: GitPullRequest,
         year: "2026",
         category: "Open Source",
-        title: "5 Merged Open-Source PRs",
+        title: "8 Merged Open-Source PRs",
         description:
-            "Contributed fixes and improvements across 120+ GitHub contributions, learning from real production codebases",
+            "Contributed fixes and improvements across real production codebases, learning from maintainers and collaborating through code review.",
         iconClassName: "text-purple-300",
     },
     {

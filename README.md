@@ -1,48 +1,71 @@
-# Jyatin Kumar Singh — Developer Portfolio
+# Jyatin Kumar Singh — Portfolio
 
-A personal portfolio built with **Next.js, TypeScript, Tailwind CSS, Framer Motion, and GSAP**. The site presents my full-stack projects, DSA practice, AI/RAG exploration, and open-source work through an interaction-focused visual experience.
+**Full-stack developer · AI/RAG · Open source · DSA**
 
-## About
+My portfolio is built with Next.js, React, TypeScript, and Tailwind CSS. It brings together selected projects, open-source work, and a portfolio-grounded RAG assistant.
 
-I'm **Jyatin Kumar Singh**, a B.Tech Computer Science student at **Lovely Professional University**, graduating in 2028. I focus on full-stack development, problem solving, AI/RAG applications, and open-source contribution.
+**[Live portfolio](https://portfolio-v3-coral-five.vercel.app/) · [GitHub](https://github.com/Jyatin) · [LinkedIn](https://www.linkedin.com/in/jyatinsingh/) · [LeetCode](https://leetcode.com/u/Jyatin_singh/)**
 
-### Core stack
+## Stack
 
-- **Frontend:** JavaScript, TypeScript, React, Next.js, HTML, CSS, Tailwind CSS
-- **Backend:** Node.js, Express.js, REST APIs
-- **Database:** MongoDB, MySQL, SQL
-- **Programming:** Java, C++, DSA
-- **Tools:** Git, GitHub, Docker, VS Code
-- **AI:** Gemini, RAG, embeddings, vector search
+- **Frontend:** Next.js 16, React 19, TypeScript, Tailwind CSS v4
+- **UI and motion:** Framer Motion, GSAP, Anime.js, Lenis, Radix UI
+- **3D:** Three.js, React Three Fiber, Drei
+- **Backend and data:** Node.js, Express, MongoDB, SQL, Supabase, Redis
+- **AI:** RAG, embeddings, vector retrieval, LLM APIs, streaming
+- **Tooling:** Git, GitHub, ESLint, Vercel, Docker
 
-## Featured projects
+## Selected projects
 
-- **AskPDF** — AI-powered PDF Q&A using RAG, Gemini, embeddings, vector search, and streaming.
-- **KiranaWala** — MERN-based local grocery platform with authentication, store, product, and inventory workflows.
-- **FixMyWay** — Full-stack application built around a practical everyday problem.
-- **MyString** — Custom C++ String implementation exploring OOP, memory management, and operator overloading.
-- **CropCycle** — Crop-cycle analysis platform using multi-temporal NDVI data.
+- **[KiranaWala](https://github.com/Jyatin/KiranaWala)** — MERN hyperlocal grocery platform with inventory, payments, and AI-assisted demand prediction.
+- **[AskPDF](https://github.com/Jyatin/AskPDF)** — Conversational document Q&A using retrieval-augmented generation, embeddings, vector search, Gemini, and streaming. [Live demo](https://ask-pdf-vert.vercel.app/)
+- **JalDrishti 2030** — IoT–AI digital-twin framework for predictive water-stress assessment and intervention planning in Bengaluru.
+- **VOXSHIELD** — Voice-authenticity and deepfake-detection project with ML-based audio analysis.
+- **FixMyWay** — Civic issue reporting app built with React Native, Expo, and Firebase.
 
-## Problem solving & open source
+## Open source
 
-- **200+ LeetCode problems**
-- **100-day LeetCode streak**
-- **150+ GFG / Codeforces problems**
-- **5 merged open-source PRs**
-- **120+ GitHub contributions**
+**500+ GitHub contributions · 8+ merged PRs**
 
-## Links
+A few contributions across developer tools, frontend systems, and Linux audio:
 
-- GitHub: https://github.com/Jyatin
-- LinkedIn: https://www.linkedin.com/in/jyatin-singh-88984831b/
-- LeetCode: https://leetcode.com/u/Jyatin_singh/
-- Email: singhjyatin@gmail.com
+| Project | Work | Stack | Status |
+|---|---|---|---|
+| [OpenStory #1307](https://github.com/openstory-org/openstory/pull/1307) | MSW v2 → v3 migration | TypeScript, Storybook, MSW, Vite | Merged |
+| [Shep AI #891](https://github.com/shep-ai/shep/pull/891) | FleetControl dashboard placement and loading fixes | TypeScript, React, Next.js, Vitest, Storybook | Merged |
+| [Speech Dispatcher #1110](https://github.com/brailcom/speechd/pull/1110) | Edge TTS generic output module | C, Bash, Edge TTS, Linux audio | Merged |
+| [OpenFeature JS SDK #1451](https://github.com/open-feature/js-sdk/pull/1451) | Honor missing-flag `defaultValue`; add regression tests | TypeScript, React, Jest | Open |
+| [OpenDesign #1](https://github.com/OpenDesign-Dev/OpenDesign/pull/1) | Initial dev-container setup | Dev Containers, Docker, VS Code | Open |
+
+See [my GitHub profile](https://github.com/Jyatin) for the wider contribution history.
+
+## DSA
+
+- 200+ LeetCode problems
+- 100-day LeetCode streak
+- 150+ problems across GFG and Codeforces
+
+[LeetCode profile](https://leetcode.com/u/Jyatin_singh/)
 
 ## Run locally
 
 ```bash
+git clone https://github.com/Jyatin/portfolio-v3.git
+cd portfolio-v3
 npm install
 npm run dev
 ```
 
-Then open `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000).
+
+For the portfolio RAG assistant, configure the environment variables required by your setup, then run:
+
+```bash
+npm run rag:ingest
+```
+
+Do not commit API keys or other secrets.
+
+---
+
+**Build · Learn · Ship · Repeat**

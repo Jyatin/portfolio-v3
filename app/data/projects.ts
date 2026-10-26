@@ -139,6 +139,40 @@ const projectCoreList: readonly ProjectCore[] = [
         year: "2025",
         image: "/images/projects/fixmyway_mockup.jpg",
     },
+    {
+        slug: "cropcycle",
+        title: "Crop Analysis",
+        subtitle: "Multi-Temporal NDVI Crop Cycle Analysis",
+        role: "Full-Stack Developer",
+        highlights: [
+            "Built a web platform for extracting and analysing crop-cycle parameters from multi-temporal NDVI data.",
+            "Connected frontend workflows with backend processing and data services for agricultural analysis.",
+            "Presented crop-cycle information through a practical interface focused on interpretable results.",
+        ],
+        tech: ["React", "Node.js", "Express.js", "MongoDB", "NDVI"],
+        github: "https://github.com/Jyatin/Extraction-of-Crop-Cycle-Parameters-from-Multi-Temporal-Data",
+        live: "",
+        featured: false,
+        year: "2025",
+        image: "/images/projects/cropcycle_mockup.jpg",
+    },
+    {
+        slug: "portfolio-v3",
+        title: "Portfolio v3",
+        subtitle: "Interactive Engineering Portfolio",
+        role: "Frontend Developer",
+        highlights: [
+            "Personal developer portfolio focused on immersive interaction and motion.",
+            "Built with a modern Next.js and TypeScript stack.",
+            "Customized the visual system and content around Jyatin's development profile.",
+        ],
+        tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "GSAP"],
+        github: "https://github.com/Jyatin/portfolio-v3",
+        live: "",
+        featured: false,
+        year: "2026",
+        image: "/images/projects/portfolio_mockup.jpg",
+    },
 ];
 
 function attachDescription(core: ProjectCore): Project {
