@@ -17,11 +17,32 @@ const navItems = [
 const AI_PROMPT = "Tell me about Jyatin Kumar Singh based on his portfolio, including his projects, experience, open-source contributions, skills, research, and engineering interests. Use his portfolio as the primary context and distinguish documented facts from anything not stated. Portfolio URL: ";
 
 function openAI(provider: "chatgpt" | "claude") {
-    const prompt = encodeURIComponent(`${AI_PROMPT}${window.location.origin}/`);
-    const url = provider === "chatgpt"
-        ? `https://chatgpt.com/?q=${prompt}`
-        : `https://claude.ai/new?prompt=${prompt}`;
-    window.open(url, "_blank", "noopener,noreferrer");
+    const prompt = `${AI_PROMPT}${window.location.origin}/`;
+    if (provider === "chatgpt") {
+        window.open(`https://chatgpt.com/?q=${encodeURIComponent(prompt)}`, "_blank", "noopener,noreferrer");
+    } else {
+        // Claude.ai does not support URL query params to pre-fill prompts.
+        // Copy the prompt to clipboard, then open a new Claude conversation.
+        navigator.clipboard.writeText(prompt).then(() => {
+            window.open("https://claude.ai/new", "_blank", "noopener,noreferrer");
+            // Brief visual feedback
+            const toast = document.createElement("div");
+            toast.textContent = "Prompt copied — paste it into Claude";
+            Object.assign(toast.style, {
+                position: "fixed", bottom: "2rem", left: "50%", transform: "translateX(-50%)",
+                zIndex: "9999", padding: "0.75rem 1.5rem", borderRadius: "0.5rem",
+                background: "#18181b", color: "#fafafa", fontSize: "0.8rem",
+                fontFamily: "monospace", boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
+                opacity: "0", transition: "opacity 0.3s ease",
+            });
+            document.body.appendChild(toast);
+            requestAnimationFrame(() => { toast.style.opacity = "1"; });
+            setTimeout(() => { toast.style.opacity = "0"; setTimeout(() => toast.remove(), 400); }, 3000);
+        }).catch(() => {
+            // Fallback: open Claude anyway if clipboard fails
+            window.open("https://claude.ai/new", "_blank", "noopener,noreferrer");
+        });
+    }
 }
 
 export default function AppNavbar() {
