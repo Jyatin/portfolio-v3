@@ -40,3 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 out.zip
+
+# temporary scratch & run files
+scratch/
+runs/

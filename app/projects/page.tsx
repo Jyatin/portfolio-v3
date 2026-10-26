@@ -16,12 +16,10 @@ import {
     logProjectsScroll,
 } from "@/app/utils/projects-scroll-debug";
 
-function projectTagsLine(project: Project): string {
-    const tags = project.tech.slice(0, 3).map((t) => `[${t.toUpperCase()}]`);
-    if (tags.length === 0) {
-        return `[${project.year}]`;
-    }
-    return tags.join(" — ");
+function isValidExternalUrl(url?: string): boolean {
+    if (!url) return false;
+    const trimmed = url.trim();
+    return trimmed.startsWith("http://") || trimmed.startsWith("https://");
 }
 
 type ProjectGridCardProps = {
@@ -35,54 +33,110 @@ const ProjectGridCard = memo(function ProjectGridCard({
     index,
     onSelect,
 }: ProjectGridCardProps) {
+    const hasLive = isValidExternalUrl(project.live);
+    const hasGithub = isValidExternalUrl(project.github);
+
     return (
         <article
-            className="min-w-0 w-full contain-[layout_paint]"
-            style={{
-                contentVisibility: "auto",
-                containIntrinsicSize: "auto 480px",
-            }}
+            className="flex flex-col justify-between min-w-0 w-full overflow-hidden rounded-xl border border-border/80 bg-card/60 p-5 shadow-sm transition-all duration-300 hover:border-foreground/30 hover:shadow-md sm:p-6"
         >
-            <button
-                type="button"
-                onClick={() => onSelect(project.slug)}
-                className="group w-full cursor-pointer text-left outline-none ring-foreground/30 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-                <div className="relative isolate aspect-16/10 w-full overflow-hidden rounded-sm border border-border bg-muted">
-                    <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                        quality={75}
-                        className="object-cover object-center transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:scale-[1.02] motion-reduce:group-hover:scale-100"
-                        priority={index === 0}
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/15 via-transparent to-transparent" />
-                </div>
-                <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 sm:mt-5">
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-foreground/40 sm:text-[11px]">
-                        {project.year}
-                    </span>
-                    {project.featured ? (
-                        <span className="rounded-sm border border-border bg-muted/80 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-foreground/50 sm:text-[10px]">
-                            Featured
+            <div>
+                <button
+                    type="button"
+                    onClick={() => onSelect(project.slug)}
+                    className="group w-full cursor-pointer text-left outline-none"
+                >
+                    <div className="relative isolate aspect-1376/768 w-full overflow-hidden rounded-lg border border-border/70 bg-muted/30">
+                        <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                            quality={85}
+                            className="object-contain object-center transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:scale-[1.02] motion-reduce:group-hover:scale-100"
+                            priority={index === 0}
+                        />
+                    </div>
+                    <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
+                        <span className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                            {String(index + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
                         </span>
-                    ) : null}
+                        {project.isResearch ? (
+                            <span className="rounded-full border border-sky-400/30 bg-sky-500/10 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-sky-300">
+                                Research Paper
+                            </span>
+                        ) : project.featured ? (
+                            <span className="rounded-full border border-border bg-muted/80 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-foreground/60">
+                                Featured
+                            </span>
+                        ) : (
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                                {project.year}
+                            </span>
+                        )}
+                    </div>
+                    <h2 className="mt-2 text-xl font-black uppercase leading-tight tracking-tight text-foreground sm:text-2xl">
+                        {project.title}
+                    </h2>
+                    <p className="mt-1 font-mono text-xs uppercase leading-relaxed tracking-wider text-muted-foreground">
+                        {project.subtitle}
+                    </p>
+
+                    <ul className="mt-4 space-y-2 border-t border-border/60 pt-3">
+                        {project.highlights.map((highlight) => (
+                            <li
+                                key={highlight}
+                                className="relative pl-3.5 text-xs font-normal leading-relaxed text-foreground/75 before:absolute before:left-0 before:top-2 before:h-1 before:w-1 before:rounded-full before:bg-primary/70"
+                            >
+                                {highlight}
+                            </li>
+                        ))}
+                    </ul>
+
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                        {project.tech.map((t) => (
+                            <span
+                                key={t}
+                                className="rounded-full border border-border/70 bg-muted/50 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-foreground/80"
+                            >
+                                {t}
+                            </span>
+                        ))}
+                    </div>
+                </button>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-border/60 pt-4">
+                <div className="flex items-center gap-2">
+                    {hasLive && (
+                        <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 rounded-full bg-foreground px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-background hover:bg-foreground/85"
+                        >
+                            Live Demo
+                        </a>
+                    )}
+                    {hasGithub && (
+                        <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 rounded-full border border-border bg-background px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-foreground hover:bg-muted"
+                        >
+                            GitHub
+                        </a>
+                    )}
                 </div>
-                <h2 className="mt-2 font-black uppercase leading-tight tracking-tight text-foreground sm:text-xl md:text-2xl">
-                    {project.title}
-                </h2>
-                <p className="mt-2 font-mono text-[10px] uppercase leading-relaxed tracking-[0.2em] text-foreground/45 sm:text-[11px]">
-                    {projectTagsLine(project)}
-                </p>
-                <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-foreground/55 sm:text-base">
-                    {project.description}
-                </p>
-                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/35 sm:text-[11px]">
-                    View project details
-                </p>
-            </button>
+                <button
+                    type="button"
+                    onClick={() => onSelect(project.slug)}
+                    className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground"
+                >
+                    Case Study →
+                </button>
+            </div>
         </article>
     );
 });
@@ -106,10 +160,6 @@ export default function ProjectsPage() {
             });
 
             if (hard) {
-                logProjectsScroll("/projects -> location.assign (hard nav)", {
-                    slug,
-                    path: projectDetailPath(slug),
-                });
                 window.location.assign(projectDetailPath(slug));
                 return;
             }
@@ -117,17 +167,11 @@ export default function ProjectsPage() {
             setIsNavigating(true);
             setTransitionKey((value) => value + 1);
 
-            logProjectsScroll("/projects scroll lock ON (isNavigating)", {});
-
             navTimeoutRef.current = window.setTimeout(() => {
-                logProjectsScroll("/projects -> router.push (soft nav)", {
-                    slug,
-                    path: projectDetailPath(slug),
-                });
                 window.sessionStorage.setItem("route-transition-lock", "1");
                 window.sessionStorage.setItem("project-transition-reveal", "1");
                 router.push(projectDetailPath(slug));
-            }, 620);
+            }, 550);
         },
         [isNavigating, router],
     );
@@ -149,9 +193,6 @@ export default function ProjectsPage() {
         document.body.style.overflow = "hidden";
 
         return () => {
-            logProjectsScroll("/projects scroll lock cleanup (releaseDocumentScroll)", {
-                wasNavigating: true,
-            });
             releaseDocumentScroll();
         };
     }, [isNavigating]);
@@ -168,7 +209,7 @@ export default function ProjectsPage() {
                             y: ["100%", "0%", "0%"],
                         }}
                         transition={{
-                            duration: 1.25,
+                            duration: 1.15,
                             times: [0, 0.24, 1],
                             ease: "easeInOut",
                         }}
@@ -197,11 +238,11 @@ export default function ProjectsPage() {
                         All Projects
                     </h1>
                     <p className="mt-5 text-sm leading-relaxed text-foreground/55 sm:text-base md:text-lg">
-                        Full list of work—same craft as the featured section. Open any card for the full case study.
+                        Full list of work, built with the same focus on reliable systems, machine learning, and product craft. Open any card for the full case study.
                     </p>
                 </header>
 
-                <div className="grid grid-cols-1 gap-12 sm:gap-14 md:grid-cols-2 md:gap-x-8 md:gap-y-14 lg:gap-x-10 lg:gap-y-16 xl:grid-cols-3">
+                <div className="grid grid-cols-1 gap-10 sm:gap-12 md:grid-cols-2 md:gap-x-8 md:gap-y-12 lg:gap-x-10 lg:gap-y-14 xl:grid-cols-3">
                     {projects.map((project, index) => (
                         <ProjectGridCard
                             key={project.slug}

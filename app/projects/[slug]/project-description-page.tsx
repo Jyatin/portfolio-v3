@@ -126,42 +126,58 @@ export default function ProjectDescriptionPage({
                                 <p className="text-2xl font-black uppercase leading-[0.95] tracking-tight text-foreground sm:text-3xl md:text-4xl wrap-break-word">
                                     {project.title}
                                 </p>
-                                <a
-                                    href={project.live}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="mt-5 inline-block border-b border-foreground/25 pb-0.5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:border-foreground/50 hover:text-foreground sm:text-xs"
-                                >
-                                    View live site
-                                </a>
-
-                                <dl className="mt-10 sm:mt-12">
-                                    <MetaRow label="Year" value={project.year} />
-                                    <MetaRow label="Role" value={project.role} />
-                                    <MetaRow label="Tech stack" value={techLine || "—"} />
-                                    <MetaRow
-                                        label="Status"
-                                        value={project.featured ? "Featured project" : "Portfolio build"}
-                                    />
-                                </dl>
-
-                                <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-                                    <a
-                                        href={project.github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex w-full items-center justify-center border border-border px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/80 transition-colors hover:border-foreground/35 hover:bg-muted hover:text-foreground sm:w-auto"
-                                    >
-                                        View source
-                                    </a>
+                                <p className="mt-2 font-mono text-xs uppercase leading-relaxed tracking-wider text-muted-foreground">
+                                    {project.subtitle}
+                                </p>
+                                {project.isResearch && (
+                                    <div className="mt-3">
+                                        <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-400/30 bg-sky-500/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-sky-300">
+                                            Research Paper · Semi-Finalist
+                                        </span>
+                                    </div>
+                                )}
+                                {project.live && project.live.startsWith("http") ? (
                                     <a
                                         href={project.live}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex w-full items-center justify-center rounded-full bg-foreground px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-background transition-colors hover:bg-foreground/85 sm:w-auto"
+                                        className="mt-5 inline-block border-b border-foreground/25 pb-0.5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:border-foreground/50 hover:text-foreground sm:text-xs"
                                     >
-                                        Live demo
+                                        View live site
                                     </a>
+                                ) : null}
+
+                                <dl className="mt-10 sm:mt-12">
+                                    <MetaRow label="Year" value={project.year} />
+                                    <MetaRow label="Role" value={project.role} />
+                                    <MetaRow label="Tech stack" value={techLine || "N/A"} />
+                                    <MetaRow
+                                        label="Status"
+                                        value={project.isResearch ? "Research Paper" : project.featured ? "Featured Project" : "Portfolio Build"}
+                                    />
+                                </dl>
+
+                                <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+                                    {project.github && project.github.startsWith("http") ? (
+                                        <a
+                                            href={project.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex w-full items-center justify-center border border-border px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/80 transition-colors hover:border-foreground/35 hover:bg-muted hover:text-foreground sm:w-auto"
+                                        >
+                                            View source
+                                        </a>
+                                    ) : null}
+                                    {project.live && project.live.startsWith("http") ? (
+                                        <a
+                                            href={project.live}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex w-full items-center justify-center rounded-full bg-foreground px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-background transition-colors hover:bg-foreground/85 sm:w-auto"
+                                        >
+                                            Live demo
+                                        </a>
+                                    ) : null}
                                 </div>
                             </div>
 

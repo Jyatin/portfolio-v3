@@ -377,7 +377,7 @@ export default function FloatingShootToggle(): React.JSX.Element {
     // Main shooting logic (mouse / touch)
     React.useEffect(() => {
         if (!isOn) return;
-        let interval: number | null = null;
+        let interval: ReturnType<typeof setInterval> | null = null;
         let holding = false;
         let touchStart: { x: number; y: number } | null = null;
         let moved = false;

@@ -35,6 +35,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     <SmoothScroll>
                         <PageTransition>{children}</PageTransition>
                     </SmoothScroll>
+                    <FloatingShootToggle />
                 </ThemeProvider>
             </body>
         </html>
