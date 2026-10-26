@@ -3,51 +3,65 @@
 import { useGSAP } from "@/app/hooks/useGSAP";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BookOpen, BriefcaseBusiness, GitPullRequest, MessageCircle, Trophy } from "lucide-react";
 import { useRef } from "react";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
-const proofItems = [
+type ProofItem = {
+    category: string;
+    period: string;
+    title: string;
+    organization: string;
+    description: string;
+    highlight: string;
+};
+
+const proofItems: readonly ProofItem[] = [
     {
-        icon: BriefcaseBusiness,
-        title: "Software Development Engineer Intern — KaHo Technologies",
-        description:
-            "Currently building and shipping customer-facing features for the Parent App using Next.js, React, JavaScript, and TypeScript. Work includes parent verification flows, structured error handling, and image-loading improvements.",
-        year: "2026 · Present",
         category: "Internship",
+        period: "2026 – Present",
+        title: "Software Development Engineer Intern",
+        organization: "KaHo Technologies",
+        description:
+            "Building parent-facing features for the Parent App using Next.js and TypeScript.",
+        highlight: "50% fewer form submission failures · 60%+ faster image loading",
     },
     {
-        icon: BriefcaseBusiness,
-        title: "Software Engineering Intern — Tata Steel",
-        description:
-            "Developed and deployed SteelCare PMMS, a full-stack Preventive Maintenance Management System for terminal shopfloor computer health monitoring, using React.js and Spring Boot 3. Implemented asynchronous email notifications, JWT authentication, role-based access control, cloud deployment, and Excel-compatible CSV exports.",
-        year: "2026",
         category: "Industry Experience",
+        period: "2026",
+        title: "Software Engineering Intern",
+        organization: "Tata Steel",
+        description:
+            "Built SteelCare PMMS, a preventive maintenance system for shopfloor computer health monitoring using React and Spring Boot.",
+        highlight:
+            "JWT authentication · Asynchronous email alerts · API response time reduced from 60s to < 50 ms",
     },
     {
-        icon: GitPullRequest,
-        title: "Open-Source Contributions",
-        description:
-            "Contribute to real-world codebases including InfiScal, OpenStory, OpenDesign, and other open-source projects. Work spans code improvements, bug fixes, feature development, tests, and collaboration through pull requests and code review.",
-        year: "2026",
         category: "Engineering in Public",
+        period: "2025 – 2026",
+        title: "Open-Source Contributions",
+        organization: "Public Repositories",
+        description:
+            "Contributed code improvements, bug fixes, features, and tests across Infisical, OpenStory, Speech Dispatcher, and other projects.",
+        highlight: "8 merged PRs",
     },
     {
-        icon: Trophy,
-        title: "Hackathons, Debate & Communication",
-        description:
-            "Earned 2nd place at the TRINETRA 20-hour hackathon and 6th place at DevStorm 2026. Also participated in Clash of Minds group discussion and extempore speaking, receiving a Badge of Appreciation.",
-        year: "2025–2026",
         category: "Competitions",
+        period: "2025 – 2026",
+        title: "Hackathons & Competitions",
+        organization: "TRINETRA & DevStorm",
+        description:
+            "Secured 2nd place at the TRINETRA 20-hour hackathon and 6th place at DevStorm 2026.",
+        highlight: "Clash of Minds — Badge of Appreciation",
     },
     {
-        icon: BookOpen,
-        title: "Research & B-SMART 2030 International Semifinalist",
+        category: "Research",
+        period: "2026",
+        title: "JalDrishti 2030",
+        organization: "IoT–AI Digital Twin",
         description:
-            "Writing research on JalDrishti 2030, an IoT–AI digital twin for predictive water-stress and intervention planning in Bengaluru. Reached the semifinal stage of the international SMART CITY 2030 student and young researcher competition, featuring participants from countries around the world.",
-        year: "2026",
-        category: "Research & International Recognition",
+            "Researching an IoT–AI digital twin for predictive water-stress analysis and intervention planning in Bengaluru.",
+        highlight: "B-SMART 2030 International Semifinalist",
     },
 ];
 
@@ -55,57 +69,99 @@ export default function Achievements() {
     const sectionRef = useRef<HTMLElement>(null);
 
     useGSAP(() => {
-        const isDesktop = window.innerWidth >= 1024;
-        if (isDesktop) {
-            gsap.from(".achievements-header", {
-                y: 40,
-                opacity: 0,
-                scrollTrigger: { trigger: sectionRef.current, start: "top 80%", end: "top 55%", scrub: 1 },
-            });
-            proofItems.forEach((_, i) => {
-                gsap.from(`.achievement-card-${i}`, {
-                    scrollTrigger: { trigger: `.achievement-card-${i}`, start: "top 85%", end: "top 55%", scrub: 1 },
-                    x: 60,
-                    opacity: 0,
-                    ease: "power2.out",
-                });
-            });
-        } else {
-            gsap.from(".achievement-card", {
-                scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-                opacity: 0,
-                y: 24,
-                duration: 0.55,
-                stagger: 0.1,
-            });
-        }
+        if (!sectionRef.current) return;
+
+        gsap.from(".achievements-header", {
+            scrollTrigger: { trigger: sectionRef.current, start: "top 85%" },
+            y: 20,
+            opacity: 0,
+            duration: 0.55,
+            ease: "power2.out",
+        });
+
+        gsap.from(".achievement-card", {
+            scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
+            y: 20,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: "power2.out",
+        });
     }, []);
 
     return (
-        <section ref={sectionRef} id="achievements" className="achievements-section relative overflow-hidden bg-background py-16 sm:py-20 lg:py-28">
-            <div className="mx-auto max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24">
-                <div className="achievements-header mb-10 md:mb-14">
-                    <span className="mb-3 block font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/45">07 / Proof of Work</span>
-                    <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter sm:text-5xl lg:text-7xl">Proof of Work</h2>
-                    <p className="mt-5 max-w-2xl text-sm leading-relaxed text-foreground/50 sm:text-base">
-                        A record of industry experience, open-source engineering, competition results, and research in progress.
-                    </p>
+        <section
+            ref={sectionRef}
+            id="achievements"
+            className="achievements-section relative overflow-hidden bg-background py-14 sm:py-16 lg:py-24"
+            aria-label="Proof of Work"
+        >
+            <div className="mx-auto w-full max-w-[1920px] px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24">
+                {/* Section Header */}
+                <div className="achievements-header mb-8 sm:mb-10 md:mb-12">
+                    <div className="flex items-center gap-4">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-foreground/45 sm:text-xs">
+                            07 / Proof of Work
+                        </span>
+                        <span className="h-px flex-1 bg-border/70" aria-hidden />
+                    </div>
+                    <div className="mt-4 flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
+                        <div>
+                            <h2 className="text-3xl font-black uppercase leading-[0.95] tracking-tighter text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
+                                Proof of Work
+                            </h2>
+                            <p className="mt-2 max-w-2xl text-xs sm:text-sm leading-relaxed text-foreground/50">
+                                A verified record of production engineering, open-source work, competitions, and research.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-                    {proofItems.map((item, index) => {
-                        const Icon = item.icon;
-                        return (
-                            <article key={item.title} className={`achievement-card achievement-card-${index} group border border-border bg-muted/20 p-5 transition-colors duration-300 hover:bg-muted/50 md:p-6`}>
-                                <div className="mb-6 flex items-center gap-3 font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/40">
-                                    <span>{item.year}</span><div className="h-px flex-1 bg-border" /><span>{item.category}</span>
+                {/* 5 Cards in a Responsive Grid */}
+                <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
+                    {proofItems.map((item, index) => (
+                        <article
+                            key={item.title}
+                            className={`achievement-card achievement-card-${index} group flex flex-col justify-between rounded-lg border border-border/70 bg-card/25 p-5 md:p-6 transition-all duration-200 hover:border-border hover:bg-card/45 motion-safe:hover:-translate-y-1`}
+                        >
+                            {/* Card Content Top */}
+                            <div>
+                                {/* Category & Date */}
+                                <div className="mb-3 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/45">
+                                    <span className="truncate">{item.category}</span>
+                                    <span className="shrink-0">{item.period}</span>
                                 </div>
-                                <Icon className="mb-6 h-7 w-7 text-foreground/60" />
-                                <h3 className="mb-3 text-xl font-black uppercase leading-tight tracking-tight">{item.title}</h3>
-                                <p className="text-sm leading-relaxed text-foreground/55">{item.description}</p>
-                            </article>
-                        );
-                    })}
+
+                                {/* Title & Organization */}
+                                <div className="mb-2.5">
+                                    <h3 className="text-base font-bold tracking-tight text-foreground sm:text-lg">
+                                        {item.title}
+                                    </h3>
+                                    <p className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-foreground/55">
+                                        {item.organization}
+                                    </p>
+                                </div>
+
+                                {/* Concise Description */}
+                                <p className="text-xs sm:text-sm leading-relaxed text-foreground/65">
+                                    {item.description}
+                                </p>
+                            </div>
+
+                            {/* Key Highlight / Outcome */}
+                            <div className="mt-4 border-t border-border/50 pt-3">
+                                <div className="flex items-start gap-2">
+                                    <span
+                                        className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-foreground/35 transition-colors group-hover:bg-foreground/60"
+                                        aria-hidden
+                                    />
+                                    <p className="font-mono text-[11px] leading-snug text-foreground/80">
+                                        {item.highlight}
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    ))}
                 </div>
             </div>
         </section>
