@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@/app/hooks/useGSAP";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Github, Linkedin, ArrowUpRight, Copy, Check, Code2, Download } from "lucide-react";
+import { Github, Linkedin, ArrowUpRight, Copy, Check, Code2, Download, MessageSquare } from "lucide-react";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
@@ -67,6 +67,14 @@ export default function Contact() {
                                     <Download className="h-4 w-4" aria-hidden />
                                     Download Resume
                                 </a>
+                                <button
+                                    type="button"
+                                    onClick={() => window.dispatchEvent(new CustomEvent("open-contact-modal"))}
+                                    className="inline-flex h-12 items-center gap-2 border border-border bg-muted/40 px-5 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground transition-colors hover:border-foreground/40 hover:bg-muted"
+                                >
+                                    <MessageSquare className="h-4 w-4" aria-hidden />
+                                    Send Message
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -81,9 +89,24 @@ export default function Contact() {
                                 <div>
                                     <span className="mb-4 block font-mono text-xs uppercase tracking-[0.2em] text-foreground/40">Email</span>
                                     <h3 className="break-all text-[clamp(1.8rem,4vw,3.5rem)] font-black uppercase leading-[0.9] tracking-tight">{email}</h3>
-                                    <button onClick={copyEmail} className="mt-8 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-foreground/50 hover:text-foreground">
-                                        {copied ? <><Check className="h-4 w-4" /><span>Email copied</span></> : <><Copy className="h-4 w-4" /><span>Copy address</span></>}
-                                    </button>
+                                    <div className="mt-8 flex flex-wrap items-center gap-4">
+                                        <button onClick={copyEmail} className="inline-flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-foreground/50 hover:text-foreground">
+                                            {copied ? <><Check className="h-4 w-4" /><span>Email copied</span></> : <><Copy className="h-4 w-4" /><span>Copy address</span></>}
+                                        </button>
+                                        <span className="text-foreground/30 select-none" aria-hidden>·</span>
+                                        <button
+                                            type="button"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                window.dispatchEvent(new CustomEvent("open-contact-modal"));
+                                            }}
+                                            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-foreground/80 hover:text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground"
+                                        >
+                                            <MessageSquare className="h-3.5 w-3.5" />
+                                            Open Message Form
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </a>

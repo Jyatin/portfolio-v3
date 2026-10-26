@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     qualities: [60, 75, 85],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    localPatterns: [
+      {
+        pathname: "/**",
+      },
+    ],
   },
   experimental: {
     optimizePackageImports: ["lucide-react"],
