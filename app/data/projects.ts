@@ -34,7 +34,7 @@ const projectCoreList: readonly ProjectCore[] = [
         live: "https://kirana-wala-1nhp.vercel.app",
         featured: true,
         year: "2026",
-        image: "/images/projects/kiranawala_mockup.jpg",
+        image: "/images/projects/kiranawala_mockup.jpg?v=20261026-2",
     },
     {
         slug: "beyond-the-rumour-mill",
