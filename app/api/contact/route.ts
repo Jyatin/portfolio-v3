@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 
 export const dynamic = "force-dynamic";
@@ -146,21 +147,24 @@ export async function POST(request: NextRequest) {
         // Recipient email
         const recipientEmail = process.env.CONTACT_EMAIL || "singhjyatin@gmail.com";
         const emailSubject = trimmedSubject
-            ? `[Portfolio] ${trimmedSubject}`
-            : `New Message from ${trimmedName} via Portfolio`;
+            ? `[Portfolio Contact] ${trimmedSubject}`
+            : `New Portfolio Message from ${trimmedName}`;
 
         let emailDelivered = false;
         let databaseSaved = false;
         const deliveryErrors: string[] = [];
 
-        // 3. Channel A: Send via Resend Email Service if configured
+        // 3. Channel A: Send via official Resend Email Service if configured
         const resendApiKey = process.env.RESEND_API_KEY;
         if (resendApiKey) {
             try {
-                const resendFrom = process.env.RESEND_FROM || "Portfolio Contact <onboarding@resend.dev>";
+                const resend = new Resend(resendApiKey);
+                const resendFrom =
+                    process.env.RESEND_FROM || "Portfolio Contact <onboarding@resend.dev>";
+
                 const htmlContent = `
-                    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 8px;">
-                        <h2 style="color: #0f172a; margin-top: 0; border-bottom: 2px solid #0f172a; padding-bottom: 12px;">New Portfolio Contact Message</h2>
+                    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #ffffff;">
+                        <h2 style="color: #0f172a; margin-top: 0; border-bottom: 2px solid #0f172a; padding-bottom: 12px; font-size: 20px;">New Portfolio Contact Message</h2>
                         <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
                             <tr>
                                 <td style="padding: 8px 0; color: #64748b; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; width: 90px;">From:</td>
@@ -188,30 +192,34 @@ export async function POST(request: NextRequest) {
                     </div>
                 `;
 
-                const resendRes = await fetch("https://api.resend.com/emails", {
-                    method: "POST",
-                    headers: {
-                        Authorization: `Bearer ${resendApiKey}`,
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        from: resendFrom,
-                        to: [recipientEmail],
-                        reply_to: trimmedEmail,
-                        subject: emailSubject,
-                        html: htmlContent,
-                    }),
+                const textContent = `New Portfolio Contact Message\n\nFrom: ${trimmedName}\nEmail: ${trimmedEmail}\nSubject: ${trimmedSubject || "None"}\nDate: ${new Date().toUTCString()}\n\nMessage:\n${trimmedMessage}`;
+
+                const { data, error } = await resend.emails.send({
+                    from: resendFrom,
+                    to: [recipientEmail],
+                    replyTo: trimmedEmail,
+                    subject: emailSubject,
+                    html: htmlContent,
+                    text: textContent,
                 });
 
-                if (resendRes.ok) {
+                if (error) {
+                    console.error("[Contact API] Resend email delivery error:", error);
+                    deliveryErrors.push(`Resend error: ${error.message}`);
+                } else if (data?.id) {
                     emailDelivered = true;
-                } else {
-                    const errorText = await resendRes.text();
-                    deliveryErrors.push(`Resend error: ${errorText}`);
+                    console.log(`[Contact API] Message sent via Resend (ID: ${data.id})`);
                 }
             } catch (err) {
-                deliveryErrors.push(`Resend fetch error: ${err instanceof Error ? err.message : String(err)}`);
+                const errMsg = err instanceof Error ? err.message : String(err);
+                console.error("[Contact API] Resend unexpected exception:", errMsg);
+                deliveryErrors.push(`Resend exception: ${errMsg}`);
             }
+        } else {
+            console.warn(
+                "[Contact API] RESEND_API_KEY environment variable is not configured. Email could not be dispatched."
+            );
+            deliveryErrors.push("RESEND_API_KEY is not configured.");
         }
 
         // 4. Channel B: Store in Supabase database / owner inbox if configured
@@ -238,32 +246,17 @@ export async function POST(request: NextRequest) {
             }
         }
 
-        // 5. Development Mode Fallback / Logger
+        // 5. Verify at least one delivery channel succeeded
         const isDev = process.env.NODE_ENV !== "production";
-        if (isDev && !emailDelivered && !databaseSaved) {
-            console.log("-----------------------------------------");
-            console.log("📬 DEV CONTACT FORM SUBMISSION RECEIVED:");
-            console.log(`From: ${trimmedName} <${trimmedEmail}>`);
-            console.log(`Subject: ${trimmedSubject || "(None)"}`);
-            console.log(`Message: ${trimmedMessage}`);
-            console.log(`Destination: ${recipientEmail}`);
-            console.log("-----------------------------------------");
-            // In dev mode, permit testing without throwing if external services are unconfigured
-            return NextResponse.json({
-                success: true,
-                message: "Message received in development mode.",
-                devNotice: "Configuring RESEND_API_KEY will enable live email delivery to " + recipientEmail,
-            });
-        }
-
-        // 6. Verify at least one delivery channel succeeded
         if (!emailDelivered && !databaseSaved) {
-            console.error("Message delivery failed:", deliveryErrors);
+            console.error("[Contact API] Message delivery failed:", deliveryErrors);
+            const userFacingError = !resendApiKey
+                ? "Could not deliver your message due to an unconfigured delivery service. Please email directly at " + recipientEmail
+                : "Could not deliver your message at this time. Please email directly at " + recipientEmail;
+
             return NextResponse.json(
                 {
-                    error:
-                        "Could not deliver your message due to an unconfigured delivery service. Please email directly at " +
-                        recipientEmail,
+                    error: userFacingError,
                     detail: isDev ? deliveryErrors.join("; ") : undefined,
                 },
                 { status: 503 }

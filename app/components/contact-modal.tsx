@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { CheckCircle2, Loader2, Mail, MessageSquare, Send, X } from "lucide-react";
+import { CheckCircle2, Loader2, MessageSquare, Send, X } from "lucide-react";
 
 export default function ContactModal() {
     const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +9,7 @@ export default function ContactModal() {
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
+    const [hpField, setHpField] = useState("");
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -99,6 +100,7 @@ export default function ContactModal() {
                     email: trimmedEmail,
                     subject: subject.trim(),
                     message: trimmedMessage,
+                    hp_field: hpField,
                 }),
             });
 
@@ -120,6 +122,7 @@ export default function ContactModal() {
             setEmail("");
             setSubject("");
             setMessage("");
+            setHpField("");
         } catch {
             setErrorMessage("Network error. Please check your connection and try again.");
             setStatus("error");
@@ -129,6 +132,7 @@ export default function ContactModal() {
     const handleReset = () => {
         setStatus("idle");
         setErrorMessage(null);
+        setHpField("");
         setTimeout(() => nameInputRef.current?.focus(), 50);
     };
 
@@ -222,8 +226,8 @@ export default function ContactModal() {
                                 name="hp_field"
                                 tabIndex={-1}
                                 autoComplete="off"
-                                value=""
-                                onChange={() => {}}
+                                value={hpField}
+                                onChange={(e) => setHpField(e.target.value)}
                             />
                         </div>
 
